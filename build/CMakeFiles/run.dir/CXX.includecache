@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../src/state.h
+state/Exemple.h
+../src/state/Exemple.h
+
+../src/state.hpp
+state.h
+../src/state.h
+
+../src/state/Exemple.h
+
+/home/raph/Téléchargements/plt-start-kit/src/main.cpp
+iostream
+-
+SFML/Graphics.hpp
+-
+state.hpp
+/home/raph/Téléchargements/plt-start-kit/src/state.hpp
+
+/home/raph/Téléchargements/plt-start-kit/src/state.h
+state/Exemple.h
+/home/raph/Téléchargements/plt-start-kit/src/state/Exemple.h
+
+/home/raph/Téléchargements/plt-start-kit/src/state.hpp
+state.h
+/home/raph/Téléchargements/plt-start-kit/src/state.h
+
+/home/raph/Téléchargements/plt-start-kit/src/state/Exemple.cpp
+state.hpp
+/home/raph/Téléchargements/plt-start-kit/src/state/state.hpp
+
+/home/raph/Téléchargements/plt-start-kit/src/state/Exemple.h
+
