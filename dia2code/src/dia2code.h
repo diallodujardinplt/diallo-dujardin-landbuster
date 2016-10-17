@@ -18,8 +18,13 @@
 #ifndef DIA2CODE_H
 #define DIA2CODE_H
 
+#define NO_NAMESPACE_SINGLE_FILE
+#define VERBOSE_LEVEL 0
+
+
 #define  _GNU_SOURCE
 #include <string.h>
+#include <strings.h>
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,6 +32,7 @@
 /* for mkdir and mode_t */
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <dirent.h>
 
 /* libxml[2] headers */
 #include <libxml/parser.h>
@@ -174,6 +180,7 @@ typedef umlclassnode * umlclasslist;
 
 struct namenode {
    char *name;
+   char *package;
    struct namenode *next;
 };
 typedef struct namenode namenode;
@@ -216,9 +223,7 @@ void * my_malloc( size_t size );
 
 umlpackagelist make_package_list( umlpackage * package);
 
-umlclasslist list_classes(umlclasslist current_class, batch *b);
-
-char *create_package_dir(const batch *batch, umlpackage *pkg);
+umlclasslist list_classes(umlclasslist current_class, batch *b, int withRef);
 
 extern char *file_ext;       /* Set by switch "-ext". Language specific
                                 default applies when NULL.  */
@@ -310,4 +315,20 @@ int indent_count;
 int indent_open_brace_on_newline;
 int generate_backup;
 
+
+
+void debug( int level, char *fmt, ... );
+void debug_setlevel( int newlevel );
+
+#ifdef __unix__
+#define ENABLE_FILE_UPDATE_ON_CHANGE
+#else
+#define MAXNAMLEN 1024
+char* strndup (const char *s, size_t n);
+#endif
+
+#ifdef ENABLE_FILE_UPDATE_ON_CHANGE
+void update_file_if_changed(batch *b,char* filename);
+#endif
+    
 #endif

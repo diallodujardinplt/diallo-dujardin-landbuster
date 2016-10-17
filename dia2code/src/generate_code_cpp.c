@@ -423,8 +423,6 @@ gen_class (umlclassnode *node)
     print ("};\n\n");
 }
 
-#define NO_NAMESPACE_SINGLE_FILE
-
 static void
 gen_decl (declaration *d)
 {
@@ -574,125 +572,281 @@ gen_decl (declaration *d)
     }
 }
 
-void 
-update_file_if_changed(batch *b,char* filename) {
-    // filename must end with '~'
-    char newfilename[1024];
-    sprintf (newfilename, "%s/%s", b->outdir, filename);
-    size_t n = strlen(newfilename);
-    if (newfilename[n-1] != '~') {
-        fprintf (stderr, "Error: filename '%s' does not end with '~'\n", newfilename);
-        return;
-    }
+struct stdlib_includes {
+   int string;
+   int stdint;
+   int stdlib;
+   int vector;
+   int memory;
+   int map;
+   int unordered_map;
+   int set;
+   int list;
+   int unordered_set;
+   int stack;
+   int queue;
+   int array;   
+   int thread;
+   int mutex;
+   int sfmlGraphics;
+};
 
-    // Read content of current filename
-    char curfilename[1024];
-    strcpy(curfilename,newfilename);
-    curfilename[n-1] = 0;
-    FILE* file = fopen(curfilename,"r");
-    if (!file) { // No file, rename new one
-        printf("Create '%s'\n",curfilename);
-        if (rename(newfilename,curfilename) < 0) {
-            fprintf (stderr, "Error: cant rename file '%s' to '%s'\n", newfilename,curfilename);
-        };
-        return;
+void print_include_stdlib(struct stdlib_includes* si,char* name) {
+    if ( strlen(name) > 0 ) {
+       if (!si->stdint 
+       && (strstr(name,"int8_t")
+       ||  strstr(name,"uint8_t")
+       ||  strstr(name,"int16_t")
+       ||  strstr(name,"uint16_t")
+       ||  strstr(name,"int32_t")
+       ||  strstr(name,"uint32_t")
+       ||  strstr(name,"int64_t")
+       ||  strstr(name,"uint64_t"))) {
+           print ("#include <stdint.h>\n");
+           si->stdint = 1;
+       }
+       if (!si->stdlib && strstr(name,"size_t")) {
+           print ("#include <stdlib.h>\n");
+           si->stdlib = 1;
+       }
+       if (!si->string && strstr(name,"std::string")) {
+           print ("#include <string>\n");
+           si->string = 1;
+       }
+       if (!si->array && strstr(name,"std::array")) {
+           print ("#include <array>\n");
+           si->array = 1;
+       }
+       if (!si->vector && strstr(name,"std::vector")) {
+           print ("#include <vector>\n");
+           si->vector = 1;
+       }
+       if (!si->map && strstr(name,"std::map")) {
+           print ("#include <map>\n");
+           si->map = 1;
+       }
+       if (!si->set && strstr(name,"std::set")) {
+           print ("#include <set>\n");
+           si->set = 1;
+       }
+       if (!si->list && strstr(name,"std::list")) {
+           print ("#include <list>\n");
+           si->list = 1;
+       }
+       if (!si->stack && strstr(name,"std::stack")) {
+           print ("#include <stack>\n");
+           si->stack = 1;
+       }
+       if (!si->mutex && strstr(name,"std::mutex")) {
+           print ("#include <mutex>\n");
+           si->mutex = 1;
+       }
+       if (!si->thread && strstr(name,"std::thread")) {
+           print ("#include <thread>\n");
+           si->thread = 1;
+       }
+       if (!si->memory 
+       && (strstr(name,"std::queue")
+       ||  strstr(name,"std::priority_queue"))) {
+           print ("#include <queue>\n");
+           si->queue = 1;
+       }
+       if (!si->unordered_map && strstr(name,"std::unordered_map")) {
+           print ("#include <unordered_map>\n");
+           si->unordered_map = 1;
+       }
+       if (!si->unordered_set && strstr(name,"std::unordered_set")) {
+           print ("#include <unordered_set>\n");
+           si->unordered_set = 1;
+       }
+       if (!si->memory 
+       && (strstr(name,"std::unique_ptr")
+       ||  strstr(name,"std::shared_ptr")
+       ||  strstr(name,"std::weak_ptr"))) {
+           print ("#include <memory>\n");
+           si->memory = 1;
+       }
+       if (!si->sfmlGraphics 
+       && (strstr(name,"sf::RenderWindow")
+       ||  strstr(name,"sf::VertexArray")
+       ||  strstr(name,"sf::Texture"))) {
+           print ("#include <SFML/Graphics.hpp>\n");
+           si->sfmlGraphics = 1;
+       }       
     }
-    fseek(file, 0, SEEK_END); 
-    size_t cursize = ftell(file);
-    fseek(file, 0, SEEK_SET); 
-    char* curcontent = (char*)malloc(cursize);
-    if (fread(curcontent,1,cursize,file) != cursize) {
-        fprintf (stderr, "Error: cant read file '%s'\n", curfilename);
-        exit(2);
-    }
-    fclose(file);
-
-    // Read content of new filename
-    FILE* newfile = fopen(newfilename,"r");
-    if (!newfile) {
-        fprintf (stderr, "Error: cant open file '%s'\n", newfilename);
-        exit(2);
-    }
-    fseek(newfile, 0, SEEK_END); 
-    size_t newsize = ftell(newfile);
-    fseek(newfile, 0, SEEK_SET); 
-    char* newcontent = (char*)malloc(newsize);
-    if (fread(newcontent,1,newsize,newfile) != newsize) {
-        fprintf (stderr, "Error: cant read file '%s'\n", newfilename);
-        exit(2);
-    }
-    fclose(newfile);
-    
-    if (cursize != newsize || memcmp(curcontent,newcontent,cursize) != 0) {
-        printf("Update '%s'\n",curfilename);
-        rename(newfilename,curfilename);
-    }
-    else {
-        remove(newfilename);
-    }
-        
-    free(curcontent);
-    free(newcontent);
 }
 
 void
-gen_namespace(batch *b,declaration *nsd)
-{
+gen_namespace(batch *b, declaration *nsd) {
     char * nsname = nsd->u.this_module->pkg->name;
     declaration* d = nsd->u.this_module->contents;
-    while (d != NULL) {            
+    while (d != NULL) {  // For each class in namespace
         char *name, *tmpname;
         char filename[BIG_BUFFER];
 
-    if (d->decl_kind == dk_module) {
-        name = d->u.this_module->pkg->name;
-        fprintf (stderr, "%s::%s: Nested namespaces are not supported\n", nsname, name);
-        continue;
-    } else {         /* dk_class */
-        name = d->u.this_class->key->name;
-    }
-    sprintf (filename, "%s/%s.%s~", nsname, name, file_ext);
-
-    spec = open_outfile (filename, b);
-    if (spec == NULL) {
-        d = d->next;
-        continue;
-    }
-
-    print("// Generated by dia2code\n");
-    char * tmpnsname = strtoupper(nsname);
-    tmpname = strtoupper(name);
-    print("#ifndef %s__%s__H\n", tmpnsname, tmpname);
-    print("#define %s__%s__H\n\n", tmpnsname, tmpname);
-    
-    includes = NULL;
-    determine_includes (d, b);
-    if (use_corba)
-        print ("#include <p_orb.h>\n\n");
-    if (includes) {
-        namelist incfile = includes;
-        while (incfile != NULL) {
-            if (!eq (incfile->name, name)) {
-                print ("#include \"%s.%s\"\n", incfile->name, file_ext);
-            }
-            incfile = incfile->next;
+        if (d->decl_kind == dk_module) {
+            name = d->u.this_module->pkg->name;
+            fprintf(stderr, "%s::%s: Nested namespaces are not supported\n", nsname, name);
+            continue;
+        } else { /* dk_class */
+            name = d->u.this_class->key->name;
         }
-        print ("\n");
-    }
+        
+        /////////////////////////////////////
+        // Header file
+        
+#ifdef ENABLE_FILE_UPDATE_ON_CHANGE
+        sprintf(filename, "%s/%s.%s~", nsname, name, file_ext);
+#else
+        sprintf(filename, "%s/%s.%s", nsname, name, file_ext);
+        printf("Create '%s'\n",filename);
+#endif
+#if VERBOSE_LEVEL >= 1
+        printf("\ngen_namespace(): generate file '%s'\n", filename);
+#endif
 
-    print ("namespace %s {\n\n", nsname);
-    indentlevel++;
-    gen_decl (d);
-    indentlevel--;
-    print ("};\n\n");    
-    
-    indentlevel = 0;  /* just for safety (should be 0 already) */
-    print("#endif\n");
-    fclose (spec);
+        spec = open_outfile(filename, b);
+        if (spec == NULL) {
+            d = d->next;
+            continue;
+        }
 
-    update_file_if_changed(b,filename);
-    
-    d = d->next;
+        print("// Generated by dia2code\n");
+        char * tmpnsname = strtoupper(nsname);
+        tmpname = strtoupper(name);
+        print("#ifndef %s__%s__H\n", tmpnsname, tmpname);
+        print("#define %s__%s__H\n\n", tmpnsname, tmpname);
+
+        // Find STL classes
+        if (d->decl_kind != dk_module) {
+
+            struct stdlib_includes si;
+            memset(&si, 0, sizeof (struct stdlib_includes));
+
+            // Attributes
+            umlattrlist umla = d->u.this_class->key->attributes;
+            while (umla != NULL) {
+                print_include_stdlib(&si, umla->key.type);
+                umla = umla->next;
+            }
+            // Methods
+            umloplist umlo = d->u.this_class->key->operations;
+            while (umlo != NULL) {
+                print_include_stdlib(&si, umlo->key.attr.type);
+                umlattrlist tmpa = umlo->key.parameters;
+                while (tmpa != NULL) {
+                    print_include_stdlib(&si, tmpa->key.type);
+                    tmpa = tmpa->next;
+                }
+                umlo = umlo->next;
+            }
+
+
+            print("\n");
+        }
+
+
+        includes = NULL;
+        determine_referenced_classes(d, b);
+        if (includes) {
+            namelist incfile = includes;
+            char* curnsname = NULL;
+            while (incfile != NULL) {
+                if (!incfile->package) {
+                    if (curnsname) {
+                        curnsname = NULL;
+                        indentlevel--;
+                        print("};\n");
+                    }
+                    print("class %s;\n", incfile->name);
+                } else {
+                    if (curnsname == NULL || strcmp(curnsname, incfile->package)) {
+                        if (curnsname) {
+                            indentlevel--;
+                            print("};\n");
+                        }
+                        curnsname = incfile->package;
+                        print("namespace %s {\n", incfile->package);
+                        indentlevel++;
+                    }
+                    print("class %s;\n", incfile->name);
+                }
+                incfile = incfile->next;
+            }
+            if (curnsname) {
+                indentlevel--;
+                print("}\n\n");
+            }
+        }
+
+        includes = NULL;
+        determine_includes(d, b);
+        if (use_corba)
+            print("#include <p_orb.h>\n\n");
+        if (includes) {
+            namelist incfile = includes;
+            while (incfile != NULL) {
+                if (incfile->package) {
+                    if (!strcmp(incfile->package, nsname)) {
+                        if (strcmp(incfile->name, name)) {
+                            print("#include \"%s.%s\"\n", incfile->name, file_ext);
+                        }
+                    } else {
+                        print("#include \"%s/%s.%s\"\n", incfile->package, incfile->name, file_ext);
+                    }
+                } else {
+                    print("#include \"%s.%s\"\n", incfile->name, file_ext);
+                }
+                incfile = incfile->next;
+            }
+            print("\n");
+        }
+
+        print("namespace %s {\n\n", nsname);
+        indentlevel++;
+        gen_decl(d);
+        indentlevel--;
+        print("};\n\n");
+
+        indentlevel = 0; /* just for safety (should be 0 already) */
+        print("#endif\n");
+        fclose(spec);
+
+#ifdef ENABLE_FILE_UPDATE_ON_CHANGE
+        update_file_if_changed(b, filename);
+#endif
+
+        /////////////////////////////////////
+        // Source file
+        
+        sprintf(filename, "%s/%s.cpp", nsname, name);
+        char newfilename[1024];
+        sprintf (newfilename, "%s/%s", b->outdir, filename);
+        int exists = 0;
+        FILE* sourceFile = fopen(newfilename,"r");
+        if (sourceFile) {
+            exists = 1;
+            fclose(sourceFile);
+        }
+        
+        /////////////////////////////////////
+        // Source file (generate new)
+        if (!exists) {
+/*            printf("Create '%s'\n",newfilename);
+            spec = open_outfile(filename, b);
+            if (spec == NULL) {
+                d = d->next;
+                continue;
+            }*/
+
+        }
+        /////////////////////////////////////
+        // Source file (update existing)
+        else {
+            
+        }
+        
+        d = d->next;
     }
 }
 
@@ -737,12 +891,23 @@ generate_code_cpp (batch *b)
         if (d->decl_kind == dk_module) {
             name = d->u.this_module->pkg->name;
 #ifdef NO_NAMESPACE_SINGLE_FILE
+#if VERBOSE_LEVEL >= 1
+            printf("generate_code_cpp(): call gen_namespace for file '%s'\n",name);
+#endif
             gen_namespace(b,d);
 #endif
         } else {         /* dk_class */
             name = d->u.this_class->key->name;
+#if VERBOSE_LEVEL >= 1
+            printf("generate_code_cpp(): file '%s'",name);
+#endif
         }
+#ifdef ENABLE_FILE_UPDATE_ON_CHANGE
         sprintf (filename, "%s.%s~", name, file_ext);
+#else
+        sprintf (filename, "%s.%s", name, file_ext);
+        printf("Create '%s'\n",filename);
+#endif
 
         spec = open_outfile (filename, b);
         if (spec == NULL) {
@@ -769,6 +934,7 @@ generate_code_cpp (batch *b)
                 print ("%c", lc);
         }
 
+#ifndef NO_NAMESPACE_SINGLE_FILE
         includes = NULL;
         determine_includes (d, b);
         if (use_corba)
@@ -783,6 +949,7 @@ generate_code_cpp (batch *b)
             }
             print ("\n");
         }
+#endif
 
         gen_decl (d);
 
@@ -790,7 +957,9 @@ generate_code_cpp (batch *b)
         print("#endif\n");
         fclose (spec);
 
+#ifdef ENABLE_FILE_UPDATE_ON_CHANGE
         update_file_if_changed(b,filename);
+#endif
         
         d = d->next;
     }
