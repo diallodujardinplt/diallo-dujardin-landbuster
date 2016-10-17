@@ -1,0 +1,40 @@
+#include "Game.h"
+
+namespace state {
+
+	Game::Game (unsigned int playersNumber) {
+
+	}
+
+	Game::~Game () {
+
+	}
+
+	static std::shared_ptr<Game> getInstance () {
+		if (not this->uniqueInstance)
+			this->uniqueInstance = 
+	}
+
+}
+class Game {
+    // Attributes
+  private:
+    std::vector<std::shared_ptr<Player>>::iterator currentPlayer;
+    Step currentStep;
+    std::vector<std::shared_ptr<Land>> lands;
+    std::vector<std::shared_ptr<Player>> players;
+    ItemType activatedItem;
+    static std::shared_ptr<Game> uniqueInstance;
+    // Operations
+  public:
+    ~Game ();
+    static std::shared_ptr<Game> getInstance ();
+    std::shared_ptr<Player> getCurrentPlayer () const;
+    void nextPlayer ();
+    Step getCurrentStep () const;
+    void setCurrentStep (Step step);
+    ItemType getActivatedItem () const;
+    void setActivatedItem (ItemType item);
+  private:
+    Game (unsigned int playersNumber);
+  };
