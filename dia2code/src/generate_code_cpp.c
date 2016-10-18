@@ -588,6 +588,7 @@ struct stdlib_includes {
    int array;   
    int thread;
    int mutex;
+   int graphics;
    int sfmlGraphics;
 };
 
@@ -666,6 +667,11 @@ void print_include_stdlib(struct stdlib_includes* si,char* name) {
            print ("#include <memory>\n");
            si->memory = 1;
        }
+       if (!si->graphics && strstr(name,"sf::")) {
+           print ("#include <SFML/Graphics.hpp>\n");
+           si->graphics = 1;
+       }
+	   
        if (!si->sfmlGraphics 
        && (strstr(name,"sf::RenderWindow")
        ||  strstr(name,"sf::VertexArray")

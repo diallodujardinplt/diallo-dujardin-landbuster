@@ -44,8 +44,8 @@ namespace state {
     void setNeutral (bool neutral);
     bool hasPorts () const;
     void setPorts (bool ports);
-    virtual LandType getType () const = 0;
-    virtual LandType setType (LandType type) = 0;
+    virtual LandType getType () const ;
+    virtual LandType setType (LandType type);
     ItemType getItem () const;
     void setItem (ItemType item);
   };

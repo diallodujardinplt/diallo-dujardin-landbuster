@@ -31,7 +31,7 @@ add_executable(run ${main_sources})
 
 # SFML
 if(WIN32)
-set(SFML_ROOT "D:/Utils/SFML-2.3")
+set(SFML_ROOT "C:\\Users\\Adou\\Documents\\IS\\PLT\\SFML-2.3.2")
 set(CMAKE_MODULE_PATH "${SFML_ROOT}/cmake/Modules" ${CMAKE_MODULE_PATH})
 else(WIN32)
 SET(CMAKE_MODULE_PATH "/usr/share/SFML/cmake/Modules/" ${CMAKE_MODULE_PATH})
