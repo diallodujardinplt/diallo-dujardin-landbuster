@@ -39,6 +39,7 @@ namespace state {
     void setCurrentStep (Step step);
     ItemType getActivatedItem () const;
     void setActivatedItem (ItemType item);
+	void render (sf::RenderWindow& window);
   private:
     Game (unsigned int playersNumber);
   };
