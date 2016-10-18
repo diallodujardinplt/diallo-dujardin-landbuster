@@ -3,6 +3,7 @@
 #define STATE__GAME__H
 
 #include <SFML/Graphics.hpp>
+
 #include <memory>
 #include <vector>
 

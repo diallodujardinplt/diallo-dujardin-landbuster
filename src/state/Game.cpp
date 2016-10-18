@@ -1,3 +1,4 @@
+#include "state.h"
 #include "Game.h"
 
 using namespace std;
