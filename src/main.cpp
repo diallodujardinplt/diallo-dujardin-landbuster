@@ -4,7 +4,9 @@
 
 int main() {
 	sf::RenderWindow window(sf::VideoMode(800,600,32), "Land Buster");
-	//std::shared_ptr<state::Game> game = state::Game::getInstance(6);
+	state::Game& game = state::Game::getInstance();
+	game.init(6);
+
 	while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
@@ -12,9 +14,10 @@ int main() {
 				window.close();
 		}
 		window.clear();
-		//game->render(window);
+		game.render(window);
 		window.display();	
 	}
+
 	return 0;
 }
 

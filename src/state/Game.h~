@@ -2,6 +2,7 @@
 #ifndef STATE__GAME__H
 #define STATE__GAME__H
 
+#include <SFML/Graphics.hpp>
 #include <memory>
 #include <vector>
 
@@ -38,6 +39,7 @@ namespace state {
     void setCurrentStep (Step step);
     ItemType getActivatedItem () const;
     void setActivatedItem (ItemType item);
+	void render (sf::RenderWindow& window);
   private:
     Game (unsigned int playersNumber);
   };

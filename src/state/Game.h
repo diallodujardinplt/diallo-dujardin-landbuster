@@ -23,7 +23,6 @@ namespace state {
   class Game {
     // Attributes
   private:
-    static std::shared_ptr<Game> uniqueInstance;
     Step currentStep;
     std::vector<std::shared_ptr<Player>>::iterator currentPlayer;
     ItemType activatedItem;
@@ -32,16 +31,16 @@ namespace state {
     // Operations
   public:
     ~Game ();
-    static std::shared_ptr<Game> getInstance (unsigned int playersNumber);
+    static Game& getInstance ();
+    void init (unsigned int playersNumber);
     std::shared_ptr<Player> getCurrentPlayer () const;
     void nextPlayer ();
     Step getCurrentStep () const;
     void setCurrentStep (Step step);
     ItemType getActivatedItem () const;
     void setActivatedItem (ItemType item);
-	void render (sf::RenderWindow& window);
   private:
-    Game (unsigned int playersNumber);
+    Game ();
   };
 
 };
