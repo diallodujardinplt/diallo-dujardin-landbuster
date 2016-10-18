@@ -32,7 +32,7 @@ namespace state {
     // Operations
   public:
     ~Game ();
-    static std::shared_ptr<Game> getInstance ();
+    static std::shared_ptr<Game> getInstance (unsigned int playersNumber);
     std::shared_ptr<Player> getCurrentPlayer () const;
     void nextPlayer ();
     Step getCurrentStep () const;
