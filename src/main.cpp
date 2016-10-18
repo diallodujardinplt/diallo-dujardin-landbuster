@@ -1,11 +1,18 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+
+#include "common.hpp"
 #include "state.h"
+#include "render.h"
 
 int main() {
 	sf::RenderWindow window(sf::VideoMode(800,600,32), "Land Buster");
+	
 	state::Game& game = state::Game::getInstance();
 	game.init(6);
+
+	render::Renderer& renderer = render::Renderer::getInstance();
+	renderer.init();
 
 	while (window.isOpen()) {
 		sf::Event event;
@@ -14,7 +21,7 @@ int main() {
 				window.close();
 		}
 		window.clear();
-		game.render(window);
+		renderer.render(window);
 		window.display();	
 	}
 

@@ -2,7 +2,6 @@
 #ifndef STATE__LAND__H
 #define STATE__LAND__H
 
-#include <SFML/Graphics.hpp>
 #include <vector>
 #include <memory>
 
@@ -19,10 +18,11 @@ namespace state {
 
   /// class Land - 
   class Land {
+    // Associations
     // Attributes
   private:
     std::vector<sf::Vector2u> geometry;
-    std::vector<std::shared_ptr<Land>> neighborLands;
+    std::vector< std::shared_ptr<Land> > neighborLands;
     unsigned int soldiersNumber;
     std::shared_ptr<Player> owner;
     bool neutral;
@@ -34,7 +34,7 @@ namespace state {
     Land (std::vector<sf::Vector2u> geometry);
     ~Land ();
     std::vector<sf::Vector2u> getGeometry () const;
-    std::vector<std::shared_ptr<Land>> getNeighborLands () const;
+    std::vector< std::shared_ptr<Land> > getNeighborLands () const;
     void addNeighborLand (std::shared_ptr<Land> land);
     unsigned int getSoldiersNumber () const;
     void setSoldiersNumber (unsigned int soldiersNumber);

@@ -1,5 +1,4 @@
-#include "state.h"
-#include "Game.h"
+#include "Game.hpp"
 
 using namespace std;
 
@@ -65,6 +64,14 @@ namespace state {
 			this->lands.push_back(make_shared<Land>(geometry));
 		}
 
+	}
+
+	vector< shared_ptr<Land> > Game::getLands() const {
+		return lands;
+	}
+
+	vector< shared_ptr<Player> > Game::getPlayers() const {
+		return players;
 	}
 
 }

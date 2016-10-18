@@ -6,9 +6,9 @@
 namespace state {
 
   enum Step {
-    STEP_REINFORCEMENT = 1,
-    STEP_ACTION = 2,
-    STEP_MOVING = 3
+    STEP_REINFORCEMENT     = 1,
+    STEP_ACTION     = 2,
+    STEP_MOVING     = 3
   };
 
 };

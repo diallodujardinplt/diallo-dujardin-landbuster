@@ -2,7 +2,6 @@
 #ifndef STATE__PLAYER__H
 #define STATE__PLAYER__H
 
-#include <SFML/Graphics.hpp>
 #include <memory>
 
 namespace state {
@@ -16,6 +15,7 @@ namespace state {
 
   /// class Player - 
   class Player {
+    // Associations
     // Attributes
   private:
     /// 		

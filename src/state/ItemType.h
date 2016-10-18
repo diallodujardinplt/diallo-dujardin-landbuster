@@ -7,14 +7,14 @@ namespace state {
 
   enum ItemType {
     ITEM_NONE = 0,
-    ITEM_ATTACK_ANYWHERE = 1,
-    ITEM_UNLIMITED_ATTACK = 2,
-    ITEM_ATTACK_AND_BUILD = 3,
-    ITEM_PLAY_TWICE = 4,
-    ITEM_SOLDIERS_BONUS = 5,
-    ITEM_SOLDIERS_MALUS = 6,
-    ITEM_LOSE_LAND = 7,
-    ITEM_FAT_BONUS = 8
+    ITEM_ATTACK_ANYWHERE     = 1,
+    ITEM_UNLIMITED_ATTACK     = 2,
+    ITEM_ATTACK_AND_BUILD     = 3,
+    ITEM_PLAY_TWICE     = 4,
+    ITEM_SOLDIERS_BONUS     = 5,
+    ITEM_SOLDIERS_MALUS     = 6,
+    ITEM_LOSE_LAND     = 7,
+    ITEM_FAT_BONUS     = 8
   };
 
 };

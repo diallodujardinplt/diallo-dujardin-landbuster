@@ -2,10 +2,8 @@
 #ifndef STATE__GAME__H
 #define STATE__GAME__H
 
-#include <SFML/Graphics.hpp>
-
-#include <memory>
 #include <vector>
+#include <memory>
 
 namespace state {
   class Game;
@@ -22,13 +20,14 @@ namespace state {
 
   /// class Game - 
   class Game {
+    // Associations
     // Attributes
   private:
     Step currentStep;
-    std::vector<std::shared_ptr<Player>>::iterator currentPlayer;
+    std::vector< std::shared_ptr<Player> >::iterator currentPlayer;
     ItemType activatedItem;
-    std::vector<std::shared_ptr<Player>> players;
-    std::vector<std::shared_ptr<Land>> lands;
+    std::vector< std::shared_ptr<Player> > players;
+    std::vector< std::shared_ptr<Land> > lands;
     // Operations
   public:
     ~Game ();
@@ -40,6 +39,8 @@ namespace state {
     void setCurrentStep (Step step);
     ItemType getActivatedItem () const;
     void setActivatedItem (ItemType item);
+    std::vector< std::shared_ptr<Land> > getLands () const;
+    std::vector< std::shared_ptr<Player> > getPlayers () const;
   private:
     Game ();
   };
