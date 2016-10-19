@@ -13,33 +13,67 @@ namespace state {
     
 	std::vector<sf::Vector2u> Land::getGeometry () const{
         return geometry;
+        }
+    
+    
+        /*
+         Getters, Setters and methodes
+         */
+        
+    std::vector<std::shared_ptr<Land>> Land::getNeighborLands () const{
+        return this->neighborLands;
     }
     
-    
-    /*std::vector<std::shared_ptr<Land>> Player::getNeighborLands () const{
-        return this->;
-    }
-    
-    void addNeighborLand (std::shared_ptr<Land> land){
+    void Land::addNeighborLand (std::shared_ptr<Land> land){
        
     }
     
-    unsigned int getSoldiersNumber () const{
+    unsigned int Land::getSoldiersNumber () const{
         return this->soldiersNumber;
     }
     
-    void setSoldiersNumber (unsigned int soldiersNumber);
-    std::shared_ptr<Player> getOwner () const;
-    void setOwner (std::shared_ptr<Player> owner);
-    bool isNeutral () const;
-    void setNeutral (bool neutral);
-    bool hasPorts () const;
-    void setPorts (bool ports);
-    virtual LandType getType () const ;
-    virtual LandType setType (LandType type);
-    ItemType getItem () const;
-    void setItem (ItemType item);
-  };*/
-
+    void Land::setSoldiersNumber (unsigned int soldiersNumber){
+        this-> soldiersNumber=soldiersNumber;
+    }
+    
+    std::shared_ptr<Player> Land::getOwner () const{
+        return this->owner;
+    }
+    
+    void Land::setOwner (std::shared_ptr<Player> owner){
+        this->owner=owner;
+    }
+    
+    bool Land::isNeutral () const{
+        return true;
+    }
+    
+    void Land::setNeutral (bool neutral){
+        this->neutral=true;
+    }
+    
+    bool Land::hasPorts () const{
+        return false;
+    }
+    
+    void Land::setPorts (bool ports){
+        this->ports=false;
+    }
+    
+    LandType Land::getType () const {
+        return this->type;
+    }
+    
+   /* void Land::setType (LandType type){
+        this->type=type;
+    }*/
+    
+    ItemType Land::getItem () const{
+        return this->item;
+    }
+    
+    void Land::setItem (ItemType item){
+        this->item=item;
+    }
+    
 }
-

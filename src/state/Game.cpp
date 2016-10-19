@@ -73,5 +73,26 @@ namespace state {
 	vector< shared_ptr<Player> > Game::getPlayers() const {
 		return players;
 	}
+        
+        std::shared_ptr<Player> Game::getCurrentPlayer () const{
+                return currentPlayer;
+        }
+        
+        Step Game::getCurrentStep () const {
+                return this->currentStep;
+        }
+        
+        void Game::setCurrentStep (Step step){
+                this->currentStep=step;
+        }
+        
+        ItemType Game::getActivatedItem () const{
+                return this->activatedItem;
+        }
+        
+        void Game::setActivatedItem (ItemType item){
+                this->activatedItem=item;
+        }
+             
 
 }
