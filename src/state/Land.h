@@ -6,10 +6,12 @@
 #include <memory>
 
 namespace state {
+  class Cell;
   class Player;
   class Land;
 }
 
+#include "Cell.h"
 #include "Player.h"
 #include "LandType.h"
 #include "ItemType.h"
@@ -21,7 +23,7 @@ namespace state {
     // Associations
     // Attributes
   private:
-    std::vector<sf::Vector2u> geometry;
+    std::vector<Cell> geometry;
     std::vector< std::shared_ptr<Land> > neighborLands;
     unsigned int soldiersNumber;
     std::shared_ptr<Player> owner;
@@ -31,9 +33,9 @@ namespace state {
     ItemType item;
     // Operations
   public:
-    Land (std::vector<sf::Vector2u> geometry);
+    Land (std::vector<Cell> geometry);
     ~Land ();
-    std::vector<sf::Vector2u> getGeometry () const;
+    const std::vector<Cell>& getGeometry () const;
     std::vector< std::shared_ptr<Land> > getNeighborLands () const;
     void addNeighborLand (std::shared_ptr<Land> land);
     unsigned int getSoldiersNumber () const;
@@ -45,7 +47,7 @@ namespace state {
     bool hasPorts () const;
     void setPorts (bool ports);
     LandType getType () const;
-    LandType setType (LandType type);
+    void setType (LandType type);
     ItemType getItem () const;
     void setItem (ItemType item);
   };

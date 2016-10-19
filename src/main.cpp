@@ -6,7 +6,7 @@
 #include "render.h"
 
 int main() {
-	sf::RenderWindow window(sf::VideoMode(800,600,32), "Land Buster");
+	sf::RenderWindow window(sf::VideoMode(576,576,32), "Land Buster");
 	
 	state::Game& game = state::Game::getInstance();
 	game.init(6);
@@ -14,15 +14,24 @@ int main() {
 	render::Renderer& renderer = render::Renderer::getInstance();
 	renderer.init();
 
+	sf::Clock framerateClock;
+
 	while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-		window.clear();
-		renderer.render(window);
-		window.display();	
+
+		sf::Time framerateElapsed = framerateClock.getElapsedTime();
+		if (framerateElapsed.asMilliseconds() > 30) {
+			window.clear();
+			renderer.render(window);
+			window.display();
+
+			framerateClock.restart();
+		}
+		
 	}
 
 	return 0;

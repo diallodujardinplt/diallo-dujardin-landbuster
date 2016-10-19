@@ -2,6 +2,7 @@
 #ifndef __STATE__H
 #define __STATE__H
 
+#include "state/Cell.h"
 #include "state/ItemType.h"
 #include "state/Player.h"
 #include "state/LandType.h"

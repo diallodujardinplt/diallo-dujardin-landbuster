@@ -41,8 +41,9 @@ namespace state {
 		
 		// TODO (temp code)
 		landsCount = 6;
-		for (unsigned int x = 0; x < 64; ++x) {
-			for (unsigned int y = 0; y < 64; ++y) {
+		
+		for (unsigned int y = 0; y < 64; ++y) {
+			for (unsigned int x = 0; x < 64; ++x) {
 				if(x < 16 && y < 16) cells[x][y] = 0;
 				else if(x >= 16 && y < 16) cells[x][y] = 1;
 				else if(x < 16 && y >= 16 && y < 40) cells[x][y] = 2;
@@ -54,15 +55,56 @@ namespace state {
 
 		// Generate lands
 		for (unsigned int i = 0; i < landsCount; ++i) {
-			std::vector<sf::Vector2u> geometry;
-			for (unsigned int x = 0; x < 64; ++x) {
-				for (unsigned int y = 0; y < 64; ++y) {
+			std::vector<Cell> geometry;
+			for (unsigned int y = 0; y < 64; ++y) {
+				for (unsigned int x = 0; x < 64; ++x) {
+
+					sf::Vector2u pos(x, y);
+					bool borderTop = (y>0)?(cells[x][y-1] != i):false;
+					bool borderBottom = (y<63)?(cells[x][y+1] != i):false;
+					bool borderLeft = (x>0)?(cells[x-1][y] != i):false;
+					bool borderRight = (x<63)?(cells[x+1][y] != i):false;
+
 					if (cells[x][y] == i)
-						geometry.push_back(sf::Vector2u(x, y));
+						geometry.push_back(Cell(pos, borderTop, borderBottom, borderLeft, borderRight));
 				}
 			}
 			this->lands.push_back(make_shared<Land>(geometry));
+			this->lands.back()->setType(LAND_MOUNTAIN);
 		}
+
+		this->lands.back()->setOwner(this->players.front());
+
+
+		// Debug display
+		cout << "CELLS" << endl;
+		for (unsigned int y = 0; y < 64; ++y) {
+			//Borders top
+			for (unsigned int x = 0; x < 64; ++x) {
+				cout << " ";
+				if ((y>0)?(cells[x][y-1] != cells[x][y]):false) cout << "_";
+				else cout << " ";
+				cout << " ";
+			}
+			cout << endl;
+			//Cells
+			for (unsigned int x = 0; x < 64; ++x) {
+				if ((x>0)?(cells[x-1][y] != cells[x][y]):false) cout << "|";
+				else cout << " ";
+				cout << cells[x][y];
+				if ((x<63)?(cells[x+1][y] != cells[x][y]):false) cout << "|";
+				else cout << " ";
+			}
+			cout << endl;
+			//Borders bottom
+			for (unsigned int x = 0; x < 64; ++x) {
+				cout << " ";
+				if ((y<63)?(cells[x][y+1] != cells[x][y]):false) cout << "_";
+				else cout << " ";
+				cout << " ";
+			}
+		}
+		cout << "ENDCELLS" << endl;
 
 	}
 
@@ -74,25 +116,25 @@ namespace state {
 		return players;
 	}
         
-        std::shared_ptr<Player> Game::getCurrentPlayer () const{
-                return currentPlayer;
-        }
-        
-        Step Game::getCurrentStep () const {
-                return this->currentStep;
-        }
-        
-        void Game::setCurrentStep (Step step){
-                this->currentStep=step;
-        }
-        
-        ItemType Game::getActivatedItem () const{
-                return this->activatedItem;
-        }
-        
-        void Game::setActivatedItem (ItemType item){
-                this->activatedItem=item;
-        }
+    std::shared_ptr<Player> Game::getCurrentPlayer () const{
+            return *currentPlayer;
+    }
+    
+    Step Game::getCurrentStep () const {
+            return this->currentStep;
+    }
+    
+    void Game::setCurrentStep (Step step){
+            this->currentStep=step;
+    }
+    
+    ItemType Game::getActivatedItem () const{
+            return this->activatedItem;
+    }
+    
+    void Game::setActivatedItem (ItemType item){
+            this->activatedItem=item;
+    }
              
 
 }

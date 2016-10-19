@@ -4,16 +4,16 @@ using namespace std;
 
 namespace state {
 
-	Land::Land(vector<sf::Vector2u> geometry) {
+	Land::Land(vector<Cell> geometry) {
 		this->geometry = geometry;
 	}
 
 	Land::~Land() {
 	}
     
-	std::vector<sf::Vector2u> Land::getGeometry () const{
+	const std::vector<Cell>& Land::getGeometry () const {
         return geometry;
-        }
+    }
     
     
         /*
@@ -64,9 +64,9 @@ namespace state {
         return this->type;
     }
     
-   /* void Land::setType (LandType type){
+    void Land::setType (LandType type){
         this->type=type;
-    }*/
+    }
     
     ItemType Land::getItem () const{
         return this->item;
