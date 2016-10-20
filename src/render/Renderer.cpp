@@ -25,7 +25,6 @@ namespace render {
 		landTextures[state::LAND_FOREST].loadFromFile("res/textures/forest.jpg");
 		landTextures[state::LAND_MOUNTAIN].loadFromFile("res/textures/mountain.jpg");
 		landTextures[state::LAND_COASTAL].loadFromFile("res/textures/coastal.jpg");
-		landTextures[state::LAND_MEADOW].create(9, 9);
 	}
 
 	void Renderer::render(sf::RenderWindow& window) {
@@ -35,6 +34,8 @@ namespace render {
 		sf::Sprite sprite;
 		sf::RectangleShape waterRect(sf::Vector2f(9, 9));
 		waterRect.setFillColor(sf::Color(0, 0, 128));
+		sf::RectangleShape portRect(sf::Vector2f(9, 9));
+		portRect.setFillColor(sf::Color(32, 16, 0));
 
 		vector< shared_ptr<state::Land> > lands = game.getLands();
 		if (lands.begin() == lands.end()) return;
@@ -49,14 +50,28 @@ namespace render {
 			for (vector<state::Cell>::const_iterator cell_it = geometry.begin(); cell_it != geometry.end(); ++cell_it) {
 
 				state::Cell cell = *cell_it;
+				sf::Vector2f pos(9*cell.position.x, 9*cell.position.y);
 
 				if(land->getType() != state::LAND_WATER) {
 					// Land
-					sprite.setPosition(9*cell.position.x, 9*cell.position.y);
-					sprite.setTexture(landTextures[land->getType()]);
-					sprite.setTextureRect(sf::IntRect((9*cell.position.x)%600, (9*cell.position.y)%400, 9, 9));
-					if(land->getOwner()) sprite.setColor(land->getOwner()->getColor());
-					window.draw(sprite);
+					if(land->getType() != state::LAND_MEADOW) {
+						sprite.setPosition(pos);
+						sprite.setTexture(landTextures[land->getType()]);
+						sprite.setTextureRect(sf::IntRect((9*cell.position.x)%600, (9*cell.position.y)%400, 9, 9));
+						if(land->getOwner()) sprite.setColor(land->getOwner()->getColor());
+						window.draw(sprite);
+					}
+					else {
+						sf::RectangleShape meadowRect(sf::Vector2f(9, 9));
+						sf::Color color = land->getOwner()?land->getOwner()->getColor():sf::Color(255, 255, 255);
+						color.r *= 200;
+						color.g *= 255;
+						color.b *= 200;
+						meadowRect.setFillColor(color);
+						meadowRect.setPosition(pos);
+						window.draw(meadowRect);
+					}
+					
 
 					if(cell.borderTop) {
 						sf::RectangleShape border;
@@ -128,7 +143,7 @@ namespace render {
 
 				else {
 					// Water
-					waterRect.setPosition(9*cell.position.x, 9*cell.position.y);
+					waterRect.setPosition(pos);
 					window.draw(waterRect);
 				}	
 

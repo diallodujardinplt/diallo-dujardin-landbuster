@@ -80,6 +80,10 @@ namespace state {
 
 		this->lands.front()->setType(LAND_WATER);
 
+		this->lands[3]->setType(LAND_MEADOW);
+		this->lands[4]->setType(LAND_MEADOW);
+		this->lands[4]->setOwner(this->players[2]);
+
 
 		// Debug display of cells with borders
 		/*cout << "CELLS" << endl;
