@@ -4,8 +4,7 @@ using namespace std;
 
 namespace state {
 
-	Land::Land(vector<Cell> geometry) {
-		this->geometry = geometry;
+	Land::Land() {
 	}
 
 	Land::~Land() {
@@ -13,6 +12,10 @@ namespace state {
     
 	const std::vector<Cell>& Land::getGeometry () const {
         return geometry;
+    }
+
+    void Land::setGeometry(vector<Cell> geometry) {
+    	this->geometry = geometry;
     }
     
     

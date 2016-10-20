@@ -2,6 +2,13 @@
 #ifndef STATE__CELL__H
 #define STATE__CELL__H
 
+#include <memory>
+
+namespace state {
+  class Land;
+}
+
+#include "Land.h"
 
 namespace state {
 
@@ -14,6 +21,7 @@ namespace state {
     bool borderBottom;
     bool borderLeft;
     bool borderRight;
+    std::shared_ptr<Land> land;
     // Operations
   public:
     /// 	
@@ -22,7 +30,8 @@ namespace state {
     /// @param borderBottom		(???) 
     /// @param borderLeft		(???) 
     /// @param borderRight		(???) 
-    Cell (sf::Vector2u position, bool borderTop, bool borderBottom, bool borderLeft, bool borderRight);
+    /// @param land		(???) 
+    Cell (sf::Vector2u position, bool borderTop, bool borderBottom, bool borderLeft, bool borderRight, std::shared_ptr<Land> land);
   };
 
 };

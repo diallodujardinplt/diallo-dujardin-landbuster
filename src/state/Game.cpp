@@ -55,6 +55,7 @@ namespace state {
 
 		// Generate lands
 		for (unsigned int i = 0; i < landsCount; ++i) {
+			this->lands.push_back(make_shared<Land>());
 			std::vector<Cell> geometry;
 			for (unsigned int y = 0; y < 64; ++y) {
 				for (unsigned int x = 0; x < 64; ++x) {
@@ -66,10 +67,11 @@ namespace state {
 					bool borderRight = (x<63)?(cells[x+1][y] != i):false;
 
 					if (cells[x][y] == i)
-						geometry.push_back(Cell(pos, borderTop, borderBottom, borderLeft, borderRight));
+						geometry.push_back(Cell(pos, borderTop, borderBottom, borderLeft, borderRight, this->lands.back()));
 				}
 			}
-			this->lands.push_back(make_shared<Land>(geometry));
+
+			this->lands.back()->setGeometry(geometry);
 			this->lands.back()->setType(LAND_MOUNTAIN);
 			this->lands.back()->setSoldiersNumber(30);
 		}

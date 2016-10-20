@@ -14,7 +14,7 @@ distclean: clean
 
 dia2code: ${DIA2CODE_DIR}/bin/dia2code
 
-${DIA2CODE_DIR}/dia2code/dia2code: 
+${DIA2CODE_DIR}/bin/dia2code: 
 	cd ${DIA2CODE_DIR} && ./configure && make
 
 configure:

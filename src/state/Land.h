@@ -33,9 +33,10 @@ namespace state {
     ItemType item;
     // Operations
   public:
-    Land (std::vector<Cell> geometry);
+    Land ();
     ~Land ();
     const std::vector<Cell>& getGeometry () const;
+    void setGeometry (std::vector<Cell> geometry);
     std::vector< std::shared_ptr<Land> > getNeighborLands () const;
     void addNeighborLand (std::shared_ptr<Land> land);
     unsigned int getSoldiersNumber () const;
