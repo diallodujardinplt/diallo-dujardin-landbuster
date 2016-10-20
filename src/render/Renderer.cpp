@@ -119,8 +119,8 @@ namespace render {
 					ostringstream oss;
 					oss << land->getSoldiersNumber();
 					text.setString(oss.str().c_str());
-					text.setCharacterSize(20);
-					text.setColor(sf::Color(0, 0, 0));
+					text.setCharacterSize(30);
+					text.setColor(sf::Color(255, 130, 0));
 					text.setStyle(sf::Text::Bold);
 					window.draw(text);
 
