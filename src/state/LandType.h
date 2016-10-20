@@ -11,7 +11,8 @@ namespace state {
     LAND_FOREST     = 2,
     LAND_MOUNTAIN     = 3,
     LAND_COASTAL     = 4,
-    LAND_MEADOW     = 5
+    LAND_MEADOW     = 5,
+    LAND_WATER     = 6
   };
 
 };
