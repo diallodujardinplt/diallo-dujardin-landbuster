@@ -75,7 +75,10 @@ namespace state {
 		}
 
 		this->lands.back()->setOwner(this->players.front());
+		this->lands.back()->setType(LAND_FOREST);
 		this->lands.back()->setSoldiersNumber(54);
+
+		this->lands.front()->setType(LAND_WATER);
 
 
 		// Debug display of cells with borders
