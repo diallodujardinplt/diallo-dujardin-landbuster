@@ -21,10 +21,10 @@ namespace render {
 	}
 
 	void Renderer::loadTextures() {
-		landTextures[state::LAND_DESERT].loadFromFile("res/textures/sm_desert.jpg");
-		landTextures[state::LAND_FOREST].loadFromFile("res/textures/sm_forest.jpg");
-		landTextures[state::LAND_MOUNTAIN].loadFromFile("res/textures/sm_mountain.jpg");
-		landTextures[state::LAND_COASTAL].loadFromFile("res/textures/sm_coastal.jpg");
+		landTextures[state::LAND_DESERT].loadFromFile("res/textures/desert.jpg");
+		landTextures[state::LAND_FOREST].loadFromFile("res/textures/forest.jpg");
+		landTextures[state::LAND_MOUNTAIN].loadFromFile("res/textures/mountain.jpg");
+		landTextures[state::LAND_COASTAL].loadFromFile("res/textures/coastal.jpg");
 		landTextures[state::LAND_MEADOW].create(9, 9);
 	}
 
@@ -54,6 +54,7 @@ namespace render {
 					// Land
 					sprite.setPosition(9*cell.position.x, 9*cell.position.y);
 					sprite.setTexture(landTextures[land->getType()]);
+					sprite.setTextureRect(sf::IntRect((9*cell.position.x)%600, (9*cell.position.y)%400, 9, 9));
 					if(land->getOwner()) sprite.setColor(land->getOwner()->getColor());
 					window.draw(sprite);
 
