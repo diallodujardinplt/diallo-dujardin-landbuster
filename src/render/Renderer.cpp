@@ -99,7 +99,7 @@ namespace render {
 			bool inLand = false;
 			for (vector<state::Cell>::const_iterator cell_it = geometry.begin(); cell_it != geometry.end(); ++cell_it) {
 				state::Cell cell = *cell_it;
-				if (cell.position.x == moyX && cell.position.y == moyY) {
+				if (cell.position.x == moyXu && cell.position.y == moyYu) {
 					inLand = true;
 				}
 			}
