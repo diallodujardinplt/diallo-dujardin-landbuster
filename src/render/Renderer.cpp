@@ -57,7 +57,7 @@ namespace render {
 					if(land->getType() != state::LAND_MEADOW) {
 						sprite.setPosition(pos);
 						sprite.setTexture(landTextures[land->getType()]);
-						sprite.setTextureRect(sf::IntRect((9*cell.position.x)%600, (9*cell.position.y)%400, 9, 9));
+						sprite.setTextureRect(sf::IntRect((9*(cell.position.x-(*(geometry.begin())).position.x))%600, (9*(cell.position.y-(*(geometry.begin())).position.y))%400, 9, 9));
 						if(land->getOwner()) sprite.setColor(land->getOwner()->getColor());
 						window.draw(sprite);
 					}
