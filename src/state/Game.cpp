@@ -71,13 +71,15 @@ namespace state {
 			}
 			this->lands.push_back(make_shared<Land>(geometry));
 			this->lands.back()->setType(LAND_MOUNTAIN);
+			this->lands.back()->setSoldiersNumber(30);
 		}
 
 		this->lands.back()->setOwner(this->players.front());
+		this->lands.back()->setSoldiersNumber(54);
 
 
-		// Debug display
-		cout << "CELLS" << endl;
+		// Debug display of cells with borders
+		/*cout << "CELLS" << endl;
 		for (unsigned int y = 0; y < 64; ++y) {
 			//Borders top
 			for (unsigned int x = 0; x < 64; ++x) {
@@ -104,7 +106,7 @@ namespace state {
 				cout << " ";
 			}
 		}
-		cout << "ENDCELLS" << endl;
+		cout << "ENDCELLS" << endl;*/
 
 	}
 

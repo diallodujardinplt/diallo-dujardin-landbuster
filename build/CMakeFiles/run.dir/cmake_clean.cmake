@@ -1,6 +1,10 @@
 file(REMOVE_RECURSE
   "CMakeFiles/run.dir/src/main.cpp.o"
-  "CMakeFiles/run.dir/src/state/Exemple.cpp.o"
+  "CMakeFiles/run.dir/src/render/Renderer.cpp.o"
+  "CMakeFiles/run.dir/src/state/Game.cpp.o"
+  "CMakeFiles/run.dir/src/state/Player.cpp.o"
+  "CMakeFiles/run.dir/src/state/Cell.cpp.o"
+  "CMakeFiles/run.dir/src/state/Land.cpp.o"
   "../bin/run.pdb"
   "../bin/run"
 )

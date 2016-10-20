@@ -17,6 +17,7 @@ namespace render {
 
 	void Renderer::init() {
 		loadTextures();
+		font.loadFromFile("res/font.ttf");
 	}
 
 	void Renderer::loadTextures() {
@@ -41,6 +42,8 @@ namespace render {
 			if (land->getType() == state::LAND_NONE) return;
 			const vector<state::Cell>& geometry = land->getGeometry();
 			if (geometry.begin() == geometry.end()) return;
+
+			// Draw cells with borders
 			for (vector<state::Cell>::const_iterator cell_it = geometry.begin(); cell_it != geometry.end(); ++cell_it) {
 
 				state::Cell cell = *cell_it;
@@ -82,6 +85,40 @@ namespace render {
 				}
 
 			}
+
+			// Write soldiers number
+			float moyX = 0.0, moyY = 0.0;
+			for (vector<state::Cell>::const_iterator cell_it = geometry.begin(); cell_it != geometry.end(); ++cell_it) {
+				state::Cell cell = *cell_it;
+				moyX += cell.position.x;
+				moyY += cell.position.y;
+			}
+			moyX /= ((float) geometry.size());
+			moyY /= ((float) geometry.size());
+			unsigned int moyXu = moyX, moyYu = moyY;
+			bool inLand = false;
+			for (vector<state::Cell>::const_iterator cell_it = geometry.begin(); cell_it != geometry.end(); ++cell_it) {
+				state::Cell cell = *cell_it;
+				if (cell.position.x == moyX && cell.position.y == moyY) {
+					inLand = true;
+				}
+			}
+			if (!inLand) {
+				moyXu = (*(geometry.begin())).position.x;
+				moyYu = (*(geometry.begin())).position.y;
+			}
+			moyXu *= 9;
+			moyYu *= 9;
+			sf::Text text;
+			text.setPosition(sf::Vector2f(moyXu, moyYu));
+			text.setFont(font);
+			ostringstream oss;
+			oss << land->getSoldiersNumber();
+			text.setString(oss.str().c_str());
+			text.setCharacterSize(20);
+			text.setColor(sf::Color(0, 0, 0));
+			text.setStyle(sf::Text::Bold);
+			window.draw(text);
 			
 		}
 

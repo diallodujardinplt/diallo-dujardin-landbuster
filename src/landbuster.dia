@@ -3812,7 +3812,7 @@
         <dia:point val="26.8006,-45.5372"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="26.7506,-45.5872;47.7556,-38.0872"/>
+        <dia:rectangle val="26.7506,-45.5872;47.7556,-37.2872"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="26.8006,-45.5372"/>
@@ -3821,7 +3821,7 @@
         <dia:real val="20.905000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="7.4000000000000004"/>
+        <dia:real val="8.1999999999999993"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#Renderer#</dia:string>
@@ -3917,6 +3917,29 @@
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::map&lt;state::LandType, sf::Texture&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="1"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#font#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#sf::Font#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -4179,7 +4202,7 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="37.2531,-45.5867"/>
+        <dia:point val="37.2531,-45.5872"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
         <dia:rectangle val="36.5031,-47.9695;51.1764,-43.2372"/>
@@ -4188,7 +4211,7 @@
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="37.2531,-45.5867"/>
+        <dia:point val="37.2531,-45.5872"/>
         <dia:point val="37.2531,-47.9195"/>
         <dia:point val="51.0764,-47.9195"/>
         <dia:point val="51.0764,-44.418"/>
@@ -4212,7 +4235,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O16" connection="22"/>
+        <dia:connection handle="0" to="O16" connection="24"/>
         <dia:connection handle="1" to="O16" connection="4"/>
       </dia:connections>
       <dia:childnode parent="O15"/>

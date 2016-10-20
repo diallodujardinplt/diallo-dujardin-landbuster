@@ -16,6 +16,12 @@ namespace state {
     bool borderRight;
     // Operations
   public:
+    /// 	
+    /// @param position		(???) 
+    /// @param borderTop		(???) 
+    /// @param borderBottom		(???) 
+    /// @param borderLeft		(???) 
+    /// @param borderRight		(???) 
     Cell (sf::Vector2u position, bool borderTop, bool borderBottom, bool borderLeft, bool borderRight);
   };
 

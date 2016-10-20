@@ -18,6 +18,7 @@ namespace render {
     // Attributes
   private:
     std::map<state::LandType, sf::Texture> landTextures;
+    sf::Font font;
     // Operations
   public:
     ~Renderer ();

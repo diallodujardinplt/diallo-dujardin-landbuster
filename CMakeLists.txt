@@ -19,8 +19,8 @@ ENDIF(CMAKE_COMPILER_IS_GNUCC)
 
 
 # Generate headers
-# set(DIA2CODE "${PROJECT_SOURCE_DIR}/dia2code/bin/dia2code")
-# exec_program(${DIA2CODE} ARGS -d src -t cpp src/state.dia)
+set(DIA2CODE "${PROJECT_SOURCE_DIR}/dia2code/bin/dia2code")
+exec_program(${DIA2CODE} ARGS -d ../src -t cpp ../src/landbuster.dia)
 
 # Sources
 file(GLOB_RECURSE main_sources src/*.cpp)

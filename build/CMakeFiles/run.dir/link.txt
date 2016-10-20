@@ -1,0 +1,1 @@
+/usr/bin/c++    -Wall -std=c++11 -pthread -g -O3 -DNDEBUG   CMakeFiles/run.dir/src/main.cpp.o CMakeFiles/run.dir/src/render/Renderer.cpp.o CMakeFiles/run.dir/src/state/Game.cpp.o CMakeFiles/run.dir/src/state/Player.cpp.o CMakeFiles/run.dir/src/state/Cell.cpp.o CMakeFiles/run.dir/src/state/Land.cpp.o  -o ../bin/run -rdynamic -lsfml-graphics -lsfml-window -lsfml-system 

@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/raph/Téléchargements/plt-start-kit
+CMAKE_SOURCE_DIR = /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/raph/Téléchargements/plt-start-kit/build
+CMAKE_BINARY_DIR = /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/run.dir/depend.make
@@ -51,17 +51,17 @@ include CMakeFiles/run.dir/flags.make
 
 CMakeFiles/run.dir/src/main.cpp.o: CMakeFiles/run.dir/flags.make
 CMakeFiles/run.dir/src/main.cpp.o: ../src/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/raph/Téléchargements/plt-start-kit/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/run.dir/src/main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/run.dir/src/main.cpp.o -c /home/raph/Téléchargements/plt-start-kit/src/main.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/run.dir/src/main.cpp.o -c /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/src/main.cpp
 
 CMakeFiles/run.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/run.dir/src/main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/raph/Téléchargements/plt-start-kit/src/main.cpp > CMakeFiles/run.dir/src/main.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/src/main.cpp > CMakeFiles/run.dir/src/main.cpp.i
 
 CMakeFiles/run.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/run.dir/src/main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/raph/Téléchargements/plt-start-kit/src/main.cpp -o CMakeFiles/run.dir/src/main.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/src/main.cpp -o CMakeFiles/run.dir/src/main.cpp.s
 
 CMakeFiles/run.dir/src/main.cpp.o.requires:
 .PHONY : CMakeFiles/run.dir/src/main.cpp.o.requires
@@ -72,39 +72,139 @@ CMakeFiles/run.dir/src/main.cpp.o.provides: CMakeFiles/run.dir/src/main.cpp.o.re
 
 CMakeFiles/run.dir/src/main.cpp.o.provides.build: CMakeFiles/run.dir/src/main.cpp.o
 
-CMakeFiles/run.dir/src/state/Exemple.cpp.o: CMakeFiles/run.dir/flags.make
-CMakeFiles/run.dir/src/state/Exemple.cpp.o: ../src/state/Exemple.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/raph/Téléchargements/plt-start-kit/build/CMakeFiles $(CMAKE_PROGRESS_2)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/run.dir/src/state/Exemple.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/run.dir/src/state/Exemple.cpp.o -c /home/raph/Téléchargements/plt-start-kit/src/state/Exemple.cpp
+CMakeFiles/run.dir/src/render/Renderer.cpp.o: CMakeFiles/run.dir/flags.make
+CMakeFiles/run.dir/src/render/Renderer.cpp.o: ../src/render/Renderer.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/run.dir/src/render/Renderer.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/run.dir/src/render/Renderer.cpp.o -c /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/src/render/Renderer.cpp
 
-CMakeFiles/run.dir/src/state/Exemple.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/run.dir/src/state/Exemple.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/raph/Téléchargements/plt-start-kit/src/state/Exemple.cpp > CMakeFiles/run.dir/src/state/Exemple.cpp.i
+CMakeFiles/run.dir/src/render/Renderer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/run.dir/src/render/Renderer.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/src/render/Renderer.cpp > CMakeFiles/run.dir/src/render/Renderer.cpp.i
 
-CMakeFiles/run.dir/src/state/Exemple.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/run.dir/src/state/Exemple.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/raph/Téléchargements/plt-start-kit/src/state/Exemple.cpp -o CMakeFiles/run.dir/src/state/Exemple.cpp.s
+CMakeFiles/run.dir/src/render/Renderer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/run.dir/src/render/Renderer.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/src/render/Renderer.cpp -o CMakeFiles/run.dir/src/render/Renderer.cpp.s
 
-CMakeFiles/run.dir/src/state/Exemple.cpp.o.requires:
-.PHONY : CMakeFiles/run.dir/src/state/Exemple.cpp.o.requires
+CMakeFiles/run.dir/src/render/Renderer.cpp.o.requires:
+.PHONY : CMakeFiles/run.dir/src/render/Renderer.cpp.o.requires
 
-CMakeFiles/run.dir/src/state/Exemple.cpp.o.provides: CMakeFiles/run.dir/src/state/Exemple.cpp.o.requires
-	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/src/state/Exemple.cpp.o.provides.build
-.PHONY : CMakeFiles/run.dir/src/state/Exemple.cpp.o.provides
+CMakeFiles/run.dir/src/render/Renderer.cpp.o.provides: CMakeFiles/run.dir/src/render/Renderer.cpp.o.requires
+	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/src/render/Renderer.cpp.o.provides.build
+.PHONY : CMakeFiles/run.dir/src/render/Renderer.cpp.o.provides
 
-CMakeFiles/run.dir/src/state/Exemple.cpp.o.provides.build: CMakeFiles/run.dir/src/state/Exemple.cpp.o
+CMakeFiles/run.dir/src/render/Renderer.cpp.o.provides.build: CMakeFiles/run.dir/src/render/Renderer.cpp.o
+
+CMakeFiles/run.dir/src/state/Game.cpp.o: CMakeFiles/run.dir/flags.make
+CMakeFiles/run.dir/src/state/Game.cpp.o: ../src/state/Game.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/run.dir/src/state/Game.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/run.dir/src/state/Game.cpp.o -c /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/src/state/Game.cpp
+
+CMakeFiles/run.dir/src/state/Game.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/run.dir/src/state/Game.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/src/state/Game.cpp > CMakeFiles/run.dir/src/state/Game.cpp.i
+
+CMakeFiles/run.dir/src/state/Game.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/run.dir/src/state/Game.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/src/state/Game.cpp -o CMakeFiles/run.dir/src/state/Game.cpp.s
+
+CMakeFiles/run.dir/src/state/Game.cpp.o.requires:
+.PHONY : CMakeFiles/run.dir/src/state/Game.cpp.o.requires
+
+CMakeFiles/run.dir/src/state/Game.cpp.o.provides: CMakeFiles/run.dir/src/state/Game.cpp.o.requires
+	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/src/state/Game.cpp.o.provides.build
+.PHONY : CMakeFiles/run.dir/src/state/Game.cpp.o.provides
+
+CMakeFiles/run.dir/src/state/Game.cpp.o.provides.build: CMakeFiles/run.dir/src/state/Game.cpp.o
+
+CMakeFiles/run.dir/src/state/Player.cpp.o: CMakeFiles/run.dir/flags.make
+CMakeFiles/run.dir/src/state/Player.cpp.o: ../src/state/Player.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/run.dir/src/state/Player.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/run.dir/src/state/Player.cpp.o -c /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/src/state/Player.cpp
+
+CMakeFiles/run.dir/src/state/Player.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/run.dir/src/state/Player.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/src/state/Player.cpp > CMakeFiles/run.dir/src/state/Player.cpp.i
+
+CMakeFiles/run.dir/src/state/Player.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/run.dir/src/state/Player.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/src/state/Player.cpp -o CMakeFiles/run.dir/src/state/Player.cpp.s
+
+CMakeFiles/run.dir/src/state/Player.cpp.o.requires:
+.PHONY : CMakeFiles/run.dir/src/state/Player.cpp.o.requires
+
+CMakeFiles/run.dir/src/state/Player.cpp.o.provides: CMakeFiles/run.dir/src/state/Player.cpp.o.requires
+	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/src/state/Player.cpp.o.provides.build
+.PHONY : CMakeFiles/run.dir/src/state/Player.cpp.o.provides
+
+CMakeFiles/run.dir/src/state/Player.cpp.o.provides.build: CMakeFiles/run.dir/src/state/Player.cpp.o
+
+CMakeFiles/run.dir/src/state/Cell.cpp.o: CMakeFiles/run.dir/flags.make
+CMakeFiles/run.dir/src/state/Cell.cpp.o: ../src/state/Cell.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/run.dir/src/state/Cell.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/run.dir/src/state/Cell.cpp.o -c /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/src/state/Cell.cpp
+
+CMakeFiles/run.dir/src/state/Cell.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/run.dir/src/state/Cell.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/src/state/Cell.cpp > CMakeFiles/run.dir/src/state/Cell.cpp.i
+
+CMakeFiles/run.dir/src/state/Cell.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/run.dir/src/state/Cell.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/src/state/Cell.cpp -o CMakeFiles/run.dir/src/state/Cell.cpp.s
+
+CMakeFiles/run.dir/src/state/Cell.cpp.o.requires:
+.PHONY : CMakeFiles/run.dir/src/state/Cell.cpp.o.requires
+
+CMakeFiles/run.dir/src/state/Cell.cpp.o.provides: CMakeFiles/run.dir/src/state/Cell.cpp.o.requires
+	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/src/state/Cell.cpp.o.provides.build
+.PHONY : CMakeFiles/run.dir/src/state/Cell.cpp.o.provides
+
+CMakeFiles/run.dir/src/state/Cell.cpp.o.provides.build: CMakeFiles/run.dir/src/state/Cell.cpp.o
+
+CMakeFiles/run.dir/src/state/Land.cpp.o: CMakeFiles/run.dir/flags.make
+CMakeFiles/run.dir/src/state/Land.cpp.o: ../src/state/Land.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/run.dir/src/state/Land.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/run.dir/src/state/Land.cpp.o -c /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/src/state/Land.cpp
+
+CMakeFiles/run.dir/src/state/Land.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/run.dir/src/state/Land.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/src/state/Land.cpp > CMakeFiles/run.dir/src/state/Land.cpp.i
+
+CMakeFiles/run.dir/src/state/Land.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/run.dir/src/state/Land.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/src/state/Land.cpp -o CMakeFiles/run.dir/src/state/Land.cpp.s
+
+CMakeFiles/run.dir/src/state/Land.cpp.o.requires:
+.PHONY : CMakeFiles/run.dir/src/state/Land.cpp.o.requires
+
+CMakeFiles/run.dir/src/state/Land.cpp.o.provides: CMakeFiles/run.dir/src/state/Land.cpp.o.requires
+	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/src/state/Land.cpp.o.provides.build
+.PHONY : CMakeFiles/run.dir/src/state/Land.cpp.o.provides
+
+CMakeFiles/run.dir/src/state/Land.cpp.o.provides.build: CMakeFiles/run.dir/src/state/Land.cpp.o
 
 # Object files for target run
 run_OBJECTS = \
 "CMakeFiles/run.dir/src/main.cpp.o" \
-"CMakeFiles/run.dir/src/state/Exemple.cpp.o"
+"CMakeFiles/run.dir/src/render/Renderer.cpp.o" \
+"CMakeFiles/run.dir/src/state/Game.cpp.o" \
+"CMakeFiles/run.dir/src/state/Player.cpp.o" \
+"CMakeFiles/run.dir/src/state/Cell.cpp.o" \
+"CMakeFiles/run.dir/src/state/Land.cpp.o"
 
 # External object files for target run
 run_EXTERNAL_OBJECTS =
 
 ../bin/run: CMakeFiles/run.dir/src/main.cpp.o
-../bin/run: CMakeFiles/run.dir/src/state/Exemple.cpp.o
+../bin/run: CMakeFiles/run.dir/src/render/Renderer.cpp.o
+../bin/run: CMakeFiles/run.dir/src/state/Game.cpp.o
+../bin/run: CMakeFiles/run.dir/src/state/Player.cpp.o
+../bin/run: CMakeFiles/run.dir/src/state/Cell.cpp.o
+../bin/run: CMakeFiles/run.dir/src/state/Land.cpp.o
 ../bin/run: CMakeFiles/run.dir/build.make
 ../bin/run: /usr/lib/x86_64-linux-gnu/libsfml-graphics.so
 ../bin/run: /usr/lib/x86_64-linux-gnu/libsfml-window.so
@@ -118,7 +218,11 @@ CMakeFiles/run.dir/build: ../bin/run
 .PHONY : CMakeFiles/run.dir/build
 
 CMakeFiles/run.dir/requires: CMakeFiles/run.dir/src/main.cpp.o.requires
-CMakeFiles/run.dir/requires: CMakeFiles/run.dir/src/state/Exemple.cpp.o.requires
+CMakeFiles/run.dir/requires: CMakeFiles/run.dir/src/render/Renderer.cpp.o.requires
+CMakeFiles/run.dir/requires: CMakeFiles/run.dir/src/state/Game.cpp.o.requires
+CMakeFiles/run.dir/requires: CMakeFiles/run.dir/src/state/Player.cpp.o.requires
+CMakeFiles/run.dir/requires: CMakeFiles/run.dir/src/state/Cell.cpp.o.requires
+CMakeFiles/run.dir/requires: CMakeFiles/run.dir/src/state/Land.cpp.o.requires
 .PHONY : CMakeFiles/run.dir/requires
 
 CMakeFiles/run.dir/clean:
@@ -126,6 +230,6 @@ CMakeFiles/run.dir/clean:
 .PHONY : CMakeFiles/run.dir/clean
 
 CMakeFiles/run.dir/depend:
-	cd /home/raph/Téléchargements/plt-start-kit/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/raph/Téléchargements/plt-start-kit /home/raph/Téléchargements/plt-start-kit /home/raph/Téléchargements/plt-start-kit/build /home/raph/Téléchargements/plt-start-kit/build /home/raph/Téléchargements/plt-start-kit/build/CMakeFiles/run.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/build /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/build /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/build/CMakeFiles/run.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/run.dir/depend
 

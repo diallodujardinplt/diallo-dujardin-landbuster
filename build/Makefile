@@ -42,10 +42,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/raph/Téléchargements/plt-start-kit
+CMAKE_SOURCE_DIR = /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/raph/Téléchargements/plt-start-kit/build
+CMAKE_BINARY_DIR = /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -72,9 +72,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raph/Téléchargements/plt-start-kit/build/CMakeFiles /home/raph/Téléchargements/plt-start-kit/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/build/CMakeFiles /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raph/Téléchargements/plt-start-kit/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/raph/AMERICA_FUCK_YEAH/diallo-dujardin-landbuster/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -138,29 +138,125 @@ src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/state/Exemple.o: src/state/Exemple.cpp.o
-.PHONY : src/state/Exemple.o
+src/render/Renderer.o: src/render/Renderer.cpp.o
+.PHONY : src/render/Renderer.o
 
 # target to build an object file
-src/state/Exemple.cpp.o:
-	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/src/state/Exemple.cpp.o
-.PHONY : src/state/Exemple.cpp.o
+src/render/Renderer.cpp.o:
+	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/src/render/Renderer.cpp.o
+.PHONY : src/render/Renderer.cpp.o
 
-src/state/Exemple.i: src/state/Exemple.cpp.i
-.PHONY : src/state/Exemple.i
+src/render/Renderer.i: src/render/Renderer.cpp.i
+.PHONY : src/render/Renderer.i
 
 # target to preprocess a source file
-src/state/Exemple.cpp.i:
-	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/src/state/Exemple.cpp.i
-.PHONY : src/state/Exemple.cpp.i
+src/render/Renderer.cpp.i:
+	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/src/render/Renderer.cpp.i
+.PHONY : src/render/Renderer.cpp.i
 
-src/state/Exemple.s: src/state/Exemple.cpp.s
-.PHONY : src/state/Exemple.s
+src/render/Renderer.s: src/render/Renderer.cpp.s
+.PHONY : src/render/Renderer.s
 
 # target to generate assembly for a file
-src/state/Exemple.cpp.s:
-	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/src/state/Exemple.cpp.s
-.PHONY : src/state/Exemple.cpp.s
+src/render/Renderer.cpp.s:
+	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/src/render/Renderer.cpp.s
+.PHONY : src/render/Renderer.cpp.s
+
+src/state/Cell.o: src/state/Cell.cpp.o
+.PHONY : src/state/Cell.o
+
+# target to build an object file
+src/state/Cell.cpp.o:
+	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/src/state/Cell.cpp.o
+.PHONY : src/state/Cell.cpp.o
+
+src/state/Cell.i: src/state/Cell.cpp.i
+.PHONY : src/state/Cell.i
+
+# target to preprocess a source file
+src/state/Cell.cpp.i:
+	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/src/state/Cell.cpp.i
+.PHONY : src/state/Cell.cpp.i
+
+src/state/Cell.s: src/state/Cell.cpp.s
+.PHONY : src/state/Cell.s
+
+# target to generate assembly for a file
+src/state/Cell.cpp.s:
+	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/src/state/Cell.cpp.s
+.PHONY : src/state/Cell.cpp.s
+
+src/state/Game.o: src/state/Game.cpp.o
+.PHONY : src/state/Game.o
+
+# target to build an object file
+src/state/Game.cpp.o:
+	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/src/state/Game.cpp.o
+.PHONY : src/state/Game.cpp.o
+
+src/state/Game.i: src/state/Game.cpp.i
+.PHONY : src/state/Game.i
+
+# target to preprocess a source file
+src/state/Game.cpp.i:
+	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/src/state/Game.cpp.i
+.PHONY : src/state/Game.cpp.i
+
+src/state/Game.s: src/state/Game.cpp.s
+.PHONY : src/state/Game.s
+
+# target to generate assembly for a file
+src/state/Game.cpp.s:
+	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/src/state/Game.cpp.s
+.PHONY : src/state/Game.cpp.s
+
+src/state/Land.o: src/state/Land.cpp.o
+.PHONY : src/state/Land.o
+
+# target to build an object file
+src/state/Land.cpp.o:
+	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/src/state/Land.cpp.o
+.PHONY : src/state/Land.cpp.o
+
+src/state/Land.i: src/state/Land.cpp.i
+.PHONY : src/state/Land.i
+
+# target to preprocess a source file
+src/state/Land.cpp.i:
+	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/src/state/Land.cpp.i
+.PHONY : src/state/Land.cpp.i
+
+src/state/Land.s: src/state/Land.cpp.s
+.PHONY : src/state/Land.s
+
+# target to generate assembly for a file
+src/state/Land.cpp.s:
+	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/src/state/Land.cpp.s
+.PHONY : src/state/Land.cpp.s
+
+src/state/Player.o: src/state/Player.cpp.o
+.PHONY : src/state/Player.o
+
+# target to build an object file
+src/state/Player.cpp.o:
+	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/src/state/Player.cpp.o
+.PHONY : src/state/Player.cpp.o
+
+src/state/Player.i: src/state/Player.cpp.i
+.PHONY : src/state/Player.i
+
+# target to preprocess a source file
+src/state/Player.cpp.i:
+	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/src/state/Player.cpp.i
+.PHONY : src/state/Player.cpp.i
+
+src/state/Player.s: src/state/Player.cpp.s
+.PHONY : src/state/Player.s
+
+# target to generate assembly for a file
+src/state/Player.cpp.s:
+	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/src/state/Player.cpp.s
+.PHONY : src/state/Player.cpp.s
 
 # Help Target
 help:
@@ -174,9 +270,21 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/state/Exemple.o"
-	@echo "... src/state/Exemple.i"
-	@echo "... src/state/Exemple.s"
+	@echo "... src/render/Renderer.o"
+	@echo "... src/render/Renderer.i"
+	@echo "... src/render/Renderer.s"
+	@echo "... src/state/Cell.o"
+	@echo "... src/state/Cell.i"
+	@echo "... src/state/Cell.s"
+	@echo "... src/state/Game.o"
+	@echo "... src/state/Game.i"
+	@echo "... src/state/Game.s"
+	@echo "... src/state/Land.o"
+	@echo "... src/state/Land.i"
+	@echo "... src/state/Land.s"
+	@echo "... src/state/Player.o"
+	@echo "... src/state/Player.i"
+	@echo "... src/state/Player.s"
 .PHONY : help
 
 
