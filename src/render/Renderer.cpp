@@ -35,7 +35,7 @@ namespace render {
 		sf::RectangleShape waterRect(sf::Vector2f(9, 9));
 		waterRect.setFillColor(sf::Color(0, 0, 128));
 		sf::RectangleShape portRect(sf::Vector2f(9, 9));
-		portRect.setFillColor(sf::Color(32, 16, 0));
+		portRect.setFillColor(sf::Color(128, 64, 0));
 
 		vector< shared_ptr<state::Land> > lands = game.getLands();
 		if (lands.begin() == lands.end()) return;
@@ -152,10 +152,29 @@ namespace render {
 				else {
 					// Water
 
-					
+					bool portCell = false;
 
-					waterRect.setPosition(pos);
-					window.draw(waterRect);
+					if(borderTop && game.getCell(x, y-1).land->hasPorts() && x%4 == 0)
+						portCell = true;
+
+					if(borderBottom && game.getCell(x, y+1).land->hasPorts() && x%4 == 0)
+						portCell = true;
+
+					if(borderLeft && game.getCell(x-1, y).land->hasPorts() && y%4 == 0)
+						portCell = true;
+
+					if(borderRight && game.getCell(x+1, y).land->hasPorts() && y%4 == 0)
+						portCell = true;
+
+					if(portCell) {
+						portRect.setPosition(pos);
+						window.draw(portRect);
+					}
+					else {
+						waterRect.setPosition(pos);
+						window.draw(waterRect);
+					}
+					
 				}	
 
 			}

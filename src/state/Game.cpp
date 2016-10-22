@@ -89,6 +89,9 @@ namespace state {
 		this->lands[4]->setType(LAND_MEADOW);
 		this->lands[4]->setOwner(this->players[2]);
 
+		this->lands[1]->setPorts(false);
+		this->lands[2]->setPorts(true);
+
 
 		// Debug display of cells with borders
 		/*cout << "CELLS" << endl;

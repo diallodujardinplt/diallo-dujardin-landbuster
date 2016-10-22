@@ -17,18 +17,13 @@ namespace state {
     void Land::setGeometry(vector<sf::Vector2u> geometry) {
     	this->geometry = geometry;
     }
-    
-    
-        /*
-         Getters, Setters and methodes
-         */
         
     std::vector<std::shared_ptr<Land>> Land::getNeighborLands () const{
         return this->neighborLands;
     }
     
     void Land::addNeighborLand (std::shared_ptr<Land> land){
-       
+       this->neighborLands.push_back(land);
     }
     
     unsigned int Land::getSoldiersNumber () const{
@@ -48,19 +43,19 @@ namespace state {
     }
     
     bool Land::isNeutral () const{
-        return true;
+        return this->neutral;
     }
     
     void Land::setNeutral (bool neutral){
-        this->neutral=true;
+        this->neutral=neutral;
     }
     
     bool Land::hasPorts () const{
-        return false;
+        return this->ports;
     }
     
     void Land::setPorts (bool ports){
-        this->ports=false;
+        this->ports=ports;
     }
     
     LandType Land::getType () const {
