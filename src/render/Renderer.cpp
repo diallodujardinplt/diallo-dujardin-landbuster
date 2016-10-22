@@ -32,9 +32,9 @@ namespace render {
 		state::Game& game = state::Game::getInstance();
 
 		sf::Sprite sprite;
-		sf::RectangleShape waterRect(sf::Vector2f(9, 9));
+		sf::RectangleShape waterRect(sf::Vector2f(CELL_WIDTH, CELL_HEIGHT));
 		waterRect.setFillColor(sf::Color(0, 0, 128));
-		sf::RectangleShape portRect(sf::Vector2f(9, 9));
+		sf::RectangleShape portRect(sf::Vector2f(CELL_WIDTH, CELL_HEIGHT));
 		portRect.setFillColor(sf::Color(128, 64, 0));
 
 		vector< shared_ptr<state::Land> > lands = game.getLands();
@@ -51,24 +51,24 @@ namespace render {
 
 				state::Cell& cell = game.getCell((*cell_it).x, (*cell_it).y);
 				unsigned int x = cell.position.x, y = cell.position.y;
-				sf::Vector2f pos(9*x, 9*y);
+				sf::Vector2f pos(CELL_WIDTH*x, CELL_HEIGHT*y);
 
 				bool borderTop = (cell.position.y>0)?(game.getCell(x, y-1).land != land):false;
-				bool borderBottom = (cell.position.y<63)?(game.getCell(x, y+1).land != land):false;
+				bool borderBottom = (cell.position.y<GRID_HEIGHT-1)?(game.getCell(x, y+1).land != land):false;
 				bool borderLeft = (cell.position.x>0)?(game.getCell(x-1, y).land != land):false;
-				bool borderRight = (cell.position.x<63)?(game.getCell(x+1, y).land != land):false;
+				bool borderRight = (cell.position.x<GRID_WIDTH-1)?(game.getCell(x+1, y).land != land):false;
 
 				if(land->getType() != state::LAND_WATER) {
 					// Land
 					if(land->getType() != state::LAND_MEADOW) {
 						sprite.setPosition(pos);
 						sprite.setTexture(landTextures[land->getType()]);
-						sprite.setTextureRect(sf::IntRect((9*(x-(*(geometry.begin())).x))%600, (9*(y-(*(geometry.begin())).y))%400, 9, 9));
+						sprite.setTextureRect(sf::IntRect((CELL_WIDTH*(x-(*(geometry.begin())).x))%600, (CELL_HEIGHT*(y-(*(geometry.begin())).y))%400, CELL_WIDTH, CELL_HEIGHT));
 						if(land->getOwner()) sprite.setColor(land->getOwner()->getColor());
 						window.draw(sprite);
 					}
 					else {
-						sf::RectangleShape meadowRect(sf::Vector2f(9, 9));
+						sf::RectangleShape meadowRect(sf::Vector2f(CELL_WIDTH, CELL_HEIGHT));
 						sf::Color color = land->getOwner()?land->getOwner()->getColor():sf::Color(255, 255, 255);
 						color.r *= 200;
 						color.g *= 255;
@@ -83,32 +83,32 @@ namespace render {
 
 					if(borderTop) {
 						sf::RectangleShape border;
-						border.setPosition(sf::Vector2f(9*cell.position.x, 9*cell.position.y-1));
-						border.setSize(sf::Vector2f(9, 3));
+						border.setPosition(sf::Vector2f(CELL_WIDTH*cell.position.x, CELL_HEIGHT*cell.position.y-1));
+						border.setSize(sf::Vector2f(CELL_WIDTH, BORDER_WIDTH));
 						border.setFillColor((game.getCell(x, y-1).land->getType() == state::LAND_WATER)?coastBorder:landBorder);
 						window.draw(border);
 					}
 
 					if(borderBottom) {
 						sf::RectangleShape border;
-						border.setPosition(sf::Vector2f(9*cell.position.x, 9*cell.position.y+9-1));
-						border.setSize(sf::Vector2f(9, 3));
+						border.setPosition(sf::Vector2f(CELL_WIDTH*cell.position.x, CELL_HEIGHT*cell.position.y+CELL_HEIGHT-1));
+						border.setSize(sf::Vector2f(CELL_WIDTH, BORDER_WIDTH));
 						border.setFillColor((game.getCell(x, y+1).land->getType() == state::LAND_WATER)?coastBorder:landBorder);
 						window.draw(border);
 					}
 
 					if(borderLeft) {
 						sf::RectangleShape border;
-						border.setPosition(sf::Vector2f(9*cell.position.x-1, 9*cell.position.y));
-						border.setSize(sf::Vector2f(3, 9));
+						border.setPosition(sf::Vector2f(CELL_WIDTH*cell.position.x-1, CELL_HEIGHT*cell.position.y));
+						border.setSize(sf::Vector2f(BORDER_WIDTH, CELL_HEIGHT));
 						border.setFillColor((game.getCell(x-1, y).land->getType() == state::LAND_WATER)?coastBorder:landBorder);
 						window.draw(border);
 					}
 
 					if(borderRight) {
 						sf::RectangleShape border;
-						border.setPosition(sf::Vector2f(9*cell.position.x+9-1, 9*cell.position.y));
-						border.setSize(sf::Vector2f(3, 9));
+						border.setPosition(sf::Vector2f(CELL_WIDTH*cell.position.x+CELL_WIDTH-1, CELL_HEIGHT*cell.position.y));
+						border.setSize(sf::Vector2f(BORDER_WIDTH, CELL_HEIGHT));
 						border.setFillColor((game.getCell(x+1, y).land->getType() == state::LAND_WATER)?coastBorder:landBorder);
 						window.draw(border);
 					}
@@ -134,8 +134,8 @@ namespace render {
 						moyXu = (*(geometry.begin())).x;
 						moyYu = (*(geometry.begin())).y;
 					}
-					moyXu *= 9;
-					moyYu *= 9;
+					moyXu *= CELL_WIDTH;
+					moyYu *= CELL_HEIGHT;
 					sf::Text text;
 					text.setPosition(sf::Vector2f(moyXu, moyYu));
 					text.setFont(font);
