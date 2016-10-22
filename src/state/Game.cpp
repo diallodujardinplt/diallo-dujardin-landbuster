@@ -5,6 +5,10 @@ using namespace std;
 namespace state {
 
 	Game::Game() {
+		cells.resize(64);
+		for(vector< vector<Cell> >::iterator it = cells.begin(); it != cells.end(); ++it) {
+			it->resize(64);
+		}
 	}
 
 	Game::~Game() {
@@ -35,7 +39,7 @@ namespace state {
 
 		// Generate map
 		// Generate cells
-		std::vector<std::vector<unsigned int>> cells(64, std::vector<unsigned int>(64, 0));
+		std::vector<std::vector<unsigned int>> ncells(64, std::vector<unsigned int>(64, 0));
 		unsigned int mediumSize = 41;
 		unsigned landsCount = 0;
 		
@@ -44,30 +48,29 @@ namespace state {
 		
 		for (unsigned int y = 0; y < 64; ++y) {
 			for (unsigned int x = 0; x < 64; ++x) {
-				if(x < 16 && y < 16) cells[x][y] = 0;
-				else if(x >= 16 && y < 16) cells[x][y] = 1;
-				else if(x < 16 && y >= 16 && y < 40) cells[x][y] = 2;
-				else if(x >= 16 && y >= 16 && y < 40) cells[x][y] = 3;
-				else if(x < 16 && y >= 40) cells[x][y] = 4;
-				else cells[x][y] = 5;
+				if(x < 16 && y < 16) ncells[x][y] = 0;
+				else if(x >= 16 && y < 16) ncells[x][y] = 1;
+				else if(x < 16 && y >= 16 && y < 40) ncells[x][y] = 2;
+				else if(x >= 16 && y >= 16 && y < 40) ncells[x][y] = 3;
+				else if(x < 16 && y >= 40) ncells[x][y] = 4;
+				else ncells[x][y] = 5;
 			}
 		}
 
 		// Generate lands
 		for (unsigned int i = 0; i < landsCount; ++i) {
 			this->lands.push_back(make_shared<Land>());
-			std::vector<Cell> geometry;
+			std::vector<sf::Vector2u> geometry;
 			for (unsigned int y = 0; y < 64; ++y) {
 				for (unsigned int x = 0; x < 64; ++x) {
 
 					sf::Vector2u pos(x, y);
-					bool borderTop = (y>0)?(cells[x][y-1] != i):false;
-					bool borderBottom = (y<63)?(cells[x][y+1] != i):false;
-					bool borderLeft = (x>0)?(cells[x-1][y] != i):false;
-					bool borderRight = (x<63)?(cells[x+1][y] != i):false;
 
-					if (cells[x][y] == i)
-						geometry.push_back(Cell(pos, borderTop, borderBottom, borderLeft, borderRight, this->lands.back()));
+					if (ncells[x][y] == i) {
+						cells[x][y].position = pos;
+						cells[x][y].land = this->lands.back();
+						geometry.push_back(sf::Vector2u(x, y));
+					}
 				}
 			}
 
@@ -145,6 +148,10 @@ namespace state {
     
     void Game::setActivatedItem (ItemType item){
             this->activatedItem=item;
+    }
+
+    Cell& Game::getCell(unsigned int x, unsigned int y) {
+    	return cells[x][y];
     }
              
 

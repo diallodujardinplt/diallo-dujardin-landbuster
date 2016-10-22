@@ -7,12 +7,14 @@
 
 namespace state {
   class Game;
+  class Cell;
   class Player;
   class Land;
 }
 
 #include "Step.h"
 #include "ItemType.h"
+#include "Cell.h"
 #include "Player.h"
 #include "Land.h"
 
@@ -28,6 +30,7 @@ namespace state {
     ItemType activatedItem;
     std::vector< std::shared_ptr<Player> > players;
     std::vector< std::shared_ptr<Land> > lands;
+    std::vector< std::vector<Cell> > cells;
     // Operations
   public:
     ~Game ();
@@ -41,6 +44,7 @@ namespace state {
     void setActivatedItem (ItemType item);
     std::vector< std::shared_ptr<Land> > getLands () const;
     std::vector< std::shared_ptr<Player> > getPlayers () const;
+    Cell& getCell (unsigned int x, unsigned int y);
   private:
     Game ();
   };

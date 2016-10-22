@@ -17,21 +17,10 @@ namespace state {
     // Attributes
   public:
     sf::Vector2u position;
-    bool borderTop;
-    bool borderBottom;
-    bool borderLeft;
-    bool borderRight;
     std::shared_ptr<Land> land;
     // Operations
   public:
-    /// 	
-    /// @param position		(???) 
-    /// @param borderTop		(???) 
-    /// @param borderBottom		(???) 
-    /// @param borderLeft		(???) 
-    /// @param borderRight		(???) 
-    /// @param land		(???) 
-    Cell (sf::Vector2u position, bool borderTop, bool borderBottom, bool borderLeft, bool borderRight, std::shared_ptr<Land> land);
+    Cell ();
   };
 
 };

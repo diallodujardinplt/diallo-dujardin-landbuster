@@ -10,11 +10,11 @@ namespace state {
 	Land::~Land() {
 	}
     
-	const std::vector<Cell>& Land::getGeometry () const {
+	const std::vector<sf::Vector2u>& Land::getGeometry () const {
         return geometry;
     }
 
-    void Land::setGeometry(vector<Cell> geometry) {
+    void Land::setGeometry(vector<sf::Vector2u> geometry) {
     	this->geometry = geometry;
     }
     
