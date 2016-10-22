@@ -78,12 +78,14 @@ namespace render {
 						window.draw(meadowRect);
 					}
 					
+					sf::Color landBorder(0, 0, 0);
+					sf::Color coastBorder(255, 200, 0);
 
 					if(borderTop) {
 						sf::RectangleShape border;
 						border.setPosition(sf::Vector2f(9*cell.position.x, 9*cell.position.y-1));
 						border.setSize(sf::Vector2f(9, 3));
-						border.setFillColor(sf::Color(0,0,0));
+						border.setFillColor((game.getCell(x, y-1).land->getType() == state::LAND_WATER)?coastBorder:landBorder);
 						window.draw(border);
 					}
 
@@ -91,7 +93,7 @@ namespace render {
 						sf::RectangleShape border;
 						border.setPosition(sf::Vector2f(9*cell.position.x, 9*cell.position.y+9-1));
 						border.setSize(sf::Vector2f(9, 3));
-						border.setFillColor(sf::Color(0,0,0));
+						border.setFillColor((game.getCell(x, y+1).land->getType() == state::LAND_WATER)?coastBorder:landBorder);
 						window.draw(border);
 					}
 
@@ -99,7 +101,7 @@ namespace render {
 						sf::RectangleShape border;
 						border.setPosition(sf::Vector2f(9*cell.position.x-1, 9*cell.position.y));
 						border.setSize(sf::Vector2f(3, 9));
-						border.setFillColor(sf::Color(0,0,0));
+						border.setFillColor((game.getCell(x-1, y).land->getType() == state::LAND_WATER)?coastBorder:landBorder);
 						window.draw(border);
 					}
 
@@ -107,7 +109,7 @@ namespace render {
 						sf::RectangleShape border;
 						border.setPosition(sf::Vector2f(9*cell.position.x+9-1, 9*cell.position.y));
 						border.setSize(sf::Vector2f(3, 9));
-						border.setFillColor(sf::Color(0,0,0));
+						border.setFillColor((game.getCell(x+1, y).land->getType() == state::LAND_WATER)?coastBorder:landBorder);
 						window.draw(border);
 					}
 
