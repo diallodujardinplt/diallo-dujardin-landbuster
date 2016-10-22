@@ -4,11 +4,19 @@
 
 #include <map>
 #include <SFML/Graphics.hpp>
+#include <memory>
+#include <vector>
 
 namespace render {
   class Renderer;
+};
+namespace state {
+  class Game;
+  class Land;
+  class Cell;
 }
 
+#include "state/Land.h"
 
 namespace render {
 
@@ -19,6 +27,8 @@ namespace render {
   private:
     std::map<state::LandType, sf::Texture> landTextures;
     sf::Font font;
+    sf::RectangleShape waterRect;
+    sf::RectangleShape portRect;
     // Operations
   public:
     ~Renderer ();
@@ -28,6 +38,10 @@ namespace render {
   private:
     Renderer ();
     void loadTextures ();
+    void renderCell (sf::RenderWindow& window, state::Game& game, std::shared_ptr<state::Land> land, const std::vector<sf::Vector2u>& geometry, state::Cell& cell);
+    void renderLandBorders (sf::RenderWindow& window, state::Game& game, state::Cell& cell, unsigned int x, unsigned int y, sf::Vector2f pos, bool borderTop, bool borderBottom, bool borderLeft, bool borderRight);
+    void renderSoldiersNumber (sf::RenderWindow& window, state::Game& game, std::shared_ptr<state::Land> land, const std::vector<sf::Vector2u>& geometry);
+    void renderLand (sf::RenderWindow& window, state::Game& game, std::shared_ptr<state::Land> land);
   };
 
 };
