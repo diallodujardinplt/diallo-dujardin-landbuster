@@ -5,6 +5,11 @@ using namespace std;
 namespace state {
 
 	Land::Land() {
+        soldiersNumber = 0;
+        neutral = false;
+        ports = false;
+        type = LAND_MEADOW;
+        item = ITEM_NONE;
 	}
 
 	Land::~Land() {

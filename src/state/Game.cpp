@@ -92,6 +92,9 @@ namespace state {
 		this->lands[1]->setPorts(false);
 		this->lands[2]->setPorts(true);
 
+		this->lands[3]->setItem(ITEM_PLAY_TWICE);
+		this->lands[5]->setItem(ITEM_FAT_BONUS);
+
 	}
 
 	vector< shared_ptr<Land> > Game::getLands() const {

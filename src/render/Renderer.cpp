@@ -135,32 +135,41 @@ namespace render {
 
 	}
 
+	sf::Vector2u Renderer::getMeanPos(state::Game& game, shared_ptr<state::Land> land, const vector<sf::Vector2u>& geometry, unsigned int offset) {
+
+		sf::Vector2f mean(0.0, 0.0);
+		for (vector<sf::Vector2u>::const_iterator cell_it = geometry.begin(); cell_it != geometry.end(); ++cell_it) {
+			state::Cell& cell = game.getCell(cell_it->x, cell_it->y);
+			mean.x += cell.position.x;
+			mean.y += cell.position.y;
+		}
+		mean.x /= ((float) geometry.size());
+		mean.y /= ((float) geometry.size());
+
+		sf::Vector2u umean(mean.x, mean.y + offset);
+		bool inLand = false;
+
+		for (vector<sf::Vector2u>::const_iterator cell_it = geometry.begin(); cell_it != geometry.end(); ++cell_it) {
+			state::Cell& cell = game.getCell(cell_it->x, cell_it->y);
+			if (cell.position.x == umean.x && cell.position.y == umean.y)
+				inLand = true;
+		}
+
+		if (!inLand) {
+			if (offset < geometry.size()) umean = geometry[offset];
+			else umean = geometry[geometry.size() -1];
+		}
+
+		return umean;
+
+	}
+
 	void Renderer::renderSoldiersNumber(sf::RenderWindow& window, state::Game& game, shared_ptr<state::Land> land, const vector<sf::Vector2u>& geometry) {
 
-		float moyX = 0.0, moyY = 0.0;
-		for (vector<sf::Vector2u>::const_iterator cell_it = geometry.begin(); cell_it != geometry.end(); ++cell_it) {
-			state::Cell& cell = game.getCell(cell_it->x, cell_it->y);
-			moyX += cell.position.x;
-			moyY += cell.position.y;
-		}
-		moyX /= ((float) geometry.size());
-		moyY /= ((float) geometry.size());
-		unsigned int moyXu = moyX, moyYu = moyY;
-		bool inLand = false;
-		for (vector<sf::Vector2u>::const_iterator cell_it = geometry.begin(); cell_it != geometry.end(); ++cell_it) {
-			state::Cell& cell = game.getCell(cell_it->x, cell_it->y);
-			if (cell.position.x == moyXu && cell.position.y == moyYu) {
-				inLand = true;
-			}
-		}
-		if (!inLand) {
-			moyXu = (*(geometry.begin())).x;
-			moyYu = (*(geometry.begin())).y;
-		}
-		moyXu *= CELL_WIDTH;
-		moyYu *= CELL_HEIGHT;
+		sf::Vector2u mean = getMeanPos(game, land, geometry, 0);
+		sf::Vector2f pos(CELL_WIDTH * mean.x, CELL_HEIGHT * mean.y);
 		sf::Text text;
-		text.setPosition(sf::Vector2f(moyXu, moyYu));
+		text.setPosition(pos);
 		text.setFont(font);
 		ostringstream oss;
 		oss << land->getSoldiersNumber();
@@ -168,6 +177,25 @@ namespace render {
 		text.setCharacterSize(30);
 		text.setColor(sf::Color(255, 130, 0));
 		text.setStyle(sf::Text::Bold);
+		window.draw(text);
+
+	}
+
+	void Renderer::renderItem(sf::RenderWindow& window, state::Game& game, shared_ptr<state::Land> land, const vector<sf::Vector2u>& geometry) {
+
+		if (land->getItem() == state::ITEM_NONE) return;
+
+		sf::Vector2u mean = getMeanPos(game, land, geometry, 3);
+		sf::Vector2f pos(CELL_WIDTH * mean.x, CELL_HEIGHT * mean.y);
+		sf::Text text;
+		text.setPosition(pos);
+		text.setFont(font);
+		
+		if (land->getItem() == state::ITEM_FAT_BONUS) text.setString("???");
+		else text.setString("?");
+
+		text.setCharacterSize(30);
+		text.setColor(sf::Color(255, 160, 10));
 		window.draw(text);
 
 	}
@@ -183,6 +211,7 @@ namespace render {
 			state::Cell& cell = game.getCell((*cell_it).x, (*cell_it).y);
 			renderCell(window, game, land, geometry, cell);
 			renderSoldiersNumber(window, game, land, geometry);
+			renderItem(window, game, land, geometry);
 			
 		}
 

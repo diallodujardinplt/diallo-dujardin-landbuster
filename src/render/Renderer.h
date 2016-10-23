@@ -42,6 +42,8 @@ namespace render {
     void renderLandBorders (sf::RenderWindow& window, state::Game& game, state::Cell& cell, unsigned int x, unsigned int y, sf::Vector2f pos, bool borderTop, bool borderBottom, bool borderLeft, bool borderRight);
     void renderSoldiersNumber (sf::RenderWindow& window, state::Game& game, std::shared_ptr<state::Land> land, const std::vector<sf::Vector2u>& geometry);
     void renderLand (sf::RenderWindow& window, state::Game& game, std::shared_ptr<state::Land> land);
+    void renderItem (sf::RenderWindow& window, state::Game& game, std::shared_ptr<state::Land> land, const std::vector<sf::Vector2u>& geometry);
+    sf::Vector2u getMeanPos (state::Game& game, std::shared_ptr<state::Land> land, const std::vector<sf::Vector2u>& geometry, unsigned int offset);
   };
 
 };
