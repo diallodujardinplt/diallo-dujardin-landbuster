@@ -64,7 +64,6 @@ namespace render {
 			}
 
 			renderLandBorders(window, game, cell, x, y, pos, borderTop, borderBottom, borderLeft, borderRight);
-			renderSoldiersNumber(window, game, land, geometry);
 
 		}
 
@@ -183,6 +182,7 @@ namespace render {
 
 			state::Cell& cell = game.getCell((*cell_it).x, (*cell_it).y);
 			renderCell(window, game, land, geometry, cell);
+			renderSoldiersNumber(window, game, land, geometry);
 			
 		}
 
