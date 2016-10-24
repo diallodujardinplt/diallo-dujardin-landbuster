@@ -12,6 +12,7 @@
 #include <map>
 #include <random>
 #include <cmath>
+#include <algorithm>
 
 #define GRID_WIDTH 128
 #define GRID_HEIGHT 128

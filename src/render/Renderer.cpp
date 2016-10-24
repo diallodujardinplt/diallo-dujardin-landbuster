@@ -209,9 +209,12 @@ namespace render {
 
 			state::Cell& cell = game.getCell((*cell_it).x, (*cell_it).y);
 			renderCell(window, game, land, geometry, cell);
+			
+		}
+
+		if (land->getType() != state::LAND_WATER) {
 			renderSoldiersNumber(window, game, land, geometry);
 			renderItem(window, game, land, geometry);
-			
 		}
 
 	}

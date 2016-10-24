@@ -29,6 +29,9 @@ namespace state {
     
     void Land::addNeighborLand (std::shared_ptr<Land> land){
        this->neighborLands.push_back(land);
+       vector< shared_ptr<Land> >::iterator it;
+       it = unique(neighborLands.begin(), neighborLands.end());
+       neighborLands.resize(distance(neighborLands.begin(), it));
     }
     
     unsigned int Land::getSoldiersNumber () const{

@@ -71,6 +71,60 @@ namespace state {
 			}
 		}
 
+		// Build lands graph
+
+		for (unsigned int i = 0; i < this->lands.size(); ++i) {
+			shared_ptr<Land> land = this->lands[i];
+			for (unsigned int j = 0; j < land->getGeometry().size(); ++j) {
+				unsigned int x = land->getGeometry()[j].x, y = land->getGeometry()[j].y;
+
+				if(x>0 && cells[x-1][y].land != land)
+					land->addNeighborLand(cells[x-1][y].land);
+				if(x<GRID_WIDTH-1 && cells[x+1][y].land != land)
+					land->addNeighborLand(cells[x+1][y].land);
+				if(y>0 && cells[x][y-1].land != land)
+					land->addNeighborLand(cells[x][y-1].land);
+				if(y<GRID_HEIGHT-1 && cells[x][y+1].land != land)
+					land->addNeighborLand(cells[x][y+1].land);
+
+			}
+		}
+
+
+		// Generate water
+
+		unsigned int meanSize = 6;
+		unsigned int meanCount = 4;
+
+		random_device rd;
+		mt19937 gen(rd());
+		uniform_int_distribution<> rndCount(meanCount - meanCount/2, meanCount + meanCount/2);
+		unsigned int count = rndCount(gen);
+
+		for (unsigned int i = 0; i < count; ++i) {
+
+			uniform_int_distribution<> rndSize(meanSize - meanSize/2, meanSize + meanSize/2);
+			unsigned int size = rndSize(gen);
+
+			uniform_int_distribution<> rndStart(0, this->lands.size()-1);
+			unsigned int start = rndStart(gen);
+
+			std::shared_ptr<Land> it = this->lands[start];
+			it->setType(LAND_WATER);
+
+			for (unsigned int j = 0; j < size; ++j) {
+
+				uniform_int_distribution<> rnd(0, it->getNeighborLands().size()-1);
+				unsigned int l = rnd(gen);
+
+				it = it->getNeighborLands()[l];
+				it->setType(LAND_WATER);
+
+			}
+
+		}
+
+
 		/*this->lands.back()->setOwner(this->players.front());
 		this->lands.back()->setType(LAND_FOREST);
 		this->lands.back()->setSoldiersNumber(54);
