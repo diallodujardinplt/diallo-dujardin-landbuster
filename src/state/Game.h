@@ -47,6 +47,10 @@ namespace state {
     Cell& getCell (unsigned int x, unsigned int y);
   private:
     Game ();
+    std::vector<unsigned int> generateAreas (std::vector< std::vector<int> >& ncells);
+    unsigned int util_total (std::vector<unsigned int>& v);
+    unsigned int util_min (std::vector<unsigned int>& v);
+    unsigned int util_max (std::vector<unsigned int>& v);
   };
 
 };

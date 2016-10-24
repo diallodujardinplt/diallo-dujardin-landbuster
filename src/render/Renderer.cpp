@@ -55,9 +55,9 @@ namespace render {
 			else {
 				sf::RectangleShape meadowRect(sf::Vector2f(CELL_WIDTH, CELL_HEIGHT));
 				sf::Color color = land->getOwner()?land->getOwner()->getColor():sf::Color(255, 255, 255);
-				color.r *= 200;
-				color.g *= 255;
-				color.b *= 200;
+				color.r = ((float) color.r) * 200.0/255.0;
+				color.g = ((float) color.g) * 255.0/255.0;
+				color.b = ((float) color.b) * 200.0/255.0;
 				meadowRect.setFillColor(color);
 				meadowRect.setPosition(pos);
 				window.draw(meadowRect);
@@ -101,7 +101,7 @@ namespace render {
 		sf::Color landBorder(0, 0, 0);
 		sf::Color coastBorder(255, 200, 0);
 
-		if(borderTop) {
+		if(borderTop && y>0) {
 			sf::RectangleShape border;
 			border.setPosition(sf::Vector2f(CELL_WIDTH*cell.position.x, CELL_HEIGHT*cell.position.y-1));
 			border.setSize(sf::Vector2f(CELL_WIDTH, BORDER_WIDTH));
@@ -109,7 +109,7 @@ namespace render {
 			window.draw(border);
 		}
 
-		if(borderBottom) {
+		if(borderBottom && y<GRID_HEIGHT-1) {
 			sf::RectangleShape border;
 			border.setPosition(sf::Vector2f(CELL_WIDTH*cell.position.x, CELL_HEIGHT*cell.position.y+CELL_HEIGHT-1));
 			border.setSize(sf::Vector2f(CELL_WIDTH, BORDER_WIDTH));
@@ -117,7 +117,7 @@ namespace render {
 			window.draw(border);
 		}
 
-		if(borderLeft) {
+		if(borderLeft && x>0) {
 			sf::RectangleShape border;
 			border.setPosition(sf::Vector2f(CELL_WIDTH*cell.position.x-1, CELL_HEIGHT*cell.position.y));
 			border.setSize(sf::Vector2f(BORDER_WIDTH, CELL_HEIGHT));
@@ -125,7 +125,7 @@ namespace render {
 			window.draw(border);
 		}
 
-		if(borderRight) {
+		if(borderRight && x<GRID_WIDTH-1) {
 			sf::RectangleShape border;
 			border.setPosition(sf::Vector2f(CELL_WIDTH*cell.position.x+CELL_WIDTH-1, CELL_HEIGHT*cell.position.y));
 			border.setSize(sf::Vector2f(BORDER_WIDTH, CELL_HEIGHT));
@@ -174,9 +174,8 @@ namespace render {
 		ostringstream oss;
 		oss << land->getSoldiersNumber();
 		text.setString(oss.str().c_str());
-		text.setCharacterSize(30);
+		text.setCharacterSize(20);
 		text.setColor(sf::Color(255, 130, 0));
-		text.setStyle(sf::Text::Bold);
 		window.draw(text);
 
 	}

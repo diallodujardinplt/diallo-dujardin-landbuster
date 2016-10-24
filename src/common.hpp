@@ -4,11 +4,20 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <sstream>
+#include <iomanip>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
+#include <string>
+#include <map>
+#include <random>
+#include <cmath>
 
-#define GRID_WIDTH 64
-#define GRID_HEIGHT 64
-#define CELL_WIDTH 9
-#define CELL_HEIGHT 9
+#define GRID_WIDTH 128
+#define GRID_HEIGHT 128
+#define CELL_WIDTH 5
+#define CELL_HEIGHT 5
 #define BORDER_WIDTH 3
+#define MEAN_LAND_SIZE 240
 
 #endif
