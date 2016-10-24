@@ -166,6 +166,7 @@ namespace render {
 
 	void Renderer::renderSoldiersNumber(sf::RenderWindow& window, state::Game& game, shared_ptr<state::Land> land, const vector<sf::Vector2u>& geometry) {
 
+		if(land->getSoldiersNumber() == 0) return;
 		sf::Vector2u mean = getMeanPos(game, land, geometry, 0);
 		sf::Vector2f pos(CELL_WIDTH * mean.x, CELL_HEIGHT * mean.y);
 		sf::Text text;

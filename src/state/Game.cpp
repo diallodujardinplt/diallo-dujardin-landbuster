@@ -65,9 +65,6 @@ namespace state {
 
 				this->lands.back()->setGeometry(geometry);
 
-				this->lands.back()->setType(LAND_MEADOW);
-				this->lands.back()->setSoldiersNumber(21);
-
 			}
 		}
 
@@ -124,6 +121,27 @@ namespace state {
 
 		}
 
+		// Set soldiers numbers
+		unsigned int meanPop = 25;
+		unsigned int varPop = 12;
+		normal_distribution<> d(meanPop, varPop);
+		for (vector< shared_ptr<Land> >::iterator land_it = lands.begin(); land_it != lands.end(); ++land_it) {
+			if ((*land_it)->getType() != LAND_WATER) {
+				unsigned int sn = round(d(gen));
+				if (sn > meanPop*4) sn = 0;
+				(*land_it)->setSoldiersNumber(sn);
+			}
+		}
+
+		// Set lands types
+		uniform_int_distribution<> rndType(0, 9);
+		LandType distType[10] = {LAND_MEADOW, LAND_MEADOW, LAND_MEADOW, LAND_MEADOW, LAND_FOREST, LAND_FOREST, LAND_FOREST, LAND_DESERT, LAND_DESERT, LAND_MOUNTAIN};
+		for (vector< shared_ptr<Land> >::iterator land_it = lands.begin(); land_it != lands.end(); ++land_it) {
+			if ((*land_it)->getType() != LAND_WATER) {
+				unsigned int i = rndType(gen);
+				(*land_it)->setType(distType[i]);
+			}
+		}
 
 		/*this->lands.back()->setOwner(this->players.front());
 		this->lands.back()->setType(LAND_FOREST);
