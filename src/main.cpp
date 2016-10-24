@@ -6,34 +6,14 @@
 #include "render.h"
 
 int main() {
-	sf::RenderWindow window(sf::VideoMode(GRID_WIDTH * CELL_WIDTH + 200, GRID_HEIGHT * CELL_HEIGHT, 32), "Land Buster");
 	
+	render::Client client;
+
 	state::Game& game = state::Game::getInstance();
 	game.init(6);
 	game.generateMap();
 
-	render::Renderer& renderer = render::Renderer::getInstance();
-	renderer.init();
-
-	sf::Clock framerateClock;
-
-	while (window.isOpen()) {
-		sf::Event event;
-		while (window.pollEvent(event)) {
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}
-
-		sf::Time framerateElapsed = framerateClock.getElapsedTime();
-		if (framerateElapsed.asMilliseconds() > 30) {
-			window.clear();
-			renderer.render(window);
-			window.display();
-
-			framerateClock.restart();
-		}
-		
-	}
+	client.run();
 
 	return 0;
 }

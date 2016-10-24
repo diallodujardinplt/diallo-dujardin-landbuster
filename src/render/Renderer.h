@@ -17,6 +17,7 @@ namespace state {
 }
 
 #include "state/Land.h"
+#include "state/Game.h"
 
 namespace render {
 

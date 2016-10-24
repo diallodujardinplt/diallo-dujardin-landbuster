@@ -3,4 +3,5 @@
 #define __RENDER__H
 
 #include "render/Renderer.h"
+#include "render/Client.h"
 #endif
