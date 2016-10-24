@@ -37,9 +37,9 @@ namespace state {
 		this->currentStep = STEP_REINFORCEMENT;
 		this->activatedItem = ITEM_NONE;
 
-		// Generate map
-		//
+	}
 
+	void Game::generateMap() {
 		// Generate cells
 		vector<vector<int>> ncells(GRID_WIDTH, vector<int>(GRID_HEIGHT, -1));
 		unsigned int mediumSize = 41;
@@ -90,8 +90,8 @@ namespace state {
 
 		// Generate water
 
-		unsigned int meanSize = 6;
-		unsigned int meanCount = 4;
+		unsigned int meanSize = 5;
+		unsigned int meanCount = 3;
 
 		random_device rd;
 		mt19937 gen(rd());
@@ -142,23 +142,6 @@ namespace state {
 				(*land_it)->setType(distType[i]);
 			}
 		}
-
-		/*this->lands.back()->setOwner(this->players.front());
-		this->lands.back()->setType(LAND_FOREST);
-		this->lands.back()->setSoldiersNumber(54);
-
-		this->lands.front()->setType(LAND_WATER);
-
-		this->lands[3]->setType(LAND_MEADOW);
-		this->lands[4]->setType(LAND_MEADOW);
-		this->lands[4]->setOwner(this->players[2]);
-
-		this->lands[1]->setPorts(false);
-		this->lands[2]->setPorts(true);
-
-		this->lands[3]->setItem(ITEM_PLAY_TWICE);
-		this->lands[5]->setItem(ITEM_FAT_BONUS);*/
-
 	}
 
 	vector<unsigned int> Game::generateAreas(vector< vector<int> >& ncells) {

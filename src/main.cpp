@@ -6,10 +6,11 @@
 #include "render.h"
 
 int main() {
-	sf::RenderWindow window(sf::VideoMode(GRID_WIDTH * CELL_WIDTH, GRID_HEIGHT * CELL_HEIGHT, 32), "Land Buster");
+	sf::RenderWindow window(sf::VideoMode(GRID_WIDTH * CELL_WIDTH + 200, GRID_HEIGHT * CELL_HEIGHT, 32), "Land Buster");
 	
 	state::Game& game = state::Game::getInstance();
 	game.init(6);
+	game.generateMap();
 
 	render::Renderer& renderer = render::Renderer::getInstance();
 	renderer.init();

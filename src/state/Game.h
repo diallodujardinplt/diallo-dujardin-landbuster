@@ -45,6 +45,7 @@ namespace state {
     std::vector< std::shared_ptr<Land> > getLands () const;
     std::vector< std::shared_ptr<Player> > getPlayers () const;
     Cell& getCell (unsigned int x, unsigned int y);
+    void generateMap ();
   private:
     Game ();
     std::vector<unsigned int> generateAreas (std::vector< std::vector<int> >& ncells);
