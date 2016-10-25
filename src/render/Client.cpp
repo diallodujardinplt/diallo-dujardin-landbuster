@@ -6,9 +6,18 @@ namespace render {
 
 	Client::Client() {}
 
+	Client::~Client() {}
+
+	Client& Client::getInstance() {
+		static Client client;
+		return client;
+	}
+
 	void Client::run() {
 
 		sf::RenderWindow window(sf::VideoMode(GRID_WIDTH * CELL_WIDTH + 200, GRID_HEIGHT * CELL_HEIGHT, 32), "Land Buster");
+
+		state::Game& game = state::Game::getInstance();
 
 		render::Renderer& renderer = render::Renderer::getInstance();
 		renderer.init();
@@ -25,7 +34,9 @@ namespace render {
 			sf::Time framerateElapsed = framerateClock.getElapsedTime();
 			if (framerateElapsed.asMilliseconds() > 30) {
 				window.clear();
+				
 				renderer.render(window);
+
 				window.display();
 
 				framerateClock.restart();

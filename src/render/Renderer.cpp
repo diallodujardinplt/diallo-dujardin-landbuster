@@ -220,7 +220,7 @@ namespace render {
 
 	}
 
-	void Renderer::render(sf::RenderWindow& window) {
+	void Renderer::renderGame(sf::RenderWindow& window) {
 
 		state::Game& game = state::Game::getInstance();
 
@@ -232,6 +232,63 @@ namespace render {
 			renderLand(window, game, land);
 			
 		}
+
+	}
+
+	void Renderer::renderUI(sf::RenderWindow& window) {
+
+		state::Game& game = state::Game::getInstance();
+		Client& client = Client::getInstance();
+
+		sf::RectangleShape plActiveBg(sf::Vector2f(48, 48));
+		plActiveBg.setPosition(sf::Vector2f(CELL_WIDTH * GRID_WIDTH + 22, (game.getCurrentPlayer() + 1) * 30 - 8));
+		plActiveBg.setFillColor(sf::Color(255,200,0));
+		window.draw(plActiveBg);
+
+		for (unsigned int i = 0; i < game.getPlayers().size(); ++i) {
+
+			sf::Vector2f pos(CELL_WIDTH * GRID_WIDTH + 30, (i + 1) * 30);
+
+
+			sf::RectangleShape plNumBg(sf::Vector2f(32.f, 32.f));
+			plNumBg.setPosition(pos);
+			plNumBg.setFillColor((game.getPlayers()[i]->isAlive())?game.getPlayers()[i]->getColor():sf::Color(140, 140, 140));
+			window.draw(plNumBg);
+
+			sf::Text text;
+			text.setPosition(pos);
+			text.setFont(font);
+			ostringstream oss;
+			oss << " " << i + 1;
+			text.setString(oss.str().c_str());
+			text.setCharacterSize(20);
+			text.setColor(sf::Color(255, 255, 255));
+			window.draw(text);
+
+			unsigned int landsCount = 0, soldiersCount = 0;
+			shared_ptr<state::Player> player = game.getPlayers()[i];
+			for(auto land : game.getLands()) {
+				if (land->getOwner() == player) {
+					landsCount++;
+					soldiersCount += land->getSoldiersNumber();
+				}
+			}
+
+			text.setPosition(pos.x + 50, pos.y + 3);
+			text.setCharacterSize(14);
+			ostringstream oss2;
+			oss2 << landsCount << " Ld - " << soldiersCount << " Sld";
+			text.setString(oss2.str().c_str());
+			window.draw(text);
+
+		}
+
+	}
+
+	void Renderer::render(sf::RenderWindow& window) {
+
+		renderGame(window);
+		renderUI(window);
 
 	}
 

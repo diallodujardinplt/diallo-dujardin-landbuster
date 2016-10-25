@@ -14,9 +14,13 @@ namespace state {
   class Game;
   class Land;
   class Cell;
+};
+namespace render {
+  class Client;
 }
 
 #include "state/Land.h"
+#include "Client.h"
 #include "state/Game.h"
 
 namespace render {
@@ -45,6 +49,8 @@ namespace render {
     void renderLand (sf::RenderWindow& window, state::Game& game, std::shared_ptr<state::Land> land);
     void renderItem (sf::RenderWindow& window, state::Game& game, std::shared_ptr<state::Land> land, const std::vector<sf::Vector2u>& geometry);
     sf::Vector2u getMeanPos (state::Game& game, std::shared_ptr<state::Land> land, const std::vector<sf::Vector2u>& geometry, unsigned int offset);
+    void renderGame (sf::RenderWindow& window);
+    void renderUI (sf::RenderWindow& window);
   };
 
 };

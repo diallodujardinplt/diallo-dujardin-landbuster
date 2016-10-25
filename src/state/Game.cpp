@@ -20,6 +20,7 @@ namespace state {
 	}
 
 	void Game::init(unsigned int playersNumber) {
+		
 		// Create players
 		sf::Color playersColors[6];
 		playersColors[0] = sf::Color(255,0,0);
@@ -33,7 +34,7 @@ namespace state {
 			this->players.push_back(make_shared<Player>(playersColors[i]));
 		}
 
-		this->currentPlayer = this->players.begin();
+		this->currentPlayer = 0;
 		this->currentStep = STEP_REINFORCEMENT;
 		this->activatedItem = ITEM_NONE;
 
@@ -411,8 +412,8 @@ namespace state {
 		return players;
 	}
         
-    std::shared_ptr<Player> Game::getCurrentPlayer () const{
-            return *currentPlayer;
+    unsigned int Game::getCurrentPlayer () const{
+            return currentPlayer;
     }
     
     Step Game::getCurrentStep () const {

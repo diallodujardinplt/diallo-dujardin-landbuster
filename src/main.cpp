@@ -7,7 +7,7 @@
 
 int main() {
 	
-	render::Client client;
+	render::Client& client = render::Client::getInstance();
 
 	state::Game& game = state::Game::getInstance();
 	game.init(6);

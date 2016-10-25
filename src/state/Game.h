@@ -26,7 +26,7 @@ namespace state {
     // Attributes
   private:
     Step currentStep;
-    std::vector< std::shared_ptr<Player> >::iterator currentPlayer;
+    unsigned int currentPlayer;
     ItemType activatedItem;
     std::vector< std::shared_ptr<Player> > players;
     std::vector< std::shared_ptr<Land> > lands;
@@ -36,7 +36,7 @@ namespace state {
     ~Game ();
     static Game& getInstance ();
     void init (unsigned int playersNumber);
-    std::shared_ptr<Player> getCurrentPlayer () const;
+    unsigned int getCurrentPlayer () const;
     void nextPlayer ();
     Step getCurrentStep () const;
     void setCurrentStep (Step step);

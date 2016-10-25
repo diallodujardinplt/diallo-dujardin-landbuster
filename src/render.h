@@ -2,6 +2,6 @@
 #ifndef __RENDER__H
 #define __RENDER__H
 
-#include "render/Renderer.h"
 #include "render/Client.h"
+#include "render/Renderer.h"
 #endif

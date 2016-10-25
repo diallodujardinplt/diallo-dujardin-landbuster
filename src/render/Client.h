@@ -3,6 +3,9 @@
 #define RENDER__CLIENT__H
 
 
+namespace render {
+  class Client;
+};
 namespace state {
   class Game;
 };
@@ -17,10 +20,14 @@ namespace render {
 
   /// class Client - 
   class Client {
+    // Associations
     // Operations
   public:
-    Client ();
+    ~Client ();
+    static Client& getInstance ();
     void run ();
+  private:
+    Client ();
   };
 
 };
