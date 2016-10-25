@@ -245,6 +245,8 @@ namespace render {
 		plActiveBg.setFillColor(sf::Color(255,200,0));
 		window.draw(plActiveBg);
 
+		sf::Text text;
+
 		for (unsigned int i = 0; i < game.getPlayers().size(); ++i) {
 
 			sf::Vector2f pos(CELL_WIDTH * GRID_WIDTH + 30, (i + 1) * 30);
@@ -255,7 +257,6 @@ namespace render {
 			plNumBg.setFillColor((game.getPlayers()[i]->isAlive())?game.getPlayers()[i]->getColor():sf::Color(140, 140, 140));
 			window.draw(plNumBg);
 
-			sf::Text text;
 			text.setPosition(pos);
 			text.setFont(font);
 			ostringstream oss;
@@ -280,6 +281,62 @@ namespace render {
 			oss2 << landsCount << " Ld - " << soldiersCount << " Sld";
 			text.setString(oss2.str().c_str());
 			window.draw(text);
+
+		}
+
+		if (client.getSelectedInfoLand()) {
+
+			shared_ptr<state::Land> land = client.getSelectedInfoLand();
+
+			sf::RectangleShape ldBg(sf::Vector2f(150, 30));
+			ldBg.setPosition(sf::Vector2f(CELL_WIDTH * GRID_WIDTH + 32, 250));
+			ldBg.setFillColor(land->getOwner()?land->getOwner()->getColor():sf::Color(255,255,255));
+			window.draw(ldBg);
+			text.setPosition(sf::Vector2f(CELL_WIDTH * GRID_WIDTH + 75, 253));
+			text.setCharacterSize(20);
+			text.setColor(sf::Color(0,0,0));
+			ostringstream oss3;
+			oss3 << "LAND";
+			text.setString(oss3.str().c_str());
+			window.draw(text);
+			text.move(0, 40);
+
+			if (!land->getOwner()) {
+				//Neutral land
+
+				text.setColor(sf::Color(255,255,255));
+				ostringstream oss4;
+				oss4 << land->getSoldiersNumber();
+				text.setString(oss4.str().c_str());
+				window.draw(text);
+
+			}
+			else {
+
+				if (land->getOwner() != client.getPlayer()) {
+
+					text.setColor(client.getPlayer()->getColor());
+					text.setString("Attack");
+					window.draw(text);
+					text.move(0, 30);
+					ostringstream oss5;
+					oss5 << game.getAttack(client.getSelectedLand(), land);
+					text.setString(oss5.str().c_str());
+					window.draw(text);
+					text.move(0, 50);
+
+				}
+
+				text.setColor(land->getOwner()->getColor());
+				text.setString("Defense");
+				window.draw(text);
+				text.move(0, 30);
+				ostringstream oss6;
+				oss6 << game.getDefense(land);
+				text.setString(oss6.str().c_str());
+				window.draw(text);
+
+			}
 
 		}
 

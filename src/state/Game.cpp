@@ -20,7 +20,7 @@ namespace state {
 	}
 
 	void Game::init(unsigned int playersNumber) {
-		
+
 		// Create players
 		sf::Color playersColors[6];
 		playersColors[0] = sf::Color(255,0,0);
@@ -402,6 +402,15 @@ namespace state {
 			}
 		}
 		return pos;
+	}
+
+	unsigned int Game::getDefense(shared_ptr<Land> land) const {
+		//TODOO
+		return land->getSoldiersNumber();
+	}
+
+	unsigned int Game::getAttack(shared_ptr<Land> attacker, shared_ptr<Land> defender) const {
+		return attacker->getSoldiersNumber();
 	}
 
 	vector< shared_ptr<Land> > Game::getLands() const {

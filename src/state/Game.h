@@ -8,15 +8,15 @@
 namespace state {
   class Game;
   class Cell;
-  class Player;
   class Land;
+  class Player;
 }
 
 #include "Step.h"
 #include "ItemType.h"
+#include "Land.h"
 #include "Cell.h"
 #include "Player.h"
-#include "Land.h"
 
 namespace state {
 
@@ -46,6 +46,8 @@ namespace state {
     std::vector< std::shared_ptr<Player> > getPlayers () const;
     Cell& getCell (unsigned int x, unsigned int y);
     void generateMap ();
+    unsigned int getDefense (std::shared_ptr<Land> land) const;
+    unsigned int getAttack (std::shared_ptr<Land> attacker, std::shared_ptr<Land> defender) const;
   private:
     Game ();
     std::vector<unsigned int> generateAreas (std::vector< std::vector<int> >& ncells);
