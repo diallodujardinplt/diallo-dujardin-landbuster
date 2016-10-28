@@ -112,12 +112,12 @@ namespace engine {
 					if(soldiers > 0) landTwo->setSoldiersNumber(soldiers);
 					else {
 						landTwo->setSoldiersNumber(0);
-						landTwo->setOwner(player);
+						if(landTwo->getOwner()->getHeadquarters()==landTwo) defeat(landTwo->getOwner(), player);
+						else landTwo->setOwner(player);
 					}
 				}
 				else {
-					if(landTwo->getOwner()->getHeadquarters()==landTwo) defeat(landTwo->getOwner(), player);
-					else landTwo->setOwner(player);
+					landTwo->setOwner(player);
 				}
 				break;
 			case COMMAND_MOVE: {
