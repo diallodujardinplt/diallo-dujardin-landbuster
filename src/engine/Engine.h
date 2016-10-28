@@ -32,9 +32,9 @@ namespace engine {
     static Engine& getInstance ();
     void pushCommand (Command command);
     void flushCommands ();
+    bool isAllowed (Command command);
   private:
     Engine ();
-    bool isAllowed (Command command);
     void execute (Command command);
     void defeat (std::shared_ptr<state::Player> player, std::shared_ptr<state::Player> killer);
   };

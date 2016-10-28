@@ -4,7 +4,8 @@ using namespace std;
 
 namespace state {
 
-Player::Player(sf::Color color) {
+Player::Player(unsigned int id, sf::Color color) {
+	this->id = id;
 	this->color = color;
 	alive = true;
 }
@@ -12,6 +13,10 @@ Player::Player(sf::Color color) {
     /*
      Getters
      */
+
+unsigned int Player::getId() const {
+	return id;
+}
     
 std::shared_ptr<Land> Player::getHeadquarters () const{
     return this->headquarters;

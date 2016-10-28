@@ -23,6 +23,7 @@ namespace state {
     // Associations
     // Attributes
   private:
+    unsigned int id;
     std::vector<sf::Vector2u> geometry;
     std::vector< std::shared_ptr<Land> > neighborLands;
     unsigned int soldiersNumber;
@@ -33,8 +34,9 @@ namespace state {
     ItemType item;
     // Operations
   public:
-    Land ();
+    Land (unsigned int id);
     ~Land ();
+    unsigned int getId () const;
     const std::vector<sf::Vector2u>& getGeometry () const;
     void setGeometry (std::vector<sf::Vector2u> geometry);
     std::vector< std::shared_ptr<Land> > getNeighborLands () const;

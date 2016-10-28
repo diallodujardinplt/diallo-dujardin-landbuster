@@ -240,12 +240,24 @@ namespace render {
 		state::Game& game = state::Game::getInstance();
 		Client& client = Client::getInstance();
 
+		sf::Text text;
+		text.setFont(font);
+
 		sf::RectangleShape plActiveBg(sf::Vector2f(48, 48));
 		plActiveBg.setPosition(sf::Vector2f(CELL_WIDTH * GRID_WIDTH + 22, (game.getCurrentPlayer() + 1) * 30 - 8));
 		plActiveBg.setFillColor(sf::Color(255,200,0));
 		window.draw(plActiveBg);
 
-		sf::Text text;
+		sf::Vector2f skipPos(CELL_WIDTH * GRID_WIDTH + 30, CELL_HEIGHT * GRID_HEIGHT - 60);
+		sf::RectangleShape btnSkip(sf::Vector2f(150, 40));
+		btnSkip.setPosition(skipPos);
+		btnSkip.setFillColor(sf::Color(255, 255, 255));
+		window.draw(btnSkip);
+		text.setPosition(sf::Vector2f(skipPos.x, skipPos.y + 10));
+		text.setCharacterSize(20);
+		text.setColor(sf::Color(0,0,0));
+		text.setString("End turn");
+		window.draw(text);
 
 		for (unsigned int i = 0; i < game.getPlayers().size(); ++i) {
 
@@ -258,7 +270,6 @@ namespace render {
 			window.draw(plNumBg);
 
 			text.setPosition(pos);
-			text.setFont(font);
 			ostringstream oss;
 			oss << " " << i + 1;
 			text.setString(oss.str().c_str());

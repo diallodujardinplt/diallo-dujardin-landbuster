@@ -4,7 +4,8 @@ using namespace std;
 
 namespace state {
 
-	Land::Land() {
+	Land::Land(unsigned int id) {
+        this->id = id;
         soldiersNumber = 0;
         neutral = false;
         ports = false;
@@ -14,6 +15,10 @@ namespace state {
 
 	Land::~Land() {
 	}
+
+    unsigned int Land::getId() const {
+        return id;
+    }
     
 	const std::vector<sf::Vector2u>& Land::getGeometry () const {
         return geometry;

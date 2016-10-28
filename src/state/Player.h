@@ -18,6 +18,7 @@ namespace state {
     // Associations
     // Attributes
   private:
+    unsigned int id;
     /// 		
     std::shared_ptr<Land> headquarters;
     unsigned int itemLifetime;
@@ -27,8 +28,9 @@ namespace state {
     sf::Color color;
     // Operations
   public:
-    Player (sf::Color color);
+    Player (unsigned int id, sf::Color color);
     ~Player ();
+    unsigned int getId () const;
     std::shared_ptr<Land> getHeadquarters () const;
     void setHeadquarters (std::shared_ptr<Land> headquarters);
     unsigned int getItemLifetime () const;

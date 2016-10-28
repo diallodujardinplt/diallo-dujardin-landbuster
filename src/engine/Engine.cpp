@@ -70,6 +70,8 @@ namespace engine {
 	}
 
 	void Engine::execute(Command command) {
+		cout << command.toString() << " [EXECUTED]" << endl;
+
 		state::Game& game = state::Game::getInstance();
 
 		state::Step step = game.getCurrentStep();
@@ -80,6 +82,7 @@ namespace engine {
 		switch(command.type) {
 			case COMMAND_CHOOSE_HEADQUARTERS:
 				player->setHeadquarters(landOne);
+				landOne->setOwner(player);
 				game.nextPlayer();
 				break;
 			case COMMAND_CHOOSE_REINFORCEMENT: {

@@ -2,6 +2,7 @@
 #ifndef ENGINE__COMMAND__H
 #define ENGINE__COMMAND__H
 
+#include <string>
 
 #include "CommandType.h"
 
@@ -19,6 +20,7 @@ namespace engine {
     // Operations
   public:
     Command (CommandType type, int playerId, int landOneId, int landTwoId);
+    std::string toString () const;
   };
 
 };

@@ -31,7 +31,7 @@ namespace state {
 		playersColors[5] = sf::Color(255,0,255);
 
 		for (unsigned int i=0; i<6; ++i) {
-			this->players.push_back(make_shared<Player>(playersColors[i]));
+			this->players.push_back(make_shared<Player>(players.size(), playersColors[i]));
 		}
 
 		this->currentPlayer = 0;
@@ -49,7 +49,7 @@ namespace state {
 		// Generate lands
 		for (unsigned int i = 0; i < landsSizes.size(); ++i) {
 			if (landsSizes[i] != 0) {
-				this->lands.push_back(make_shared<Land>());
+				this->lands.push_back(make_shared<Land>(this->lands.size()));
 				vector<sf::Vector2u> geometry;
 				for (unsigned int y = 0; y < GRID_HEIGHT; ++y) {
 					for (unsigned int x = 0; x < GRID_WIDTH; ++x) {
