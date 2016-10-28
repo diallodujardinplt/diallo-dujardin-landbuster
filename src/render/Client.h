@@ -11,6 +11,10 @@ namespace state {
 namespace render {
   class Client;
 };
+namespace engine {
+  class Command;
+  class Engine;
+};
 namespace state {
   class Game;
 };
@@ -20,6 +24,8 @@ namespace render {
 
 #include "state/Player.h"
 #include "state/Land.h"
+#include "engine/Command.h"
+#include "engine/Engine.h"
 #include "state/Game.h"
 #include "Renderer.h"
 
@@ -46,6 +52,7 @@ namespace render {
     void setSelectedLand (std::shared_ptr<state::Land> land);
   private:
     Client ();
+    void sendCommand (engine::Command command);
   };
 
 };

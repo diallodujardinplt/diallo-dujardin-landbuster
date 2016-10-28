@@ -3,13 +3,20 @@
 #define ENGINE__ENGINE__H
 
 #include <queue>
+#include <memory>
 
 namespace engine {
   class Command;
   class Engine;
+};
+namespace state {
+  class Player;
+  class Game;
 }
 
 #include "Command.h"
+#include "state/Player.h"
+#include "state/Game.h"
 
 namespace engine {
 
@@ -27,6 +34,9 @@ namespace engine {
     void flushCommands ();
   private:
     Engine ();
+    bool isAllowed (Command command);
+    void execute (Command command);
+    void defeat (std::shared_ptr<state::Player> player, std::shared_ptr<state::Player> killer);
   };
 
 };

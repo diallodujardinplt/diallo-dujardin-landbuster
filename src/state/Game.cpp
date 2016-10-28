@@ -413,6 +413,44 @@ namespace state {
 		return attacker->getSoldiersNumber();
 	}
 
+	bool Game::areConnected(shared_ptr<Land> landOne, shared_ptr<Land> landTwo) const {
+		return getConnection(landOne, landTwo) > 0;
+	}
+
+	unsigned int Game::getConnection(shared_ptr<Land> landOne, shared_ptr<Land> landTwo) const {
+		for(auto n : landOne->getNeighborLands()) {
+			if(n == landTwo) return 2;
+		}
+		return 0;
+		//TODO : water
+	}
+
+	unsigned int Game::getCurrentPlayer() const {
+        return currentPlayer;
+    }
+
+    void Game::nextPlayer() {
+    	currentPlayer = (currentPlayer==players.size()-1)?0:currentPlayer+1;
+    	setCurrentStep(STEP_REINFORCEMENT);
+    	if(!players[currentPlayer]->isAlive()) nextPlayer();
+    }
+
+    Step Game::getCurrentStep () const {
+        return this->currentStep;
+    }
+    
+    void Game::setCurrentStep (Step step){
+        this->currentStep=step;
+    }
+
+    ItemType Game::getActivatedItem () const {
+        return this->activatedItem;
+    }
+    
+    void Game::setActivatedItem (ItemType item){
+        this->activatedItem=item;
+    }
+
 	vector< shared_ptr<Land> > Game::getLands() const {
 		return lands;
 	}
@@ -421,26 +459,6 @@ namespace state {
 		return players;
 	}
         
-    unsigned int Game::getCurrentPlayer () const{
-            return currentPlayer;
-    }
-    
-    Step Game::getCurrentStep () const {
-            return this->currentStep;
-    }
-    
-    void Game::setCurrentStep (Step step){
-            this->currentStep=step;
-    }
-    
-    ItemType Game::getActivatedItem () const{
-            return this->activatedItem;
-    }
-    
-    void Game::setActivatedItem (ItemType item){
-            this->activatedItem=item;
-    }
-
     Cell& Game::getCell(unsigned int x, unsigned int y) {
     	return cells[x][y];
     }

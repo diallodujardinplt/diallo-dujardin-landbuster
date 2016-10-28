@@ -60,11 +60,16 @@ namespace render {
 			mousePos.y /= CELL_HEIGHT;
 			if(mousePos.x >= 0 && mousePos.x < GRID_WIDTH && mousePos.y >= 0 && mousePos.y < GRID_HEIGHT) {
 				shared_ptr<state::Land> target = game.getCell(mousePos.x, mousePos.y).land;
+
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+
 					setSelectedLand(target);
+
 				}
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
+
 					setSelectedInfoLand(target);
+
 				}
 			}
 
@@ -81,6 +86,10 @@ namespace render {
 			
 		}
 
+	}
+
+	void Client::sendCommand(engine::Command command) {
+		engine::Engine::getInstance().pushCommand(command);
 	}
 
 }

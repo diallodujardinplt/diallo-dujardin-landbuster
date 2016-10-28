@@ -6,6 +6,7 @@ namespace state {
 
 Player::Player(sf::Color color) {
 	this->color = color;
+	alive = true;
 }
 
     /*
@@ -25,7 +26,7 @@ std::shared_ptr<Land> Player::getHeroPosition () const{
 }
 
 bool Player::isAlive() const{
-    return true;
+    return this->alive;
 }
 
 ItemType Player::getStoredItem() const{
@@ -57,7 +58,7 @@ void Player::setHeroPosition (std::shared_ptr<Land> heroPosition){
 
 
 void Player::setAlive (bool alive){
-    this->alive=true;
+    this->alive=alive;
 }
 
 Player::~Player() {
@@ -66,5 +67,6 @@ Player::~Player() {
 void Player::setStoredItem (ItemType storedItem){
     this->storedItem=storedItem;
 }
+
 
 }

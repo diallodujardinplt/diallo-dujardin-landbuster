@@ -13,6 +13,7 @@
 #include <random>
 #include <cmath>
 #include <algorithm>
+#include <queue>
 
 #define GRID_WIDTH 128
 #define GRID_HEIGHT 128
