@@ -26,7 +26,7 @@ namespace engine {
     	oss << "cmd player " << playerId << " : " << names[type] << " ";
     	if(landOneId>=0) oss << landOneId;
     	else oss << "_";
-    	if(landTwoId>=0) oss << landTwoId;
+    	if(landTwoId>=0) oss << " " << landTwoId;
     	return oss.str();
 	}
 

@@ -26,6 +26,10 @@ namespace render {
 	}
 
 	void Client::setSelectedInfoLand(shared_ptr<state::Land> land) {
+		cout << "land ";
+		if(land) cout << land->getId();
+		else cout << "null";
+		cout << endl;
 		selectedInfoLand = land;
 	}
 
@@ -34,6 +38,10 @@ namespace render {
 	}
 
 	void Client::setSelectedLand(shared_ptr<state::Land> land) {
+		cout << "select land ";
+		if(land) cout << land->getId();
+		else cout << "null";
+		cout << endl;
 		selectedLand = land;
 	}
 
@@ -64,6 +72,8 @@ namespace render {
 				shared_ptr<state::Land> target = game.getCell(mousePos.x, mousePos.y).land;
 
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && clickClock.getElapsedTime().asMilliseconds() >= 500) {
+
+					cout << "click on land " << target->getId() << endl;
 
 					if (!player->getHeadquarters()) {
 						sendCommand(engine::Command(engine::COMMAND_CHOOSE_HEADQUARTERS, player->getId(), target->getId(), -1));

@@ -17,9 +17,6 @@ int main() {
 	game.generateMap();
 
 	client.setPlayer(0);
-	client.setSelectedInfoLand(game.getLands()[0]);
-	client.setSelectedLand(game.getLands()[1]);
-
 	client.run();
 
 	return 0;

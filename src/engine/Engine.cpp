@@ -54,7 +54,7 @@ namespace engine {
 			case COMMAND_ATTACK:
 				if (!(step==state::STEP_ACTION && landOne && landTwo && landOne->getOwner() == player && landTwo->getOwner() != landOne->getOwner() && game.areConnected(landOne, landTwo))) return false;
 				if (landTwo->getOwner()) return game.getAttack(landOne, landTwo) > game.getDefense(landTwo);
-				else return true;
+				return true;
 				break;
 			case COMMAND_MOVE:
 				return step==state::STEP_MOVING && landOne && landTwo && landOne->getOwner() == player && landTwo->getOwner() == player && game.areConnected(landOne, landTwo);
@@ -119,6 +119,7 @@ namespace engine {
 				else {
 					landTwo->setOwner(player);
 				}
+				game.setCurrentStep(state::STEP_MOVING);
 				break;
 			case COMMAND_MOVE: {
 				unsigned int soldiers = landOne->getSoldiersNumber() / 2;
