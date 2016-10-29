@@ -405,11 +405,13 @@ namespace state {
 	}
 
 	unsigned int Game::getDefense(shared_ptr<Land> land) const {
+		if(!land) return 0;
 		//TODOO
 		return land->getSoldiersNumber();
 	}
 
 	unsigned int Game::getAttack(shared_ptr<Land> attacker, shared_ptr<Land> defender) const {
+		if(!attacker || !defender) return 0;
 		return attacker->getSoldiersNumber();
 	}
 
