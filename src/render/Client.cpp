@@ -66,10 +66,8 @@ namespace render {
 			}
 
 			sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-			mousePos.x /= CELL_WIDTH;
-			mousePos.y /= CELL_HEIGHT;
-			if(mousePos.x > CELL_WIDTH/2 && mousePos.x < GRID_WIDTH && mousePos.y > CELL_HEIGHT/2 && mousePos.y < GRID_HEIGHT) {
-				shared_ptr<state::Land> target = game.getCell(mousePos.x, mousePos.y).land;
+			if(mousePos.x > CELL_WIDTH/2 && mousePos.x < GRID_WIDTH * CELL_WIDTH && mousePos.y > CELL_HEIGHT/2 && mousePos.y < GRID_HEIGHT * CELL_HEIGHT) {
+				shared_ptr<state::Land> target = game.getCell(mousePos.x / CELL_WIDTH, mousePos.y / CELL_HEIGHT).land;
 
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && clickClock.getElapsedTime().asMilliseconds() >= 500) {
 
