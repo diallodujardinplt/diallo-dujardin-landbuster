@@ -8,7 +8,7 @@ fi
 IMAGE=$1
 
 docker run -it \
-    --user=$USER \
+    --user=$(id -u $USER) \
     --env="DISPLAY" \
     --volume="/etc/group:/etc/group:ro" \
     --volume="/etc/passwd:/etc/passwd:ro" \
