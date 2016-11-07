@@ -11,7 +11,6 @@ int main() {
 	render::Client& client = render::Client::getInstance();
 
 	state::Game& game = state::Game::getInstance();
-	engine::Engine& engine = engine::Engine::getInstance();
 
 	game.init(6);
 	game.generateMap();

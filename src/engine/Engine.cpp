@@ -27,13 +27,13 @@ namespace engine {
 	bool Engine::isAllowed(Command command) {
 		state::Game& game = state::Game::getInstance();
 
-		if(command.playerId != game.getCurrentPlayer() || !game.getPlayers()[command.playerId]->isAlive())
+		if(command.playerId != (int) game.getCurrentPlayer() || !game.getPlayers()[command.playerId]->isAlive())
 			return false;
 
 		state::Step step = game.getCurrentStep();
 		shared_ptr<state::Player> player = game.getPlayers()[command.playerId];
-		shared_ptr<state::Land> landOne = (command.landOneId >= 0 && command.landOneId < game.getLands().size())?game.getLands()[command.landOneId] : nullptr;
-		shared_ptr<state::Land> landTwo = (command.landTwoId >= 0 && command.landTwoId < game.getLands().size())?game.getLands()[command.landTwoId] : nullptr;
+		shared_ptr<state::Land> landOne = (command.landOneId >= 0 && command.landOneId < (int) game.getLands().size())?game.getLands()[command.landOneId] : nullptr;
+		shared_ptr<state::Land> landTwo = (command.landTwoId >= 0 && command.landTwoId < (int) game.getLands().size())?game.getLands()[command.landTwoId] : nullptr;
 
 		switch(command.type) {
 			case COMMAND_CHOOSE_HEADQUARTERS:
@@ -74,10 +74,9 @@ namespace engine {
 
 		state::Game& game = state::Game::getInstance();
 
-		state::Step step = game.getCurrentStep();
 		shared_ptr<state::Player> player = game.getPlayers()[command.playerId];
-		shared_ptr<state::Land> landOne = (command.landOneId >= 0 && command.landOneId < game.getLands().size())?game.getLands()[command.landOneId] : nullptr;
-		shared_ptr<state::Land> landTwo = (command.landTwoId >= 0 && command.landTwoId < game.getLands().size())?game.getLands()[command.landTwoId] : nullptr;
+		shared_ptr<state::Land> landOne = (command.landOneId >= 0 && command.landOneId < (int) game.getLands().size())?game.getLands()[command.landOneId] : nullptr;
+		shared_ptr<state::Land> landTwo = (command.landTwoId >= 0 && command.landTwoId < (int) game.getLands().size())?game.getLands()[command.landTwoId] : nullptr;
 
 		switch(command.type) {
 			case COMMAND_CHOOSE_HEADQUARTERS:

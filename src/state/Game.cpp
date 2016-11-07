@@ -43,7 +43,6 @@ namespace state {
 	void Game::generateMap() {
 		// Generate cells
 		vector<vector<int>> ncells(GRID_WIDTH, vector<int>(GRID_HEIGHT, -1));
-		unsigned int mediumSize = 41;
 		vector<unsigned int> landsSizes = generateAreas(ncells);
 
 		// Generate lands
@@ -56,7 +55,7 @@ namespace state {
 
 						sf::Vector2u pos(x, y);
 
-						if (ncells[x][y] == i) {
+						if (ncells[x][y] == (int) i) {
 							cells[x][y].position = pos;
 							cells[x][y].land = this->lands.back();
 							geometry.push_back(sf::Vector2u(x, y));
@@ -154,7 +153,7 @@ namespace state {
 				this->it = it;
 			}
 
-			unsigned int x,y, it;
+			int x,y, it;
 		};
 
 		unsigned int meanSize = MEAN_LAND_SIZE;
@@ -210,7 +209,6 @@ namespace state {
 			emptyCells.erase(emptyCells.begin() + k);
 
 			vector<vector2u> possibilities;
-			unsigned int it;
 			if(x>0 && ncells[x-1][y] == -1) {
 				index[x-1][y].y = possibilities.size();
 				possibilities.push_back(vector2u(x-1, y, index[x-1][y].x));
@@ -324,14 +322,14 @@ namespace state {
 		}
 
 		// Remove tiny lands
-		for(unsigned int i = 0; i < realSizes.size(); ++i) {
+		for(int i = 0; i < (int) realSizes.size(); ++i) {
 			if(realSizes[i] < meanSize / 3) {
 
 				unsigned int neighbor = 0;
 				for(unsigned int x = 0; x < GRID_WIDTH; ++x) {
 					for(unsigned int y = 0; y < GRID_HEIGHT; ++y) {
 						if(ncells[x][y] == i) {
-							if(x>0 && ncells[x-1][y] != i) {
+							if(x>0 && ncells[x-1][y] != (int) i) {
 								neighbor = ncells[x-1][y];
 							}
 							if(x<GRID_WIDTH-1 && ncells[x+1][y] != i) {
