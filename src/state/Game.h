@@ -15,6 +15,7 @@ namespace state {
 #include "Step.h"
 #include "ItemType.h"
 #include "Land.h"
+#include "ConnectionType.h"
 #include "Cell.h"
 #include "Player.h"
 
@@ -48,8 +49,7 @@ namespace state {
     void generateMap ();
     unsigned int getDefense (std::shared_ptr<Land> land) const;
     unsigned int getAttack (std::shared_ptr<Land> attacker, std::shared_ptr<Land> defender) const;
-    bool areConnected (std::shared_ptr<Land> landOne, std::shared_ptr<Land> landTwo) const;
-    unsigned int getConnection (std::shared_ptr<Land> landOne, std::shared_ptr<Land> landTwo) const;
+    ConnectionType getConnection (std::shared_ptr<Land> landOne, std::shared_ptr<Land> landTwo) const;
   private:
     Game ();
     std::vector<unsigned int> generateAreas (std::vector< std::vector<int> >& ncells);

@@ -166,14 +166,15 @@ namespace render {
 
 	void Renderer::renderSoldiersNumber(sf::RenderWindow& window, state::Game& game, shared_ptr<state::Land> land, const vector<sf::Vector2u>& geometry) {
 
-		if(land->getSoldiersNumber() == 0) return;
+		if(!Client::getInstance().getDebugMode() && land->getSoldiersNumber() == 0) return;
 		sf::Vector2u mean = getMeanPos(game, land, geometry, 0);
 		sf::Vector2f pos(CELL_WIDTH * mean.x, CELL_HEIGHT * mean.y);
 		sf::Text text;
 		text.setPosition(pos);
 		text.setFont(font);
 		ostringstream oss;
-		oss << land->getSoldiersNumber();
+		if (!Client::getInstance().getDebugMode()) oss << land->getSoldiersNumber();
+		else oss << land->getId();
 		text.setString(oss.str().c_str());
 		text.setCharacterSize(20);
 		text.setColor(sf::Color(255, 130, 0));
@@ -242,6 +243,14 @@ namespace render {
 
 		sf::Text text;
 		text.setFont(font);
+
+		if(Client::getInstance().getDebugMode()) {
+			text.setPosition(sf::Vector2f(10, 10));
+			text.setCharacterSize(30);
+			text.setColor(sf::Color(255, 0, 0));
+			text.setString("Debug display mode, press D to exit");
+			window.draw(text);
+		}
 
 		sf::RectangleShape plActiveBg(sf::Vector2f(48, 48));
 		plActiveBg.setPosition(sf::Vector2f(CELL_WIDTH * GRID_WIDTH + 22, (game.getCurrentPlayer() + 1) * 30 - 8));

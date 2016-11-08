@@ -52,12 +52,12 @@ namespace engine {
 				return true;
 				break;
 			case COMMAND_ATTACK:
-				if (!(step==state::STEP_ACTION && landOne && landTwo && landOne->getOwner() == player && landTwo->getOwner() != landOne->getOwner() && game.areConnected(landOne, landTwo))) return false;
+				if (!(step==state::STEP_ACTION && landOne && landTwo && landOne->getOwner() == player && landTwo->getOwner() != landOne->getOwner() && game.getConnection(landOne, landTwo) != state::CONNECTION_NONE)) return false;
 				if (landTwo->getOwner()) return game.getAttack(landOne, landTwo) > game.getDefense(landTwo);
 				return true;
 				break;
 			case COMMAND_MOVE:
-				return step==state::STEP_MOVING && landOne && landTwo && landOne->getOwner() == player && landTwo->getOwner() == player && game.areConnected(landOne, landTwo);
+				return step==state::STEP_MOVING && landOne && landTwo && landOne->getOwner() == player && landTwo->getOwner() == player && game.getConnection(landOne, landTwo) != state::CONNECTION_NONE;
 				break;
 			case COMMAND_USE_ITEM:
 				//TODO

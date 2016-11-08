@@ -8,5 +8,6 @@
 #include "state/Cell.h"
 #include "state/Land.h"
 #include "state/Step.h"
+#include "state/ConnectionType.h"
 #include "state/Game.h"
 #endif

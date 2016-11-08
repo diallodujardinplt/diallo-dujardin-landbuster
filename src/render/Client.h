@@ -39,6 +39,7 @@ namespace render {
     std::shared_ptr<state::Player> player;
     std::shared_ptr<state::Land> selectedInfoLand;
     std::shared_ptr<state::Land> selectedLand;
+    bool debugMode;
     // Operations
   public:
     ~Client ();
@@ -50,6 +51,7 @@ namespace render {
     void setSelectedInfoLand (std::shared_ptr<state::Land> land);
     std::shared_ptr<state::Land> getSelectedLand () const;
     void setSelectedLand (std::shared_ptr<state::Land> land);
+    bool getDebugMode () const;
   private:
     Client ();
     void sendCommand (engine::Command command);

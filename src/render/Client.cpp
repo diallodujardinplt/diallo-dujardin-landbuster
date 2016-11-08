@@ -4,13 +4,19 @@ using namespace std;
 
 namespace render {
 
-	Client::Client() {}
+	Client::Client() {
+		debugMode = false;
+	}
 
 	Client::~Client() {}
 
 	Client& Client::getInstance() {
 		static Client client;
 		return client;
+	}
+
+	bool Client::getDebugMode() const {
+		return debugMode;
 	}
 
 	shared_ptr<state::Player> Client::getPlayer() const {
@@ -63,6 +69,10 @@ namespace render {
 			while (window.pollEvent(event)) {
 				if (event.type == sf::Event::Closed)
 					window.close();
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && clickClock.getElapsedTime().asMilliseconds() >= 500) {
+					debugMode = !debugMode;
+					clickClock.restart();
+				}
 			}
 
 			sf::Vector2i mousePos = sf::Mouse::getPosition(window);

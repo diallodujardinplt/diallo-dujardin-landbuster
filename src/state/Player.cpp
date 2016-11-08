@@ -21,10 +21,6 @@ unsigned int Player::getId() const {
 std::shared_ptr<Land> Player::getHeadquarters () const{
     return this->headquarters;
 }
-    
-unsigned int Player::getItemLifetime () const{
-    return this->itemLifetime;
-}
 
 std::shared_ptr<Land> Player::getHeroPosition () const{
     return this->heroPosition;
@@ -49,11 +45,6 @@ sf::Color Player::getColor () const{
 
 void Player::setHeadquarters (std::shared_ptr<Land> headquarters){
     this->headquarters=headquarters;    
-}
-
-
-void Player::setItemLifetime (unsigned int timeLeft){
-    this->itemLifetime=timeLeft;
 }
 
 

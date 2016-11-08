@@ -7,10 +7,11 @@ namespace state {
 	Land::Land(unsigned int id) {
         this->id = id;
         soldiersNumber = 0;
-        neutral = false;
+        fort = false;
         ports = false;
         type = LAND_MEADOW;
         item = ITEM_NONE;
+        itemLifetime = 0;
 	}
 
 	Land::~Land() {
@@ -33,10 +34,8 @@ namespace state {
     }
     
     void Land::addNeighborLand (std::shared_ptr<Land> land){
-       this->neighborLands.push_back(land);
-       vector< shared_ptr<Land> >::iterator it;
-       it = unique(neighborLands.begin(), neighborLands.end());
-       neighborLands.resize(distance(neighborLands.begin(), it));
+        if (find(this->neighborLands.begin(), this->neighborLands.end(), land) == this->neighborLands.end())
+            this->neighborLands.push_back(land);
     }
     
     unsigned int Land::getSoldiersNumber () const{
@@ -55,12 +54,12 @@ namespace state {
         this->owner=owner;
     }
     
-    bool Land::isNeutral () const{
-        return this->neutral;
+    bool Land::hasFort () const{
+        return this->fort;
     }
     
-    void Land::setNeutral (bool neutral){
-        this->neutral=neutral;
+    void Land::setFort (bool fort){
+        this->fort = fort;
     }
     
     bool Land::hasPorts () const{
@@ -86,5 +85,15 @@ namespace state {
     void Land::setItem (ItemType item){
         this->item=item;
     }
+
+    unsigned int Land::getItemLifetime () const{
+        return this->itemLifetime;
+    }
+
+    void Land::setItemLifetime (unsigned int timeLeft){
+        this->itemLifetime=timeLeft;
+    }
+
+
     
 }

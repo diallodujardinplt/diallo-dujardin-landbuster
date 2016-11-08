@@ -21,7 +21,6 @@ namespace state {
     unsigned int id;
     /// 		
     std::shared_ptr<Land> headquarters;
-    unsigned int itemLifetime;
     std::shared_ptr<Land> heroPosition;
     bool alive;
     ItemType storedItem;
@@ -33,8 +32,6 @@ namespace state {
     unsigned int getId () const;
     std::shared_ptr<Land> getHeadquarters () const;
     void setHeadquarters (std::shared_ptr<Land> headquarters);
-    unsigned int getItemLifetime () const;
-    void setItemLifetime (unsigned int timeLeft);
     std::shared_ptr<Land> getHeroPosition () const;
     void setHeroPosition (std::shared_ptr<Land> heroPosition);
     bool isAlive () const;

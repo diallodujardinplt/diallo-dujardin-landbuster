@@ -28,10 +28,11 @@ namespace state {
     std::vector< std::shared_ptr<Land> > neighborLands;
     unsigned int soldiersNumber;
     std::shared_ptr<Player> owner;
-    bool neutral;
+    bool fort;
     bool ports;
     LandType type;
     ItemType item;
+    unsigned int itemLifetime;
     // Operations
   public:
     Land (unsigned int id);
@@ -45,14 +46,16 @@ namespace state {
     void setSoldiersNumber (unsigned int soldiersNumber);
     std::shared_ptr<Player> getOwner () const;
     void setOwner (std::shared_ptr<Player> owner);
-    bool isNeutral () const;
-    void setNeutral (bool neutral);
+    bool hasFort () const;
+    void setFort (bool fort);
     bool hasPorts () const;
     void setPorts (bool ports);
     LandType getType () const;
     void setType (LandType type);
     ItemType getItem () const;
     void setItem (ItemType item);
+    unsigned int getItemLifetime () const;
+    void setItemLifetime (unsigned int timeLeft);
   };
 
 };

@@ -87,6 +87,18 @@ namespace state {
 			}
 		}
 
+		// Debug display
+
+		cout << "*** LANDS GRAPH ***" << endl;
+		for (vector< shared_ptr<Land> >::const_iterator it1 = this->lands.begin(); it1 != this->lands.end(); ++it1) {
+			cout << (*it1)->getId() << " : ";
+			vector< shared_ptr<Land> > neighbors = (*it1)->getNeighborLands();
+			for (vector< shared_ptr<Land> >::const_iterator it2 = neighbors.begin(); it2 != neighbors.end(); ++it2) {
+				cout << (*it2)->getId() << ", ";
+			}
+			cout << endl;
+		}
+		cout << "*******************" << endl;
 
 		// Generate water
 
@@ -142,6 +154,26 @@ namespace state {
 				(*land_it)->setType(distType[i]);
 			}
 		}
+
+		// Add coastal lands
+
+		for (vector< shared_ptr<Land> >::iterator land_it = lands.begin(); land_it != lands.end(); ++land_it) {
+			shared_ptr<Land> land = *land_it;
+			
+			if(land->getType() == LAND_WATER) {
+				vector< shared_ptr<Land> > neighbors = land->getNeighborLands();
+				for (vector< shared_ptr<Land> >::iterator land_it2 = neighbors.begin(); land_it2 != neighbors.end(); ++land_it2) {
+					shared_ptr<Land> land2 = *land_it2;
+					if(land2->getType() != LAND_WATER) {
+						uniform_int_distribution<> rndCoastal(0, 1);
+						unsigned int coastal = rndCoastal(gen);
+						if(coastal) land2->setType(LAND_COASTAL);
+					}
+				}
+			}
+
+		}
+
 	}
 
 	vector<unsigned int> Game::generateAreas(vector< vector<int> >& ncells) {
@@ -413,15 +445,11 @@ namespace state {
 		return attacker->getSoldiersNumber();
 	}
 
-	bool Game::areConnected(shared_ptr<Land> landOne, shared_ptr<Land> landTwo) const {
-		return getConnection(landOne, landTwo) > 0;
-	}
-
-	unsigned int Game::getConnection(shared_ptr<Land> landOne, shared_ptr<Land> landTwo) const {
+	ConnectionType Game::getConnection(shared_ptr<Land> landOne, shared_ptr<Land> landTwo) const {
 		for(auto n : landOne->getNeighborLands()) {
-			if(n == landTwo) return 2;
+			if(n == landTwo) return CONNECTION_LAND;
 		}
-		return 0;
+		return CONNECTION_NONE;
 		//TODO : water
 	}
 
