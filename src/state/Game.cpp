@@ -89,7 +89,7 @@ namespace state {
 
 		// Debug display
 
-		cout << "*** LANDS GRAPH ***" << endl;
+		/*cout << "*** LANDS GRAPH ***" << endl;
 		for (vector< shared_ptr<Land> >::const_iterator it1 = this->lands.begin(); it1 != this->lands.end(); ++it1) {
 			cout << (*it1)->getId() << " : ";
 			vector< shared_ptr<Land> > neighbors = (*it1)->getNeighborLands();
@@ -98,7 +98,7 @@ namespace state {
 			}
 			cout << endl;
 		}
-		cout << "*******************" << endl;
+		cout << "*******************" << endl;*/
 
 		// Generate water
 
@@ -172,6 +172,16 @@ namespace state {
 				}
 			}
 
+		}
+
+		// Add forts
+
+		float fortProbability = 0.1;
+		for (vector< shared_ptr<Land> >::iterator land_it = lands.begin(); land_it != lands.end(); ++land_it) {
+			shared_ptr<Land> land = *land_it;
+			uniform_int_distribution<> rndFort(0, 100);
+			unsigned int fort = rndFort(gen);
+			if((float) fort / 100.0 < fortProbability) land->setFort(true);
 		}
 
 	}
