@@ -14,6 +14,8 @@
 #include <cmath>
 #include <algorithm>
 #include <queue>
+#include <unordered_set>
+#include <stack>
 
 #define GRID_WIDTH 128
 #define GRID_HEIGHT 128

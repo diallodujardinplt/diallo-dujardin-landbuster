@@ -456,11 +456,41 @@ namespace state {
 	}
 
 	ConnectionType Game::getConnection(shared_ptr<Land> landOne, shared_ptr<Land> landTwo) const {
-		for(auto n : landOne->getNeighborLands()) {
-			if(n == landTwo) return CONNECTION_LAND;
+		
+		// Look for a land connection
+		for(auto land : landOne->getNeighborLands()) {
+			if (land == landTwo) return CONNECTION_LAND;
 		}
+		
+		// Look for a water connection (depth-first search)
+		struct LandHash {
+			size_t operator()(const shared_ptr<Land> &p) const {
+				return hash<int>()((int) p->getId());
+			}
+		};
+		struct LandEquals {
+			bool operator()(const shared_ptr<Land>& a, const shared_ptr<Land>& b) const {
+				return a == b;
+			}
+		};
+
+		stack< shared_ptr<Land> > open;
+		unordered_set< shared_ptr<Land>, LandHash, LandEquals> closed;
+		open.push(landOne);
+		while(!open.empty()) {
+			auto land = open.top();
+			open.pop();
+			closed.insert(land);
+			for(auto neighbor : land->getNeighborLands()) {
+				if(neighbor == landTwo) return CONNECTION_WATER;
+				if(neighbor->getType() == LAND_WATER && !(closed.count(neighbor))) open.push(neighbor);
+			}
+		}
+
+		// No connection found
+
 		return CONNECTION_NONE;
-		//TODO : water
+
 	}
 
 	unsigned int Game::getCurrentPlayer() const {
