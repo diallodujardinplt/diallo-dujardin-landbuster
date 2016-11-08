@@ -23,5 +23,7 @@
 #define CELL_HEIGHT 5
 #define BORDER_WIDTH 3
 #define MEAN_LAND_SIZE 240
+#define HERO_RATIO 0.2
+#define WATER_POWER_RATIO 0.5
 
 #endif

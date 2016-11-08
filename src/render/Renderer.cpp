@@ -286,14 +286,8 @@ namespace render {
 			text.setColor(sf::Color(255, 255, 255));
 			window.draw(text);
 
-			unsigned int landsCount = 0, soldiersCount = 0;
 			shared_ptr<state::Player> player = game.getPlayers()[i];
-			for(auto land : game.getLands()) {
-				if (land->getOwner() == player) {
-					landsCount++;
-					soldiersCount += land->getSoldiersNumber();
-				}
-			}
+			unsigned int landsCount = game.getLandsCount(player), soldiersCount = game.getSoldiersCount(player);
 
 			text.setPosition(pos.x + 50, pos.y + 3);
 			text.setCharacterSize(14);

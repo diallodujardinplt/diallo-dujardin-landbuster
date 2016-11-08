@@ -446,16 +446,60 @@ namespace state {
 
 	unsigned int Game::getDefense(shared_ptr<Land> land) const {
 		if(!land) return 0;
-		//TODOO
-		return land->getSoldiersNumber();
+		
+		unsigned int defense = land->getSoldiersNumber();
+		if(land->getOwner()->getHeroPosition()==land) defense += HERO_RATIO * getSoldiersCount(land->getOwner());
+		for(auto l : lands) {
+			ConnectionType connection = getConnection(land, l);
+			if(connection != CONNECTION_NONE && l->getOwner()==land->getOwner()) {
+				unsigned int defenseMore = l->getSoldiersNumber();
+				if(l->getOwner()->getHeroPosition()==l) defenseMore += HERO_RATIO * getSoldiersCount(l->getOwner());
+				if(connection == CONNECTION_WATER) defenseMore *= WATER_POWER_RATIO;
+				defense += defenseMore;
+			}
+		}
+
+		return defense;
 	}
 
 	unsigned int Game::getAttack(shared_ptr<Land> attacker, shared_ptr<Land> defender) const {
 		if(!attacker || !defender) return 0;
-		return attacker->getSoldiersNumber();
+		
+		ConnectionType connection = getConnection(attacker, defender);
+		if(connection == CONNECTION_NONE) return 0;
+
+		unsigned int attack = attacker->getSoldiersNumber();
+		if(attacker->getOwner()->getHeroPosition()==attacker) {
+			attack += HERO_RATIO * getSoldiersCount(attacker->getOwner());
+		}
+
+		if(connection == CONNECTION_WATER) attack *= WATER_POWER_RATIO;
+
+		return attack;
+	}
+
+	unsigned int Game::getLandsCount(shared_ptr<Player> player) const {
+		unsigned int landsCount = 0;
+		for(auto land : lands) {
+			if (land->getOwner() == player)
+				landsCount++;
+		}
+		return landsCount;
+	}
+
+	unsigned int Game::getSoldiersCount(shared_ptr<Player> player) const {
+		unsigned int soldiersCount = 0;
+		for(auto land : lands) {
+			if (land->getOwner() == player)
+				soldiersCount += land->getSoldiersNumber();
+		}
+		return soldiersCount;
 	}
 
 	ConnectionType Game::getConnection(shared_ptr<Land> landOne, shared_ptr<Land> landTwo) const {
+
+		if(!landOne || !landTwo) return CONNECTION_NONE;
+		if(landOne == landTwo) return CONNECTION_NONE;
 		
 		// Look for a land connection
 		for(auto land : landOne->getNeighborLands()) {

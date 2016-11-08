@@ -16,8 +16,8 @@ namespace state {
 #include "ItemType.h"
 #include "Land.h"
 #include "ConnectionType.h"
-#include "Cell.h"
 #include "Player.h"
+#include "Cell.h"
 
 namespace state {
 
@@ -50,6 +50,8 @@ namespace state {
     unsigned int getDefense (std::shared_ptr<Land> land) const;
     unsigned int getAttack (std::shared_ptr<Land> attacker, std::shared_ptr<Land> defender) const;
     ConnectionType getConnection (std::shared_ptr<Land> landOne, std::shared_ptr<Land> landTwo) const;
+    unsigned int getLandsCount (std::shared_ptr<Player> player) const;
+    unsigned int getSoldiersCount (std::shared_ptr<Player> player) const;
   private:
     Game ();
     std::vector<unsigned int> generateAreas (std::vector< std::vector<int> >& ncells);
