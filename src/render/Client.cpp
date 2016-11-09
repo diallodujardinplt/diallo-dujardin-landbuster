@@ -84,10 +84,10 @@ namespace render {
 					cout << "click on land " << target->getId() << endl;
 
 					if (!player->getHeadquarters()) {
-						sendCommand(engine::Command(engine::COMMAND_CHOOSE_HEADQUARTERS, player->getId(), target->getId(), -1));
+						sendCommand(make_shared<engine::ChoiceCommand>(engine::COMMAND_CHOOSE_HEADQUARTERS, player->getId(), target->getId()));
 					}
 					else if (game.getCurrentStep()==state::STEP_REINFORCEMENT) {
-						sendCommand(engine::Command(engine::COMMAND_CHOOSE_REINFORCEMENT, player->getId(), target->getId(), -1));
+						sendCommand(make_shared<engine::ChoiceCommand>(engine::COMMAND_CHOOSE_REINFORCEMENT, player->getId(), target->getId()));
 					}
 					else if (game.getCurrentStep()==state::STEP_ACTION) {
 						if(!selectedLand) {
@@ -95,14 +95,20 @@ namespace render {
 						}
 						else {
 							if(selectedLand == target) {
-								engine::Command cmd(engine::COMMAND_BUILD_PORT, player->getId(), target->getId(), -1);
-								if(engine::Engine::getInstance().isAllowed(cmd)) sendCommand(cmd);
-								setSelectedLand(nullptr);
+								shared_ptr<engine::ChoiceCommand> cmd = make_shared<engine::ChoiceCommand>(engine::COMMAND_BUILD_PORT, player->getId(), target->getId());
+								if(engine::Engine::getInstance().isAllowed(cmd)) {
+									sendCommand(cmd);
+									setSelectedLand(nullptr);
+								}
 							}
 							else {
-								engine::Command cmd(engine::COMMAND_ATTACK, player->getId(), selectedLand->getId(), target->getId());
-								if(engine::Engine::getInstance().isAllowed(cmd)) sendCommand(cmd);
-								setSelectedLand(nullptr);
+								vector<engine::Interaction> attacks;
+								attacks.push_back(engine::Interaction(selectedLand->getId(), target->getId()));
+								shared_ptr<engine::AttackCommand> cmd = make_shared<engine::AttackCommand>(player->getId(), attacks);
+								if(engine::Engine::getInstance().isAllowed(cmd)) {
+									sendCommand(cmd);
+									setSelectedLand(nullptr);
+								}
 							}
 						}
 					}
@@ -111,9 +117,11 @@ namespace render {
 							setSelectedLand(target);
 						}
 						else {
-							engine::Command cmd(engine::COMMAND_MOVE, player->getId(), selectedLand->getId(), target->getId());
-							if(engine::Engine::getInstance().isAllowed(cmd)) sendCommand(cmd);
-							setSelectedLand(nullptr);
+							shared_ptr<engine::MoveCommand> cmd = make_shared<engine::MoveCommand>(player->getId(), engine::Interaction(selectedLand->getId(), target->getId()), 0.5, false);
+							if(engine::Engine::getInstance().isAllowed(cmd)) {
+								sendCommand(cmd);
+								setSelectedLand(nullptr);
+							}
 						}
 					}
 					else {
@@ -131,7 +139,7 @@ namespace render {
 			}
 			else if(mousePos.x >= CELL_WIDTH * GRID_WIDTH + 30 && mousePos.x < CELL_WIDTH * GRID_WIDTH + 30 + 150 && mousePos.y >= CELL_HEIGHT * GRID_HEIGHT - 60 && mousePos.y < CELL_HEIGHT * GRID_HEIGHT - 60 + 40) {
 				if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && clickClock.getElapsedTime().asMilliseconds() >= 500) {
-					sendCommand(engine::Command(engine::COMMAND_SKIP_ROUND, player->getId(), -1, -1));
+					sendCommand(make_shared<engine::ActionCommand>(engine::COMMAND_SKIP_ROUND, player->getId()));
 					clickClock.restart();
 				}
 			}
@@ -153,8 +161,8 @@ namespace render {
 
 	}
 
-	void Client::sendCommand(engine::Command command) {
-		cout << command.toString() << endl;
+	void Client::sendCommand(shared_ptr<engine::Command> command) {
+		cout << command->toString() << endl;
 		engine::Engine::getInstance().pushCommand(command);
 	}
 

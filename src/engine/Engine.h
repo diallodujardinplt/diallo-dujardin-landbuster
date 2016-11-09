@@ -6,16 +6,28 @@
 #include <memory>
 
 namespace engine {
-  class Command;
   class Engine;
+  class Command;
 };
 namespace state {
   class Player;
+};
+namespace engine {
+  class MoveCommand;
+  class AttackCommand;
+  class ChoiceCommand;
+  class ActionCommand;
+};
+namespace state {
   class Game;
 }
 
 #include "Command.h"
 #include "state/Player.h"
+#include "MoveCommand.h"
+#include "AttackCommand.h"
+#include "ChoiceCommand.h"
+#include "ActionCommand.h"
 #include "state/Game.h"
 
 namespace engine {
@@ -25,18 +37,18 @@ namespace engine {
     // Associations
     // Attributes
   private:
-    std::queue<Command> commandQueue;
+    std::queue< std::shared_ptr<Command> > commandQueue;
     // Operations
   public:
     /// 	
     static Engine& getInstance ();
-    void pushCommand (Command command);
+    void pushCommand (std::shared_ptr<Command> command);
     void flushCommands ();
-    bool isAllowed (Command command);
+    bool isAllowed (std::shared_ptr<Command> command);
+    void defeat (std::shared_ptr<state::Player> player, std::shared_ptr<state::Player> killer);
   private:
     Engine ();
-    void execute (Command command);
-    void defeat (std::shared_ptr<state::Player> player, std::shared_ptr<state::Player> killer);
+    void execute (std::shared_ptr<Command> command);
   };
 
 };

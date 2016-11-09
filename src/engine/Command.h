@@ -4,23 +4,32 @@
 
 #include <string>
 
+namespace state {
+  class Game;
+}
+
 #include "CommandType.h"
+#include "state/Game.h"
 
 namespace engine {
 
+  // abstract
   /// class Command - 
   class Command {
     // Associations
     // Attributes
-  public:
+  protected:
     CommandType type;
-    int playerId;
-    int landOneId;
-    int landTwoId;
+    unsigned int playerId;
     // Operations
   public:
-    Command (CommandType type, int playerId, int landOneId, int landTwoId);
-    std::string toString () const;
+    virtual std::string toString () const = 0;
+    virtual bool isAllowed (state::Game& game) const = 0;
+    /// 																																														
+    /// @param game		(???) 
+    virtual void execute (state::Game& game) = 0;
+    CommandType getType () const;
+    unsigned int getPlayerId () const;
   };
 
 };

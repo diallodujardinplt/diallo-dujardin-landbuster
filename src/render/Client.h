@@ -54,7 +54,7 @@ namespace render {
     bool getDebugMode () const;
   private:
     Client ();
-    void sendCommand (engine::Command command);
+    void sendCommand (std::shared_ptr<engine::Command> command);
   };
 
 };
