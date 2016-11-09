@@ -29,6 +29,7 @@ namespace render {
 		landTextures[state::LAND_FOREST].loadFromFile("res/textures/forest.jpg");
 		landTextures[state::LAND_MOUNTAIN].loadFromFile("res/textures/mountain.jpg");
 		landTextures[state::LAND_COASTAL].loadFromFile("res/textures/coastal.jpg");
+		headquartersMaskTexture.loadFromFile("res/textures/headquarters_mask.png");
 	}
 
 	void Renderer::renderCell(sf::RenderWindow& window, state::Game& game, shared_ptr<state::Land> land, const vector<sf::Vector2u>& geometry, state::Cell& cell) {
@@ -61,6 +62,13 @@ namespace render {
 				meadowRect.setFillColor(color);
 				meadowRect.setPosition(pos);
 				window.draw(meadowRect);
+			}
+
+			if(land->getOwner() && land->getOwner()->getHeadquarters()==land) {
+				sprite.setPosition(pos);
+				sprite.setTexture(headquartersMaskTexture);
+				sprite.setTextureRect(sf::IntRect(0, 0, 9, 9));
+				window.draw(sprite);
 			}
 
 			renderLandBorders(window, game, cell, x, y, pos, borderTop, borderBottom, borderLeft, borderRight);

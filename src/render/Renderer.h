@@ -34,6 +34,7 @@ namespace render {
     sf::Font font;
     sf::RectangleShape waterRect;
     sf::RectangleShape portRect;
+    sf::Texture headquartersMaskTexture;
     // Operations
   public:
     ~Renderer ();
