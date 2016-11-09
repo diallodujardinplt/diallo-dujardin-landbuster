@@ -36,10 +36,21 @@ namespace engine {
 		shared_ptr<state::Land> landTwo = (interactions[0].landTwoId >= 0 && interactions[0].landTwoId < (int) game.getLands().size())?game.getLands()[interactions[0].landTwoId] : nullptr;
 
 		if(landTwo->getOwner()) {
-			int soldiers = landTwo->getSoldiersNumber() - (game.getAttack(landOne, landTwo) - game.getDefense(landTwo));
+			random_device rd;
+			mt19937 gen(rd());
+			uniform_int_distribution<> randDmg(8, 12);
+			float chance_factor = ((float) randDmg(gen)) / 10.0;
+			int soldiers = landTwo->getSoldiersNumber() - (game.getAttack(landOne, landTwo) - game.getDefense(landTwo)) * chance_factor;
 			if(soldiers > 0) landTwo->setSoldiersNumber(soldiers);
 			else {
 				landTwo->setSoldiersNumber(0);
+				if(landTwo->getOwner()->getHeroPosition()==landTwo) {
+					landTwo->getOwner()->setHeroPosition(nullptr);
+					for(auto l : game.getLands()) {
+						if(l->getOwner() == player)
+							l->setSoldiersNumber(l->getSoldiersNumber() / 2);
+					}
+				}
 				if(landTwo->getOwner()->getHeadquarters()==landTwo) Engine::getInstance().defeat(landTwo->getOwner(), player);
 				else landTwo->setOwner(player);
 			}

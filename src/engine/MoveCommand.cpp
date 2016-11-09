@@ -33,9 +33,11 @@ namespace engine {
 		shared_ptr<state::Land> landOne = (interaction.landOneId >= 0 && interaction.landOneId < (int) game.getLands().size())?game.getLands()[interaction.landOneId] : nullptr;
 		shared_ptr<state::Land> landTwo = (interaction.landTwoId >= 0 && interaction.landTwoId < (int) game.getLands().size())?game.getLands()[interaction.landTwoId] : nullptr;
 
-		unsigned int soldiers = landOne->getSoldiersNumber() / 2;
+		unsigned int soldiers = landOne->getSoldiersNumber() * ratio;
 		landOne->setSoldiersNumber(landOne->getSoldiersNumber() - soldiers);
 		landTwo->setSoldiersNumber(landTwo->getSoldiersNumber() + soldiers);
+		if (hero && player->getHeroPosition() == landOne)
+			player->setHeroPosition(landTwo);
 		game.nextPlayer();
 	}
 
