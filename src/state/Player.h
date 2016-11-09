@@ -22,6 +22,7 @@ namespace state {
     /// 		
     std::shared_ptr<Land> headquarters;
     std::shared_ptr<Land> heroPosition;
+    bool deadHero;
     bool alive;
     ItemType storedItem;
     sf::Color color;
@@ -34,6 +35,8 @@ namespace state {
     void setHeadquarters (std::shared_ptr<Land> headquarters);
     std::shared_ptr<Land> getHeroPosition () const;
     void setHeroPosition (std::shared_ptr<Land> heroPosition);
+    bool getDeadHero () const;
+    void setDeadHero (bool deadHero);
     bool isAlive () const;
     void setAlive (bool alive);
     ItemType getStoredItem () const;

@@ -30,6 +30,7 @@ namespace render {
 		landTextures[state::LAND_MOUNTAIN].loadFromFile("res/textures/mountain.jpg");
 		landTextures[state::LAND_COASTAL].loadFromFile("res/textures/coastal.jpg");
 		headquartersMaskTexture.loadFromFile("res/textures/headquarters_mask.png");
+		heroTexture.loadFromFile("res/textures/hero.png");
 	}
 
 	void Renderer::renderCell(sf::RenderWindow& window, state::Game& game, shared_ptr<state::Land> land, const vector<sf::Vector2u>& geometry, state::Cell& cell) {
@@ -209,6 +210,19 @@ namespace render {
 
 	}
 
+	void Renderer::renderHero(sf::RenderWindow& window, state::Game& game, shared_ptr<state::Land> land, const vector<sf::Vector2u>& geometry) {
+
+		if (!land->getOwner() || land->getOwner()->getHeroPosition() != land) return;
+
+		sf::Vector2u mean = getMeanPos(game, land, geometry, 6);
+		sf::Vector2f pos(CELL_WIDTH * mean.x, CELL_HEIGHT * mean.y);
+		sf::Sprite heroSprite;
+		heroSprite.setPosition(pos);
+		heroSprite.setTexture(heroTexture);
+		window.draw(heroSprite);
+
+	}
+
 	void Renderer::renderLand(sf::RenderWindow& window, state::Game& game, shared_ptr<state::Land> land) {
 
 		if (land->getType() == state::LAND_NONE) return;
@@ -225,6 +239,7 @@ namespace render {
 		if (land->getType() != state::LAND_WATER) {
 			renderSoldiersNumber(window, game, land, geometry);
 			renderItem(window, game, land, geometry);
+			renderHero(window, game, land, geometry);
 		}
 
 	}

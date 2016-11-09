@@ -7,6 +7,7 @@ namespace state {
 Player::Player(unsigned int id, sf::Color color) {
 	this->id = id;
 	this->color = color;
+    deadHero = false;
 	alive = true;
 }
 
@@ -24,6 +25,10 @@ std::shared_ptr<Land> Player::getHeadquarters () const{
 
 std::shared_ptr<Land> Player::getHeroPosition () const{
     return this->heroPosition;
+}
+
+bool Player::getDeadHero() const {
+    return deadHero;
 }
 
 bool Player::isAlive() const{
@@ -50,6 +55,10 @@ void Player::setHeadquarters (std::shared_ptr<Land> headquarters){
 
 void Player::setHeroPosition (std::shared_ptr<Land> heroPosition){
     this->heroPosition=heroPosition;
+}
+
+void Player::setDeadHero(bool deadHero) {
+    this->deadHero = deadHero;
 }
 
 

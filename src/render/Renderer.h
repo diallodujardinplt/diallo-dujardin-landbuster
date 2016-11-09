@@ -35,6 +35,7 @@ namespace render {
     sf::RectangleShape waterRect;
     sf::RectangleShape portRect;
     sf::Texture headquartersMaskTexture;
+    sf::Texture heroTexture;
     // Operations
   public:
     ~Renderer ();
@@ -49,6 +50,7 @@ namespace render {
     void renderSoldiersNumber (sf::RenderWindow& window, state::Game& game, std::shared_ptr<state::Land> land, const std::vector<sf::Vector2u>& geometry);
     void renderLand (sf::RenderWindow& window, state::Game& game, std::shared_ptr<state::Land> land);
     void renderItem (sf::RenderWindow& window, state::Game& game, std::shared_ptr<state::Land> land, const std::vector<sf::Vector2u>& geometry);
+    void renderHero (sf::RenderWindow& window, state::Game& game, std::shared_ptr<state::Land> land, const std::vector<sf::Vector2u>& geometry);
     sf::Vector2u getMeanPos (state::Game& game, std::shared_ptr<state::Land> land, const std::vector<sf::Vector2u>& geometry, unsigned int offset);
     void renderGame (sf::RenderWindow& window);
     void renderUI (sf::RenderWindow& window);
