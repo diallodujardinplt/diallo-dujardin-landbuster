@@ -31,6 +31,7 @@ namespace render {
 		landTextures[state::LAND_COASTAL].loadFromFile("res/textures/coastal.jpg");
 		headquartersMaskTexture.loadFromFile("res/textures/headquarters_mask.png");
 		heroTexture.loadFromFile("res/textures/hero.png");
+		fortTexture.loadFromFile("res/textures/fort.png");
 	}
 
 	void Renderer::renderCell(sf::RenderWindow& window, state::Game& game, shared_ptr<state::Land> land, const vector<sf::Vector2u>& geometry, state::Cell& cell) {
@@ -223,6 +224,19 @@ namespace render {
 
 	}
 
+	void Renderer::renderFort(sf::RenderWindow& window, state::Game& game, shared_ptr<state::Land> land, const vector<sf::Vector2u>& geometry) {
+
+		if (!land->hasFort()) return;
+
+		sf::Vector2u mean = getMeanPos(game, land, geometry, 9);
+		sf::Vector2f pos(CELL_WIDTH * mean.x, CELL_HEIGHT * mean.y);
+		sf::Sprite fortSprite;
+		fortSprite.setPosition(pos);
+		fortSprite.setTexture(fortTexture);
+		window.draw(fortSprite);
+
+	}
+
 	void Renderer::renderLand(sf::RenderWindow& window, state::Game& game, shared_ptr<state::Land> land) {
 
 		if (land->getType() == state::LAND_NONE) return;
@@ -240,6 +254,7 @@ namespace render {
 			renderSoldiersNumber(window, game, land, geometry);
 			renderItem(window, game, land, geometry);
 			renderHero(window, game, land, geometry);
+			renderFort(window, game, land, geometry);
 		}
 
 	}

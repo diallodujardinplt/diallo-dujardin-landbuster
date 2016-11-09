@@ -179,9 +179,11 @@ namespace state {
 		float fortProbability = 0.1;
 		for (vector< shared_ptr<Land> >::iterator land_it = lands.begin(); land_it != lands.end(); ++land_it) {
 			shared_ptr<Land> land = *land_it;
-			uniform_int_distribution<> rndFort(0, 100);
-			unsigned int fort = rndFort(gen);
-			if((float) fort / 100.0 < fortProbability) land->setFort(true);
+			if (land->getType() != LAND_WATER) {
+				uniform_int_distribution<> rndFort(0, 100);
+				unsigned int fort = rndFort(gen);
+				if((float) fort / 100.0 < fortProbability) land->setFort(true);
+			}
 		}
 
 	}

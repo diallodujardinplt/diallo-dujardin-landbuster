@@ -36,12 +36,14 @@ namespace render {
     sf::RectangleShape portRect;
     sf::Texture headquartersMaskTexture;
     sf::Texture heroTexture;
+    sf::Texture fortTexture;
     // Operations
   public:
     ~Renderer ();
     static Renderer& getInstance ();
     void render (sf::RenderWindow& window);
     void init ();
+    void renderFort (sf::RenderWindow& window, state::Game& game, std::shared_ptr<state::Land> land, const std::vector<sf::Vector2u>& geometry);
   private:
     Renderer ();
     void loadTextures ();
