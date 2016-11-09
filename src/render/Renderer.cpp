@@ -258,14 +258,25 @@ namespace render {
 		window.draw(plActiveBg);
 
 		sf::Vector2f skipPos(CELL_WIDTH * GRID_WIDTH + 30, CELL_HEIGHT * GRID_HEIGHT - 60);
-		sf::RectangleShape btnSkip(sf::Vector2f(150, 40));
+		sf::RectangleShape btnSkip(sf::Vector2f(150, 30));
 		btnSkip.setPosition(skipPos);
 		btnSkip.setFillColor(sf::Color(255, 255, 255));
 		window.draw(btnSkip);
 		text.setPosition(sf::Vector2f(skipPos.x, skipPos.y + 10));
-		text.setCharacterSize(20);
+		text.setCharacterSize(15);
 		text.setColor(sf::Color(0,0,0));
 		text.setString("End turn");
+		window.draw(text);
+
+		sf::Vector2f abandonPos(CELL_WIDTH * GRID_WIDTH + 30, CELL_HEIGHT * GRID_HEIGHT - 30);
+		sf::RectangleShape btnAbandon(sf::Vector2f(150, 30));
+		btnAbandon.setPosition(abandonPos);
+		btnAbandon.setFillColor(sf::Color(255, 0, 0));
+		window.draw(btnAbandon);
+		text.setPosition(sf::Vector2f(abandonPos.x, abandonPos.y + 10));
+		text.setCharacterSize(15);
+		text.setColor(sf::Color(0, 0, 0));
+		text.setString("Abandon");
 		window.draw(text);
 
 		for (unsigned int i = 0; i < game.getPlayers().size(); ++i) {

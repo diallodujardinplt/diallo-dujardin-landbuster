@@ -137,9 +137,15 @@ namespace render {
 
 				}
 			}
-			else if(mousePos.x >= CELL_WIDTH * GRID_WIDTH + 30 && mousePos.x < CELL_WIDTH * GRID_WIDTH + 30 + 150 && mousePos.y >= CELL_HEIGHT * GRID_HEIGHT - 60 && mousePos.y < CELL_HEIGHT * GRID_HEIGHT - 60 + 40) {
+			else if(mousePos.x >= CELL_WIDTH * GRID_WIDTH + 30 && mousePos.x < CELL_WIDTH * GRID_WIDTH + 30 + 150 && mousePos.y >= CELL_HEIGHT * GRID_HEIGHT - 60 && mousePos.y < CELL_HEIGHT * GRID_HEIGHT - 60 + 30) {
 				if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && clickClock.getElapsedTime().asMilliseconds() >= 500) {
 					sendCommand(make_shared<engine::ActionCommand>(engine::COMMAND_SKIP_ROUND, player->getId()));
+					clickClock.restart();
+				}
+			}
+			else if(mousePos.x >= CELL_WIDTH * GRID_WIDTH + 30 && mousePos.x < CELL_WIDTH * GRID_WIDTH + 30 + 150 && mousePos.y >= CELL_HEIGHT * GRID_HEIGHT - 30 && mousePos.y < CELL_HEIGHT * GRID_HEIGHT - 30 + 30) {
+				if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && clickClock.getElapsedTime().asMilliseconds() >= 500) {
+					sendCommand(make_shared<engine::ActionCommand>(engine::COMMAND_ABANDON, player->getId()));
 					clickClock.restart();
 				}
 			}
