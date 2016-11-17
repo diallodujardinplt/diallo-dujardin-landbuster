@@ -18,6 +18,20 @@ int main() {
 	client.setPlayer(0);
 	client.run();
 
+/*	//sf::RenderWindow window(sf::VideoMode(GRID_WIDTH * CELL_WIDTH + 200, GRID_HEIGHT * CELL_HEIGHT, 32), "Land Buster");
+*	sf::Clock framerateClock, clickClock;
+*	while (window.isOpen()) {
+*		DumbAI.run(3);
+*		window.clear();
+*
+*		renderer.render(window);
+*
+*		window.display();
+*
+*		framerateClock.restart();
+*	} 
+*/
+	
 	return 0;
 }
 
