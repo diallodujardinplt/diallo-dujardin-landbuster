@@ -43,7 +43,7 @@ namespace engine {
 			int soldiers = landTwo->getSoldiersNumber() - (game.getAttack(landOne, landTwo) - game.getDefense(landTwo)) * chance_factor;
 			if(soldiers > 0) landTwo->setSoldiersNumber(soldiers);
 			else {
-				landTwo->setSoldiersNumber(0);
+				/*landTwo->setSoldiersNumber(0);
 				if(landTwo->getOwner()->getHeroPosition()==landTwo) {
 					landTwo->getOwner()->setHeroPosition(nullptr);
 					for(auto l : game.getLands()) {
@@ -52,13 +52,19 @@ namespace engine {
 					}
 				}
 				if(landTwo->getOwner()->getHeadquarters()==landTwo) Engine::getInstance().defeat(landTwo->getOwner(), player);
-				else landTwo->setOwner(player);
+				else landTwo->setOwner(player);*/
+				Engine::getInstance().acquireLand(landTwo, player);
 			}
 		}
 		else {
-			landTwo->setOwner(player);
+			//landTwo->setOwner(player);
+			Engine::getInstance().acquireLand(landTwo, player);
 		}
 		game.setCurrentStep(state::STEP_MOVING);
+	}
+
+	void AttackCommand::rollback(state::Game& game) {
+		
 	}
 
 	vector<Interaction> AttackCommand::getInteractions() const {

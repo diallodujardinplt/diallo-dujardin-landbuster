@@ -41,6 +41,10 @@ namespace engine {
 		game.nextPlayer();
 	}
 
+	void MoveCommand::rollback(state::Game& game) {
+		
+	}
+
 	Interaction MoveCommand::getInteraction() const {
 		return interaction;
 	}

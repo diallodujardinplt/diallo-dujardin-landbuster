@@ -36,6 +36,7 @@ namespace engine {
     Interaction getInteraction () const;
     float getRatio () const;
     bool getHero () const;
+    void rollback (state::Game& game);
   };
 
 };

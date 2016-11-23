@@ -1,4 +1,4 @@
-#include "ai.hpp"
+#include "DumbAI.hpp"
 
 /**
  * DumbAI Class
@@ -9,23 +9,21 @@
 using namespace ai;
 using namespace engine;
 using namespace state;
+using namespace std;
 
 
-DumbAI::DumbAI(shared_ptr<state::Player> player):AI() {
-	this->player = player;
-}
+DumbAI::DumbAI(shared_ptr<state::Player> player) : AI(player) {}
 
+void DumbAI::run(state::Game& game){
 
-void DumbAI::run(state::Game& game, unsigned int playerId){
+		unsigned int playerId = player->getId();
 
-		while (window.isOpen()) {
-			
 			//shared_ptr<state::Land> targetId =  state::land::getId(); 
 
 			//sf::Vector2i aiPosition;
 			//aiPosition.x = 
 			//aiPosition.y = 
-			shared_ptr<state::Land> targetId = game.getCell(rand() % 5 / CELL_WIDTH, rand() % 5 / CELL_HEIGHT).land;
+			unsigned int targetId = game.getCell(rand() % 5 / CELL_WIDTH, rand() % 5 / CELL_HEIGHT).land->getId();
 
 				//setSelectedInfoLand(target); 
 				
@@ -42,6 +40,5 @@ void DumbAI::run(state::Game& game, unsigned int playerId){
 				//attacks.push_back(engine::Interaction(, targetId);
 				engine::Engine::getInstance().pushCommand(make_shared<engine::AttackCommand>(playerId, attacks));
 			
-		}
 
 }	

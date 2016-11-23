@@ -35,6 +35,7 @@ namespace engine {
     bool isAllowed (state::Game& game) const;
     void execute (state::Game& game);
     std::vector<Interaction> getInteractions () const;
+    void rollback (state::Game& game);
   };
 
 };

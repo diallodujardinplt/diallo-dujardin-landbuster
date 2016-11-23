@@ -9,10 +9,12 @@ namespace state {
 };
 namespace engine {
   class Command;
+  class Engine;
 }
 
 #include "CommandType.h"
 #include "Command.h"
+#include "Engine.h"
 
 namespace engine {
 
@@ -28,6 +30,7 @@ namespace engine {
     bool isAllowed (state::Game& game) const;
     void execute (state::Game& game);
     unsigned int getLandId () const;
+    void rollback (state::Game& game);
   };
 
 };

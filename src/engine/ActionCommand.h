@@ -26,6 +26,7 @@ namespace engine {
     std::string toString () const;
     bool isAllowed (state::Game& game) const;
     void execute (state::Game& game);
+    void rollback (state::Game& game);
   };
 
 };

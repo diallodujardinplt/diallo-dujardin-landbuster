@@ -32,8 +32,7 @@ namespace engine {
 				return true;
 				break;
 			case COMMAND_USE_ITEM:
-				//TODO
-				return false;
+				return true;
 				break;
 			default:
 				return false;
@@ -53,12 +52,17 @@ namespace engine {
 				game.nextPlayer();
 				break;
 			case COMMAND_USE_ITEM:
-				//TODO.
+				Engine::getInstance().executeItem(player->getStoredItem(), player);
+				player->setStoredItem(state::ITEM_NONE);
 				break;
 			default:
 				return;
 				break;
 		}
+	}
+
+	void ActionCommand::rollback(state::Game& game) {
+		
 	}
 
 }

@@ -28,6 +28,7 @@ namespace engine {
     /// 																																														
     /// @param game		(???) 
     virtual void execute (state::Game& game) = 0;
+    virtual void rollback (state::Game& game) = 0;
     CommandType getType () const;
     unsigned int getPlayerId () const;
   };

@@ -544,9 +544,12 @@ namespace state {
     }
 
     void Game::nextPlayer() {
-    	currentPlayer = (currentPlayer==players.size()-1)?0:currentPlayer+1;
     	setCurrentStep(STEP_REINFORCEMENT);
-    	if(!players[currentPlayer]->isAlive()) nextPlayer();
+    	if(activatedItem != ITEM_PLAY_TWICE) {
+    		currentPlayer = (currentPlayer==players.size()-1)?0:currentPlayer+1;
+    		if(!players[currentPlayer]->isAlive()) nextPlayer();
+    	}
+    	activatedItem = ITEM_NONE;
     }
 
     Step Game::getCurrentStep () const {

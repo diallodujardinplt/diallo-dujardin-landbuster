@@ -11,6 +11,7 @@ namespace engine {
 };
 namespace state {
   class Player;
+  class Land;
 };
 namespace engine {
   class MoveCommand;
@@ -24,6 +25,8 @@ namespace state {
 
 #include "Command.h"
 #include "state/Player.h"
+#include "state/Land.h"
+#include "state/ItemType.h"
 #include "MoveCommand.h"
 #include "AttackCommand.h"
 #include "ChoiceCommand.h"
@@ -46,6 +49,9 @@ namespace engine {
     void flushCommands ();
     bool isAllowed (std::shared_ptr<Command> command);
     void defeat (std::shared_ptr<state::Player> player, std::shared_ptr<state::Player> killer);
+    void acquireLand (std::shared_ptr<state::Land> land, std::shared_ptr<state::Player> newOwner);
+    void acquireItem (state::ItemType item, std::shared_ptr<state::Player> player);
+    void executeItem (state::ItemType item, std::shared_ptr<state::Player> player);
   private:
     Engine ();
     void execute (std::shared_ptr<Command> command);

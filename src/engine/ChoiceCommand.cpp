@@ -49,8 +49,8 @@ namespace engine {
 
 		switch(type) {
 			case COMMAND_CHOOSE_HEADQUARTERS:
+				engine::Engine::getInstance().acquireLand(land, player);
 				player->setHeadquarters(land);
-				land->setOwner(player);
 				game.nextPlayer();
 				break;
 			case COMMAND_CHOOSE_REINFORCEMENT: {
@@ -71,6 +71,10 @@ namespace engine {
 				return;
 				break;
 		}
+	}
+
+	void ChoiceCommand::rollback(state::Game& game) {
+		
 	}
 
 	unsigned int ChoiceCommand::getLandId() const {
