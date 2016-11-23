@@ -21,6 +21,7 @@ namespace engine {
   protected:
     CommandType type;
     unsigned int playerId;
+    bool executed;
     // Operations
   public:
     virtual std::string toString () const = 0;

@@ -27,6 +27,7 @@ namespace engine {
     Interaction interaction;
     float ratio;
     bool hero;
+    unsigned int executedSoldiers;
     // Operations
   public:
     MoveCommand (unsigned int playerId, Interaction interaction, float ratio, bool hero);
