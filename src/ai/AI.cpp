@@ -4,8 +4,8 @@ using namespace std;
 
 namespace ai {
 
-	AI::AI(shared_ptr<state::Player> player) {
-		this->player = player;
+	AI::AI(unsigned int playerId) {
+		this->playerId = playerId;
 	}
 
 	vector<shared_ptr<engine::Command>> AI::getPossibilities(shared_ptr<state::Game> game, unsigned int playerId) {

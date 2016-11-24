@@ -12,7 +12,7 @@ using namespace state;
 using namespace std;
 
 
-DumbAI::DumbAI(shared_ptr<state::Player> player) : AI(player) {}
+DumbAI::DumbAI(unsigned int playerId) : AI(playerId) {}
 
 void DumbAI::run(shared_ptr<state::Game> game, shared_ptr<engine::Engine> engine){
 

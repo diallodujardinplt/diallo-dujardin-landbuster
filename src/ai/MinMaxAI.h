@@ -5,7 +5,6 @@
 #include <memory>
 
 namespace state {
-  class Player;
   class Game;
 };
 namespace engine {
@@ -15,7 +14,6 @@ namespace ai {
   class AI;
 }
 
-#include "state/Player.h"
 #include "state/Game.h"
 #include "engine/Engine.h"
 #include "AI.h"
@@ -26,7 +24,7 @@ namespace ai {
   class MinMaxAI : public ai::AI {
     // Operations
   public:
-    MinMaxAI (std::shared_ptr<state::Player> player);
+    MinMaxAI (unsigned int playerId);
     void run (std::shared_ptr<state::Game> game, std::shared_ptr<engine::Engine> engine);
   protected:
     unsigned int min (std::shared_ptr<state::Game> game, std::shared_ptr<engine::Engine> engine, unsigned int depth);

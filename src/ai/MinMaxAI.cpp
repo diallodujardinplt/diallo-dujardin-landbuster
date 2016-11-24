@@ -4,7 +4,7 @@ using namespace std;
 
 namespace ai {
 
-	MinMaxAI::MinMaxAI(shared_ptr<state::Player> player) : AI(player) {}
+	MinMaxAI::MinMaxAI(unsigned int playerId) : AI(playerId) {}
 
 	void MinMaxAI::run(shared_ptr<state::Game> game, shared_ptr<engine::Engine> engine) {
 
@@ -13,7 +13,7 @@ namespace ai {
 		unsigned int maxVal = 0;
 		shared_ptr<engine::Command> bestShot = nullptr;
 
-		for(auto possibility : getPossibilities(game, player->getId())) {
+		for(auto possibility : getPossibilities(game, playerId)) {
 			shared_ptr<state::Game> possibleGame = make_shared<state::Game>(game);
 			shared_ptr<engine::Engine> possibleEngine = make_shared<engine::Engine>(possibleGame);
 			possibleEngine->pushCommand(possibility);
@@ -38,7 +38,7 @@ namespace ai {
 
 		unsigned int minVal = 0xFFFFFFFF;
 
-		for(auto possibility : getPossibilities(game, player->getId())) {
+		for(auto possibility : getPossibilities(game, game->getCurrentPlayer())) {
 			shared_ptr<state::Game> possibleGame = make_shared<state::Game>(game);
 			shared_ptr<engine::Engine> possibleEngine = make_shared<engine::Engine>(possibleGame);
 			possibleEngine->pushCommand(possibility);
@@ -61,7 +61,7 @@ namespace ai {
 
 		unsigned int maxVal = 0;
 
-		for(auto possibility : getPossibilities(game, player->getId())) {
+		for(auto possibility : getPossibilities(game, game->getCurrentPlayer())) {
 			shared_ptr<state::Game> possibleGame = make_shared<state::Game>(game);
 			shared_ptr<engine::Engine> possibleEngine = make_shared<engine::Engine>(possibleGame);
 			possibleEngine->pushCommand(possibility);
@@ -78,7 +78,7 @@ namespace ai {
 
 	unsigned int MinMaxAI::eval(shared_ptr<state::Game> game, unsigned int distance) {
 		if (game->isFinished()) {
-			if (game->getPlayers()[player->getId()]->isAlive()) {
+			if (game->getPlayers()[playerId]->isAlive()) {
 				return 0xFFFFFF - distance;
 			}
 			else {
@@ -87,12 +87,12 @@ namespace ai {
 		}
 
 		unsigned int portsCount = 0;
-		for(auto land : game->getPlayerLands(player->getId())) {
+		for(auto land : game->getPlayerLands(playerId)) {
 			if (land->hasPorts())
 				portsCount++;
 		}
 
-		return game->getSoldiersCount(game->getPlayers()[player->getId()]) + 5 * portsCount;
+		return game->getSoldiersCount(game->getPlayers()[playerId]) + 5 * portsCount;
 	}
 
 }

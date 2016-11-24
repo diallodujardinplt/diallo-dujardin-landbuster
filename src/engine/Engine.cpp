@@ -19,6 +19,9 @@ namespace engine {
 			if(isAllowed(cmd))
 				execute(cmd);
 		}
+		if(aiPlayers.count(this->game->getCurrentPlayer())) {
+			aiPlayers[this->game->getCurrentPlayer()]->run(this->game, shared_ptr<Engine>(this));
+		}
 	}
 
 	bool Engine::isAllowed(shared_ptr<Command> command) {
@@ -61,6 +64,10 @@ namespace engine {
 		else if(command->getType() == COMMAND_MOVE) {
 			return (static_pointer_cast<MoveCommand>(command))->execute(game);
 		}
+	}
+
+	void Engine::registerAIPlayer(unsigned int playerId, shared_ptr<ai::AI> ai) {
+		aiPlayers[playerId] = ai;
 	}
 
 }

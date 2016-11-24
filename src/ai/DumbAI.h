@@ -5,7 +5,6 @@
 #include <memory>
 
 namespace state {
-  class Player;
   class Game;
 };
 namespace engine {
@@ -15,7 +14,6 @@ namespace ai {
   class AI;
 }
 
-#include "state/Player.h"
 #include "state/Game.h"
 #include "engine/Engine.h"
 #include "AI.h"
@@ -26,7 +24,7 @@ namespace ai {
   class DumbAI : public ai::AI {
     // Operations
   public:
-    DumbAI (std::shared_ptr<state::Player> player);
+    DumbAI (unsigned int playerId);
     virtual void  run (std::shared_ptr<state::Game> game, std::shared_ptr<engine::Engine> engine);
   };
 

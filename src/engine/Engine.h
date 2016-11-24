@@ -4,12 +4,18 @@
 
 #include <queue>
 #include <memory>
+#include <map>
 
 namespace state {
   class Game;
 };
 namespace engine {
   class Command;
+};
+namespace ai {
+  class AI;
+};
+namespace engine {
   class MoveCommand;
   class AttackCommand;
   class ChoiceCommand;
@@ -18,6 +24,7 @@ namespace engine {
 
 #include "state/Game.h"
 #include "Command.h"
+#include "ai/AI.h"
 #include "MoveCommand.h"
 #include "AttackCommand.h"
 #include "ChoiceCommand.h"
@@ -32,12 +39,14 @@ namespace engine {
   private:
     std::queue< std::shared_ptr<Command> > commandQueue;
     std::shared_ptr<state::Game> game;
+    std::map<unsigned int, std::shared_ptr<ai::AI>> aiPlayers;
     // Operations
   public:
     Engine (std::shared_ptr<state::Game> game);
     void pushCommand (std::shared_ptr<Command> command);
     void flushCommands ();
     bool isAllowed (std::shared_ptr<Command> command);
+    void registerAIPlayer (unsigned int playerId, std::shared_ptr<ai::AI> ai);
   private:
     void execute (std::shared_ptr<Command> command);
   };
