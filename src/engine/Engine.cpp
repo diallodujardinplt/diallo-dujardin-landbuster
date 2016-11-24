@@ -20,7 +20,7 @@ namespace engine {
 				execute(cmd);
 		}
 		if(aiPlayers.count(this->game->getCurrentPlayer())) {
-			aiPlayers[this->game->getCurrentPlayer()]->run(this->game, shared_ptr<Engine>(this));
+			execute(aiPlayers[this->game->getCurrentPlayer()]->run(this->game));
 		}
 	}
 
@@ -48,7 +48,7 @@ namespace engine {
 	void Engine::execute(shared_ptr<Command> command) {
 		if(!isAllowed(command)) return;
 
-		cout << command->toString() << " [EXECUTED]" << endl;
+		//cout << command->toString() << " [EXECUTED]" << endl;
 
 		state::Game& game = *(this->game);
 

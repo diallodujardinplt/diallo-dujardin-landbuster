@@ -14,7 +14,7 @@ using namespace std;
 
 DumbAI::DumbAI(unsigned int playerId) : AI(playerId) {}
 
-void DumbAI::run(shared_ptr<state::Game> game, shared_ptr<engine::Engine> engine){
+shared_ptr<engine::Command> DumbAI::run(shared_ptr<state::Game> game){
 
 	/*	unsigned int playerId = player->getId();
 
@@ -40,5 +40,7 @@ void DumbAI::run(shared_ptr<state::Game> game, shared_ptr<engine::Engine> engine
 				//attacks.push_back(engine::Interaction(, targetId);
 				engine.pushCommand(make_shared<engine::AttackCommand>(playerId, attacks));
 			*/
+
+	return make_shared<engine::ChoiceCommand>(engine::COMMAND_CHOOSE_HEADQUARTERS, playerId, 0);
 
 }	

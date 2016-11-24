@@ -12928,13 +12928,13 @@
         <dia:point val="133.056,34.1535"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="133.031,34.1285;166.306,37.7785"/>
+        <dia:rectangle val="133.031,34.1285;161.686,37.7785"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="133.056,34.1535"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="33.225000000000001"/>
+        <dia:real val="28.605"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.5999999999999996"/>
@@ -13084,7 +13084,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#void #</dia:string>
+            <dia:string>#std::shared_ptr&lt;engine::Command&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -13111,23 +13111,6 @@
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#std::shared_ptr&lt;state::Game&gt;#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="value">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="comment">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="kind">
-                <dia:enum val="0"/>
-              </dia:attribute>
-            </dia:composite>
-            <dia:composite type="umlparameter">
-              <dia:attribute name="name">
-                <dia:string>#engine#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="type">
-                <dia:string>#std::shared_ptr&lt;engine::Engine&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13333,7 +13316,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#void#</dia:string>
+            <dia:string>#std::shared_ptr&lt;engine::Command&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -13360,23 +13343,6 @@
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#std::shared_ptr&lt;state::Game&gt;#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="value">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="comment">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="kind">
-                <dia:enum val="0"/>
-              </dia:attribute>
-            </dia:composite>
-            <dia:composite type="umlparameter">
-              <dia:attribute name="name">
-                <dia:string>#engine#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="type">
-                <dia:string>#std::shared_ptr&lt;engine::Engine&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13467,7 +13433,7 @@
         <dia:point val="158.005,30.2746"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="149.619,30.2246;158.855,34.1781"/>
+        <dia:rectangle val="147.309,30.2246;158.855,34.1781"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13475,8 +13441,8 @@
       <dia:attribute name="orth_points">
         <dia:point val="158.005,30.2746"/>
         <dia:point val="158.005,32.6013"/>
-        <dia:point val="149.669,32.6013"/>
-        <dia:point val="149.669,34.1281"/>
+        <dia:point val="147.359,32.6013"/>
+        <dia:point val="147.359,34.1281"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -13642,13 +13608,13 @@
         <dia:point val="136.088,43.7963"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="136.038,43.7463;168.978,52.2463"/>
+        <dia:rectangle val="136.038,43.7463;166.668,52.2463"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="136.088,43.7963"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.839999999999996"/>
+        <dia:real val="30.530000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="8.3999999999999986"/>
@@ -13798,7 +13764,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#void#</dia:string>
+            <dia:string>#std::shared_ptr&lt;engine::Command&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -13825,23 +13791,6 @@
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#std::shared_ptr&lt;state::Game&gt;#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="value">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="comment">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="kind">
-                <dia:enum val="0"/>
-              </dia:attribute>
-            </dia:composite>
-            <dia:composite type="umlparameter">
-              <dia:attribute name="name">
-                <dia:string>#engine#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="type">
-                <dia:string>#std::shared_ptr&lt;engine::Engine&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14096,7 +14045,7 @@
         <dia:point val="158.005,30.2746"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="152.458,30.2246;158.855,43.796"/>
+        <dia:rectangle val="151.303,30.2246;158.855,43.796"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -14104,8 +14053,8 @@
       <dia:attribute name="orth_points">
         <dia:point val="158.005,30.2746"/>
         <dia:point val="158.005,37.4103"/>
-        <dia:point val="152.508,37.4103"/>
-        <dia:point val="152.508,43.746"/>
+        <dia:point val="151.353,37.4103"/>
+        <dia:point val="151.353,43.746"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

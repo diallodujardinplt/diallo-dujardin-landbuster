@@ -16,6 +16,7 @@
 #include <queue>
 #include <unordered_set>
 #include <stack>
+#include <thread>
 
 #define GRID_WIDTH 128
 #define GRID_HEIGHT 128
