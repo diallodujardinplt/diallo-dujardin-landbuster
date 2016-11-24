@@ -86,7 +86,13 @@ namespace ai {
 			}
 		}
 
-		return game->getSoldiersCount(game->getPlayers()[player->getId()]);
+		unsigned int portsCount = 0;
+		for(auto land : game->getPlayerLands(player->getId())) {
+			if (land->hasPorts())
+				portsCount++;
+		}
+
+		return game->getSoldiersCount(game->getPlayers()[player->getId()]) + 5 * portsCount;
 	}
 
 }
