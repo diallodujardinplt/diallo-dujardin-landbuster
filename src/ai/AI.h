@@ -13,6 +13,7 @@ namespace engine {
 }
 
 #include "state/Player.h"
+#include "state/Game.h"
 #include "engine/Engine.h"
 
 namespace ai {
@@ -26,7 +27,7 @@ namespace ai {
     // Operations
   public:
     AI (std::shared_ptr<state::Player> player);
-    virtual void run (state::Game&  game, engine::Engine& engine) = 0;
+    virtual void run (std::shared_ptr<state::Game> game, std::shared_ptr<engine::Engine> engine) = 0;
   };
 
 };

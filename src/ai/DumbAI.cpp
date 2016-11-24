@@ -14,9 +14,9 @@ using namespace std;
 
 DumbAI::DumbAI(shared_ptr<state::Player> player) : AI(player) {}
 
-void DumbAI::run(state::Game& game, engine::Engine& engine){
+void DumbAI::run(shared_ptr<state::Game> game, shared_ptr<engine::Engine> engine){
 
-		unsigned int playerId = player->getId();
+	/*	unsigned int playerId = player->getId();
 
 			//shared_ptr<state::Land> targetId =  state::land::getId(); 
 
@@ -39,6 +39,6 @@ void DumbAI::run(state::Game& game, engine::Engine& engine){
 				vector<engine::Interaction> attacks;
 				//attacks.push_back(engine::Interaction(, targetId);
 				engine.pushCommand(make_shared<engine::AttackCommand>(playerId, attacks));
-			
+			*/
 
 }	
