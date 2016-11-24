@@ -3,12 +3,18 @@
 #define ENGINE__COMMAND__H
 
 #include <string>
+#include <memory>
 
 namespace state {
   class Game;
+  class Player;
+  class Land;
 }
 
 #include "CommandType.h"
+#include "state/Player.h"
+#include "state/Land.h"
+#include "state/ItemType.h"
 #include "state/Game.h"
 
 namespace engine {
@@ -32,6 +38,15 @@ namespace engine {
     virtual void rollback (state::Game& game) = 0;
     CommandType getType () const;
     unsigned int getPlayerId () const;
+  protected:
+    void defeat (state::Game& game, std::shared_ptr<state::Player> player, std::shared_ptr<state::Player> killer);
+    void rollbackDefeat (state::Game& game, std::shared_ptr<state::Player> player, std::shared_ptr<state::Player> killer);
+    void acquireLand (state::Game& game, std::shared_ptr<state::Land> land, std::shared_ptr<state::Player> newOwner);
+    void rollbackAcquireLand (state::Game& game, std::shared_ptr<state::Land> land, std::shared_ptr<state::Player> newOwner);
+    void acquireItem (state::Game& game, state::ItemType item, std::shared_ptr<state::Player> player);
+    void rollbackAcquireItem (state::Game& game, state::ItemType item, std::shared_ptr<state::Player> player);
+    void executeItem (state::Game& game, state::ItemType item, std::shared_ptr<state::Player> player);
+    void rollbackExecuteItem (state::Game& game, state::ItemType item, std::shared_ptr<state::Player> player);
   };
 
 };

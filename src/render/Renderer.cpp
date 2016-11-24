@@ -259,9 +259,7 @@ namespace render {
 
 	}
 
-	void Renderer::renderGame(sf::RenderWindow& window) {
-
-		state::Game& game = state::Game::getInstance();
+	void Renderer::renderGame(sf::RenderWindow& window, state::Game& game) {
 
 		vector< shared_ptr<state::Land> > lands = game.getLands();
 		if (lands.begin() == lands.end()) return;
@@ -274,9 +272,8 @@ namespace render {
 
 	}
 
-	void Renderer::renderUI(sf::RenderWindow& window) {
+	void Renderer::renderUI(sf::RenderWindow& window, state::Game& game) {
 
-		state::Game& game = state::Game::getInstance();
 		Client& client = Client::getInstance();
 
 		sf::Text text;
@@ -405,10 +402,10 @@ namespace render {
 
 	}
 
-	void Renderer::render(sf::RenderWindow& window) {
+	void Renderer::render(sf::RenderWindow& window, state::Game& game) {
 
-		renderGame(window);
-		renderUI(window);
+		renderGame(window, game);
+		renderUI(window, game);
 
 	}
 

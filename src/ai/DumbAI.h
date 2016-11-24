@@ -8,6 +8,9 @@ namespace state {
   class Player;
   class Game;
 };
+namespace engine {
+  class Engine;
+};
 namespace ai {
   class AI;
 }
@@ -22,7 +25,7 @@ namespace ai {
     // Operations
   public:
     DumbAI (std::shared_ptr<state::Player> player);
-    virtual void  run (state::Game&  game);
+    virtual void  run (state::Game&  game, engine::Engine& engine);
   };
 
 };

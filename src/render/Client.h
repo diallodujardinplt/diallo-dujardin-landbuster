@@ -11,12 +11,12 @@ namespace state {
 namespace render {
   class Client;
 };
-namespace engine {
-  class Command;
-  class Engine;
-};
 namespace state {
   class Game;
+};
+namespace engine {
+  class Engine;
+  class Command;
 };
 namespace render {
   class Renderer;
@@ -24,8 +24,8 @@ namespace render {
 
 #include "state/Player.h"
 #include "state/Land.h"
-#include "engine/Command.h"
 #include "engine/Engine.h"
+#include "engine/Command.h"
 #include "state/Game.h"
 #include "Renderer.h"
 
@@ -44,7 +44,7 @@ namespace render {
   public:
     ~Client ();
     static Client& getInstance ();
-    void run ();
+    void run (state::Game& game, std::shared_ptr<engine::Engine> engine);
     std::shared_ptr<state::Player> getPlayer () const;
     void setPlayer (std::shared_ptr<state::Player> player);
     std::shared_ptr<state::Land> getSelectedInfoLand () const;
@@ -54,7 +54,7 @@ namespace render {
     bool getDebugMode () const;
   private:
     Client ();
-    void sendCommand (std::shared_ptr<engine::Command> command);
+    void sendCommand (std::shared_ptr<engine::Engine> engine, std::shared_ptr<engine::Command> command);
   };
 
 };

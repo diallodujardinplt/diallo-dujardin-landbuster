@@ -49,7 +49,7 @@ namespace engine {
 
 		switch(type) {
 			case COMMAND_CHOOSE_HEADQUARTERS:
-				engine::Engine::getInstance().acquireLand(land, player);
+				acquireLand(game, land, player);
 				player->setHeadquarters(land);
 				game.nextPlayer();
 				break;
@@ -71,10 +71,42 @@ namespace engine {
 				return;
 				break;
 		}
+
+		executed = true;
 	}
 
 	void ChoiceCommand::rollback(state::Game& game) {
-		
+		if (executed) {
+			shared_ptr<state::Player> player = game.getPlayers()[playerId];
+			shared_ptr<state::Land> land = (landId >= 0 && landId < (int) game.getLands().size())?game.getLands()[landId] : nullptr;
+
+			switch(type) {
+				case COMMAND_CHOOSE_HEADQUARTERS:
+					rollbackAcquireLand(game, land, player);
+					player->setHeadquarters(nullptr);
+					//game.nextPlayer();
+					break;
+				/*case COMMAND_CHOOSE_REINFORCEMENT: {
+					unsigned int reinforcement = 0;
+					for(auto _land : game.getLands()) {
+						if (_land->getOwner() == player) reinforcement += 3;
+					}
+					if(reinforcement < 3) reinforcement = 3;
+					land->setSoldiersNumber(land->getSoldiersNumber() + reinforcement);
+					game.setCurrentStep(state::STEP_ACTION);
+					break;
+				}
+				case COMMAND_BUILD_PORT:
+					land->setPorts(true);
+					game.setCurrentStep(state::STEP_MOVING);
+					break;*/
+				default:
+					return;
+					break;
+			}
+
+			executed = true;
+		}
 	}
 
 	unsigned int ChoiceCommand::getLandId() const {

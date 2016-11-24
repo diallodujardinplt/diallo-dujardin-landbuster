@@ -51,11 +51,9 @@ namespace render {
 		selectedLand = land;
 	}
 
-	void Client::run() {
+	void Client::run(state::Game& game, shared_ptr<engine::Engine> engine) {
 
 		sf::RenderWindow window(sf::VideoMode(GRID_WIDTH * CELL_WIDTH + 200, GRID_HEIGHT * CELL_HEIGHT, 32), "Land Buster");
-
-		state::Game& game = state::Game::getInstance();
 
 		render::Renderer& renderer = render::Renderer::getInstance();
 		renderer.init();
@@ -84,10 +82,10 @@ namespace render {
 					cout << "click on land " << target->getId() << endl;
 
 					if (!player->getHeadquarters()) {
-						sendCommand(make_shared<engine::ChoiceCommand>(engine::COMMAND_CHOOSE_HEADQUARTERS, player->getId(), target->getId()));
+						sendCommand(engine, make_shared<engine::ChoiceCommand>(engine::COMMAND_CHOOSE_HEADQUARTERS, player->getId(), target->getId()));
 					}
 					else if (game.getCurrentStep()==state::STEP_REINFORCEMENT) {
-						sendCommand(make_shared<engine::ChoiceCommand>(engine::COMMAND_CHOOSE_REINFORCEMENT, player->getId(), target->getId()));
+						sendCommand(engine, make_shared<engine::ChoiceCommand>(engine::COMMAND_CHOOSE_REINFORCEMENT, player->getId(), target->getId()));
 					}
 					else if (game.getCurrentStep()==state::STEP_ACTION) {
 						if(!selectedLand) {
@@ -96,8 +94,8 @@ namespace render {
 						else {
 							if(selectedLand == target) {
 								shared_ptr<engine::ChoiceCommand> cmd = make_shared<engine::ChoiceCommand>(engine::COMMAND_BUILD_PORT, player->getId(), target->getId());
-								if(engine::Engine::getInstance().isAllowed(cmd)) {
-									sendCommand(cmd);
+								if(engine->isAllowed(cmd)) {
+									sendCommand(engine, cmd);
 									setSelectedLand(nullptr);
 								}
 							}
@@ -105,8 +103,8 @@ namespace render {
 								vector<engine::Interaction> attacks;
 								attacks.push_back(engine::Interaction(selectedLand->getId(), target->getId()));
 								shared_ptr<engine::AttackCommand> cmd = make_shared<engine::AttackCommand>(player->getId(), attacks);
-								if(engine::Engine::getInstance().isAllowed(cmd)) {
-									sendCommand(cmd);
+								if(engine->isAllowed(cmd)) {
+									sendCommand(engine, cmd);
 									setSelectedLand(nullptr);
 								}
 							}
@@ -118,8 +116,8 @@ namespace render {
 						}
 						else {
 							shared_ptr<engine::MoveCommand> cmd = make_shared<engine::MoveCommand>(player->getId(), engine::Interaction(selectedLand->getId(), target->getId()), 0.5, false);
-							if(engine::Engine::getInstance().isAllowed(cmd)) {
-								sendCommand(cmd);
+							if(engine->isAllowed(cmd)) {
+								sendCommand(engine, cmd);
 								setSelectedLand(nullptr);
 							}
 						}
@@ -139,24 +137,24 @@ namespace render {
 			}
 			else if(mousePos.x >= CELL_WIDTH * GRID_WIDTH + 30 && mousePos.x < CELL_WIDTH * GRID_WIDTH + 30 + 150 && mousePos.y >= CELL_HEIGHT * GRID_HEIGHT - 60 && mousePos.y < CELL_HEIGHT * GRID_HEIGHT - 60 + 30) {
 				if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && clickClock.getElapsedTime().asMilliseconds() >= 500) {
-					sendCommand(make_shared<engine::ActionCommand>(engine::COMMAND_SKIP_ROUND, player->getId()));
+					sendCommand(engine, make_shared<engine::ActionCommand>(engine::COMMAND_SKIP_ROUND, player->getId()));
 					clickClock.restart();
 				}
 			}
 			else if(mousePos.x >= CELL_WIDTH * GRID_WIDTH + 30 && mousePos.x < CELL_WIDTH * GRID_WIDTH + 30 + 150 && mousePos.y >= CELL_HEIGHT * GRID_HEIGHT - 30 && mousePos.y < CELL_HEIGHT * GRID_HEIGHT - 30 + 30) {
 				if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && clickClock.getElapsedTime().asMilliseconds() >= 500) {
-					sendCommand(make_shared<engine::ActionCommand>(engine::COMMAND_ABANDON, player->getId()));
+					sendCommand(engine, make_shared<engine::ActionCommand>(engine::COMMAND_ABANDON, player->getId()));
 					clickClock.restart();
 				}
 			}
 
 			sf::Time framerateElapsed = framerateClock.getElapsedTime();
 			if (framerateElapsed.asMilliseconds() > 30) {
-				engine::Engine::getInstance().flushCommands();
+				engine->flushCommands();
 
 				window.clear();
 				
-				renderer.render(window);
+				renderer.render(window, game);
 
 				window.display();
 
@@ -167,9 +165,9 @@ namespace render {
 
 	}
 
-	void Client::sendCommand(shared_ptr<engine::Command> command) {
+	void Client::sendCommand(shared_ptr<engine::Engine> engine, shared_ptr<engine::Command> command) {
 		cout << command->toString() << endl;
-		engine::Engine::getInstance().pushCommand(command);
+		engine->pushCommand(command);
 	}
 
 }

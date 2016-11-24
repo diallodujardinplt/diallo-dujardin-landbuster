@@ -26,7 +26,7 @@ namespace ai {
     // Operations
   public:
     AI (std::shared_ptr<state::Player> player);
-    virtual void run (state::Game&  game) = 0;
+    virtual void run (state::Game&  game, engine::Engine& engine) = 0;
   };
 
 };

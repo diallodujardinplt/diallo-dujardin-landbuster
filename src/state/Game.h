@@ -6,7 +6,6 @@
 #include <memory>
 
 namespace state {
-  class Game;
   class Cell;
   class Land;
   class Player;
@@ -34,8 +33,8 @@ namespace state {
     std::vector< std::vector<Cell> > cells;
     // Operations
   public:
+    Game ();
     ~Game ();
-    static Game& getInstance ();
     void init (unsigned int playersNumber);
     unsigned int getCurrentPlayer () const;
     void nextPlayer ();
@@ -53,7 +52,6 @@ namespace state {
     unsigned int getLandsCount (std::shared_ptr<Player> player) const;
     unsigned int getSoldiersCount (std::shared_ptr<Player> player) const;
   private:
-    Game ();
     std::vector<unsigned int> generateAreas (std::vector< std::vector<int> >& ncells);
     unsigned int util_total (std::vector<unsigned int>& v);
     unsigned int util_min (std::vector<unsigned int>& v);

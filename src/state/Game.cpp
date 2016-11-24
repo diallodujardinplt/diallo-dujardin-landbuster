@@ -14,11 +14,6 @@ namespace state {
 	Game::~Game() {
 	}
 
-	Game& Game::getInstance() {
-		static Game game;
-		return game;
-	}
-
 	void Game::init(unsigned int playersNumber) {
 
 		// Create players

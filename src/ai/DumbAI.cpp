@@ -14,7 +14,7 @@ using namespace std;
 
 DumbAI::DumbAI(shared_ptr<state::Player> player) : AI(player) {}
 
-void DumbAI::run(state::Game& game){
+void DumbAI::run(state::Game& game, engine::Engine& engine){
 
 		unsigned int playerId = player->getId();
 
@@ -27,18 +27,18 @@ void DumbAI::run(state::Game& game){
 
 				//setSelectedInfoLand(target); 
 				
-				engine::Engine::getInstance().pushCommand(make_shared<engine::ChoiceCommand>(engine::COMMAND_CHOOSE_HEADQUARTERS, playerId, targetId));
+				engine.pushCommand(make_shared<engine::ChoiceCommand>(engine::COMMAND_CHOOSE_HEADQUARTERS, playerId, targetId));
 			
-				engine::Engine::getInstance().pushCommand(make_shared<engine::ChoiceCommand>(engine::COMMAND_CHOOSE_REINFORCEMENT, playerId, targetId));
+				engine.pushCommand(make_shared<engine::ChoiceCommand>(engine::COMMAND_CHOOSE_REINFORCEMENT, playerId, targetId));
 				
-				engine::Engine::getInstance().pushCommand(make_shared<engine::ChoiceCommand>(engine::COMMAND_CHOOSE_REINFORCEMENT, playerId, targetId));
+				engine.pushCommand(make_shared<engine::ChoiceCommand>(engine::COMMAND_CHOOSE_REINFORCEMENT, playerId, targetId));
 
-				engine::Engine::getInstance().pushCommand(make_shared<engine::ChoiceCommand>(engine::COMMAND_BUILD_PORT, playerId, targetId));
+				engine.pushCommand(make_shared<engine::ChoiceCommand>(engine::COMMAND_BUILD_PORT, playerId, targetId));
 				
 				//pour faire une attaque
 				vector<engine::Interaction> attacks;
 				//attacks.push_back(engine::Interaction(, targetId);
-				engine::Engine::getInstance().pushCommand(make_shared<engine::AttackCommand>(playerId, attacks));
+				engine.pushCommand(make_shared<engine::AttackCommand>(playerId, attacks));
 			
 
 }	
