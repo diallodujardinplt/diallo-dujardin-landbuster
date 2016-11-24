@@ -2,8 +2,10 @@
 #ifndef ENGINE__COMMAND__H
 #define ENGINE__COMMAND__H
 
-#include <string>
+#include <vector>
+#include <stack>
 #include <memory>
+#include <string>
 
 namespace state {
   class Game;
@@ -28,6 +30,7 @@ namespace engine {
     CommandType type;
     unsigned int playerId;
     bool executed;
+    std::stack<std::vector<std::shared_ptr<state::Land>>> executedDefeatLands;
     // Operations
   public:
     virtual std::string toString () const = 0;

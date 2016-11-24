@@ -13,16 +13,23 @@ namespace engine {
     }
 
     void Command::defeat(state::Game& game, shared_ptr<state::Player> player, shared_ptr<state::Player> killer) {
+		vector<shared_ptr<state::Land>> lands;
 		player->setAlive(false);
 		for(auto land : game.getLands()) {
 			if(land->getOwner() == player) {
 				land->setOwner(killer);
+				lands.push_back(land);
 			}
 		}
+		executedDefeatLands.push(lands);
 	}
 
 	void Command::rollbackDefeat(state::Game& game, shared_ptr<state::Player> player, shared_ptr<state::Player> killer) {
-
+		for(auto land : executedDefeatLands.top()) {
+			land->setOwner(player);
+		}
+		player->setAlive(true);
+		executedDefeatLands.pop();
 	}
 
 	void Command::acquireLand(state::Game& game, shared_ptr<state::Land> land, shared_ptr<state::Player> newOwner) {
