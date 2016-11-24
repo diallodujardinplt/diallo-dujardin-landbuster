@@ -482,12 +482,12 @@ namespace state {
 		if(!land) return 0;
 		
 		unsigned int defense = land->getSoldiersNumber();
-		if(land->getOwner()->getHeroPosition()==land) defense += HERO_RATIO * getSoldiersCount(land->getOwner());
+		if(land->getOwner() && land->getOwner()->getHeroPosition()==land) defense += HERO_RATIO * getSoldiersCount(land->getOwner());
 		for(auto l : lands) {
 			ConnectionType connection = getConnection(land, l);
 			if(connection != CONNECTION_NONE && l->getOwner()==land->getOwner()) {
 				unsigned int defenseMore = l->getSoldiersNumber();
-				if(l->getOwner()->getHeroPosition()==l) defenseMore += HERO_RATIO * getSoldiersCount(l->getOwner());
+				if(l->getOwner() && l->getOwner()->getHeroPosition()==l) defenseMore += HERO_RATIO * getSoldiersCount(l->getOwner());
 				if(connection == CONNECTION_WATER) defenseMore *= WATER_POWER_RATIO;
 				defense += defenseMore;
 			}
