@@ -62,7 +62,7 @@ namespace state {
 		playersColors[4] = sf::Color(34,34,34);
 		playersColors[5] = sf::Color(255,0,255);
 
-		for (unsigned int i=0; i<6; ++i) {
+		for (unsigned int i=0; i<playersNumber; ++i) {
 			this->players.push_back(make_shared<Player>(players.size(), playersColors[i]));
 		}
 
