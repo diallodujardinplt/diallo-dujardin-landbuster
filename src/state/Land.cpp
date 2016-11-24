@@ -14,6 +14,18 @@ namespace state {
         itemLifetime = 0;
 	}
 
+    Land::Land(shared_ptr<Land> toCopy) {
+        id = toCopy->id;
+        geometry = toCopy->geometry;
+        soldiersNumber = toCopy->soldiersNumber;
+        owner = nullptr;
+        fort = toCopy->fort;
+        ports = toCopy->ports;
+        type = toCopy->type;
+        item = toCopy->item;
+        itemLifetime = toCopy->itemLifetime;
+    }
+
 	Land::~Land() {
 	}
 

@@ -11,6 +11,43 @@ namespace state {
 		}
 	}
 
+	Game::Game(shared_ptr<Game> toCopy) {
+		currentStep = toCopy->currentStep;
+		currentPlayer = toCopy->currentPlayer;
+		activatedItem = toCopy->activatedItem;
+		for (auto player : toCopy->players) {
+			players.push_back(make_shared<Player>(player));
+		}
+		for (auto land : toCopy->lands) {
+			lands.push_back(make_shared<Land>(land));
+		}
+		for (auto player : players) {
+			shared_ptr<Player> src = toCopy->getPlayers()[player->getId()];
+			if(src->getHeadquarters())
+				player->setHeadquarters(lands[src->getHeadquarters()->getId()]);
+			if(src->getHeroPosition())
+				player->setHeroPosition(lands[src->getHeroPosition()->getId()]);
+		}
+		for (auto land : lands) {
+			shared_ptr<Land> src = toCopy->getLands()[land->getId()];
+			if(src->getOwner())
+				land->setOwner(players[src->getOwner()->getId()]);
+			for (l : src->getNeighborLands()) {
+				land->addNeighborLand(lands[l->getId()]);
+			}
+		}
+		for (unsigned int x = 0; x < toCopy->cells.size(); x++) {
+			vector<Cell> row;
+			for (unsigned y = 0; y < toCopy->cells[x].size(); y++) {
+				Cell c;
+				c.position = toCopy->cells[x][y].position;
+				c.land = lands[toCopy->cells[x][y].land->getId()];
+				row.push_back(c);
+			}
+			cells.push_back(row);
+		}
+	}
+
 	Game::~Game() {
 	}
 
@@ -573,6 +610,23 @@ namespace state {
         
     Cell& Game::getCell(unsigned int x, unsigned int y) {
     	return cells[x][y];
+    }
+
+    bool Game::isFinished() const {
+    	unsigned int aliveCount = 0;
+    	for(auto player : players) {
+    		if(player->isAlive()) aliveCount++;
+    	}
+    	return aliveCount <= 1;
+    }
+
+    vector<shared_ptr<Land>> Game::getPlayerLands(unsigned int playerId) const {
+    	vector<shared_ptr<Land>> results;
+    	for(land : lands) {
+    		if(land->getOwner() && land->getOwner()->getId() == playerId)
+    			results.push_back(land);
+    	}
+    	return results;
     }
              
 

@@ -11,6 +11,16 @@ Player::Player(unsigned int id, sf::Color color) {
 	alive = true;
 }
 
+Player::Player(shared_ptr<Player> toCopy) {
+    id = toCopy->id;
+    headquarters = nullptr;
+    heroPosition = nullptr;
+    deadHero = toCopy->deadHero;
+    alive = toCopy->alive;
+    storedItem = toCopy->storedItem;
+    color = toCopy->color;
+}
+
     /*
      Getters
      */

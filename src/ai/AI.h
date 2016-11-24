@@ -3,6 +3,7 @@
 #define AI__AI__H
 
 #include <memory>
+#include <vector>
 
 namespace state {
   class Player;
@@ -28,6 +29,7 @@ namespace ai {
   public:
     AI (std::shared_ptr<state::Player> player);
     virtual void run (std::shared_ptr<state::Game> game, std::shared_ptr<engine::Engine> engine) = 0;
+    std::vector<std::shared_ptr<engine::Command>> getPossibilities (std::shared_ptr<state::Game> game, unsigned int playerId);
   };
 
 };

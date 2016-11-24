@@ -28,6 +28,10 @@ namespace ai {
   public:
     MinMaxAI (std::shared_ptr<state::Player> player);
     void run (std::shared_ptr<state::Game> game, std::shared_ptr<engine::Engine> engine);
+  protected:
+    unsigned int min (std::shared_ptr<state::Game> game, std::shared_ptr<engine::Engine> engine, unsigned int depth);
+    unsigned int max (std::shared_ptr<state::Game> game, std::shared_ptr<engine::Engine> engine, unsigned int depth);
+    unsigned int eval (std::shared_ptr<state::Game> game, unsigned int distance);
   };
 
 };

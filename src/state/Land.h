@@ -36,6 +36,7 @@ namespace state {
     // Operations
   public:
     Land (unsigned int id);
+    Land (std::shared_ptr<Land> toCopy);
     ~Land ();
     unsigned int getId () const;
     const std::vector<sf::Vector2u>& getGeometry () const;

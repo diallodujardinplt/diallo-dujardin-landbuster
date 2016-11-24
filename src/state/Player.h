@@ -6,6 +6,7 @@
 
 namespace state {
   class Land;
+  class Player;
 }
 
 #include "Land.h"
@@ -29,6 +30,7 @@ namespace state {
     // Operations
   public:
     Player (unsigned int id, sf::Color color);
+    Player (std::shared_ptr<Player> toCopy);
     ~Player ();
     unsigned int getId () const;
     std::shared_ptr<Land> getHeadquarters () const;
