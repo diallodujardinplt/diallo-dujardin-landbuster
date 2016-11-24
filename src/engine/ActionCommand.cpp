@@ -48,11 +48,11 @@ namespace engine {
 				game.nextPlayer();
 				break;
 			case COMMAND_ABANDON:
-				Engine::getInstance().defeat(player, nullptr);
+				defeat(game, player, nullptr);
 				game.nextPlayer();
 				break;
 			case COMMAND_USE_ITEM:
-				Engine::getInstance().executeItem(player->getStoredItem(), player);
+				executeItem(game, player->getStoredItem(), player);
 				player->setStoredItem(state::ITEM_NONE);
 				break;
 			default:

@@ -4,34 +4,31 @@
 
 #include <queue>
 #include <memory>
+#include <map>
 
+namespace state {
+  class Game;
+};
 namespace engine {
-  class Engine;
   class Command;
 };
-namespace state {
-  class Player;
-  class Land;
+namespace ai {
+  class AI;
 };
 namespace engine {
   class MoveCommand;
   class AttackCommand;
   class ChoiceCommand;
   class ActionCommand;
-};
-namespace state {
-  class Game;
 }
 
+#include "state/Game.h"
 #include "Command.h"
-#include "state/Player.h"
-#include "state/Land.h"
-#include "state/ItemType.h"
+#include "ai/AI.h"
 #include "MoveCommand.h"
 #include "AttackCommand.h"
 #include "ChoiceCommand.h"
 #include "ActionCommand.h"
-#include "state/Game.h"
 
 namespace engine {
 
@@ -41,19 +38,16 @@ namespace engine {
     // Attributes
   private:
     std::queue< std::shared_ptr<Command> > commandQueue;
+    std::shared_ptr<state::Game> game;
+    std::map<unsigned int, std::shared_ptr<ai::AI>> aiPlayers;
     // Operations
   public:
-    /// 	
-    static Engine& getInstance ();
+    Engine (std::shared_ptr<state::Game> game);
     void pushCommand (std::shared_ptr<Command> command);
     void flushCommands ();
     bool isAllowed (std::shared_ptr<Command> command);
-    void defeat (std::shared_ptr<state::Player> player, std::shared_ptr<state::Player> killer);
-    void acquireLand (std::shared_ptr<state::Land> land, std::shared_ptr<state::Player> newOwner);
-    void acquireItem (state::ItemType item, std::shared_ptr<state::Player> player);
-    void executeItem (state::ItemType item, std::shared_ptr<state::Player> player);
+    void registerAIPlayer (unsigned int playerId, std::shared_ptr<ai::AI> ai);
   private:
-    Engine ();
     void execute (std::shared_ptr<Command> command);
   };
 

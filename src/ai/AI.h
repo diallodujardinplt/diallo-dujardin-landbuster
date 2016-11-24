@@ -3,17 +3,21 @@
 #define AI__AI__H
 
 #include <memory>
+#include <vector>
 
 namespace state {
-  class Player;
   class Game;
 };
 namespace engine {
   class Engine;
+};
+namespace state {
+  class Player;
 }
 
-#include "state/Player.h"
+#include "state/Game.h"
 #include "engine/Engine.h"
+#include "state/Player.h"
 
 namespace ai {
 
@@ -22,11 +26,12 @@ namespace ai {
   class AI {
     // Attributes
   protected:
-    std::shared_ptr<state::Player> player;
+    unsigned int playerId;
     // Operations
   public:
-    AI (std::shared_ptr<state::Player> player);
-    virtual void run (state::Game&  game) = 0;
+    AI (unsigned int playerId);
+    virtual void run (std::shared_ptr<state::Game> game, std::shared_ptr<engine::Engine> engine) = 0;
+    std::vector<std::shared_ptr<engine::Command>> getPossibilities (std::shared_ptr<state::Game> game, unsigned int playerId);
   };
 
 };

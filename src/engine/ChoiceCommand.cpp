@@ -49,7 +49,7 @@ namespace engine {
 
 		switch(type) {
 			case COMMAND_CHOOSE_HEADQUARTERS:
-				engine::Engine::getInstance().acquireLand(land, player);
+				acquireLand(game, land, player);
 				player->setHeadquarters(land);
 				game.nextPlayer();
 				break;
@@ -71,15 +71,17 @@ namespace engine {
 				return;
 				break;
 		}
+
+		executed = true;
 	}
 
 	void ChoiceCommand::rollback(state::Game& game) {
+		if (executed) {
 		shared_ptr<state::Player> player = game.getPlayers()[playerId];
 		shared_ptr<state::Land> land = (landId >= 0 && landId < (int) game.getLands().size())?game.getLands()[landId] : nullptr;
-
 		switch(type) {
 			case COMMAND_CHOOSE_HEADQUARTERS:
-				engine::Engine::getInstance().acquireLand(land, player);
+					rollbackAcquireLand(game, land, player);
 				player->setHeadquarters(nullptr);
 				break;
 			case COMMAND_CHOOSE_REINFORCEMENT: {
@@ -97,16 +99,9 @@ namespace engine {
 			default:
 				return;
 				break;
-		if (executed) {
-			unsigned int soldiers = executedSoldiers;
-			landOne->setSoldiersNumber(landOne->getSoldiersNumber() + soldiers);
-			landTwo->setSoldiersNumber(landTwo->getSoldiersNumber() - soldiers);
-			if (hero)
-				player->setHeroPosition(landOne);
-			executed = false;
+			}
+			executed = true;
 		}
-	}
-		
 	}
 
 	unsigned int ChoiceCommand::getLandId() const {

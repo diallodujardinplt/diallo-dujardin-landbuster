@@ -1,5 +1,5 @@
-#ifndef AI_HPP
-#define AI_HPP
+#ifndef AI__AI__HPP
+#define AI__AI__HPP
 
 #include "../common.hpp"
 #include "AI.h"

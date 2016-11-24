@@ -34,8 +34,9 @@ namespace state {
     std::vector< std::vector<Cell> > cells;
     // Operations
   public:
+    Game ();
+    Game (std::shared_ptr<Game> toCopy);
     ~Game ();
-    static Game& getInstance ();
     void init (unsigned int playersNumber);
     unsigned int getCurrentPlayer () const;
     void nextPlayer ();
@@ -52,8 +53,9 @@ namespace state {
     ConnectionType getConnection (std::shared_ptr<Land> landOne, std::shared_ptr<Land> landTwo) const;
     unsigned int getLandsCount (std::shared_ptr<Player> player) const;
     unsigned int getSoldiersCount (std::shared_ptr<Player> player) const;
+    bool isFinished () const;
+    std::vector<std::shared_ptr<Land>> getPlayerLands (unsigned int playerId) const;
   private:
-    Game ();
     std::vector<unsigned int> generateAreas (std::vector< std::vector<int> >& ncells);
     unsigned int util_total (std::vector<unsigned int>& v);
     unsigned int util_min (std::vector<unsigned int>& v);

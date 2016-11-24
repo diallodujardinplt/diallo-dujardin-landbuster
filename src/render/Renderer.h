@@ -12,6 +12,7 @@ namespace render {
 };
 namespace state {
   class Game;
+  class Player;
   class Land;
   class Cell;
 };
@@ -19,6 +20,7 @@ namespace render {
   class Client;
 }
 
+#include "state/Player.h"
 #include "state/Land.h"
 #include "Client.h"
 #include "state/Game.h"
@@ -41,7 +43,7 @@ namespace render {
   public:
     ~Renderer ();
     static Renderer& getInstance ();
-    void render (sf::RenderWindow& window);
+    void render (sf::RenderWindow& window, state::Game& game, std::shared_ptr<state::Player> player);
     void init ();
     void renderFort (sf::RenderWindow& window, state::Game& game, std::shared_ptr<state::Land> land, const std::vector<sf::Vector2u>& geometry);
   private:
@@ -54,8 +56,8 @@ namespace render {
     void renderItem (sf::RenderWindow& window, state::Game& game, std::shared_ptr<state::Land> land, const std::vector<sf::Vector2u>& geometry);
     void renderHero (sf::RenderWindow& window, state::Game& game, std::shared_ptr<state::Land> land, const std::vector<sf::Vector2u>& geometry);
     sf::Vector2u getMeanPos (state::Game& game, std::shared_ptr<state::Land> land, const std::vector<sf::Vector2u>& geometry, unsigned int offset);
-    void renderGame (sf::RenderWindow& window);
-    void renderUI (sf::RenderWindow& window);
+    void renderGame (sf::RenderWindow& window, state::Game& game);
+    void renderUI (sf::RenderWindow& window, state::Game& game, std::shared_ptr<state::Player> player);
   };
 
 };

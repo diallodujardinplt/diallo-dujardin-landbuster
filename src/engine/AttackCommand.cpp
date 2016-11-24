@@ -53,12 +53,12 @@ namespace engine {
 				}
 				if(landTwo->getOwner()->getHeadquarters()==landTwo) Engine::getInstance().defeat(landTwo->getOwner(), player);
 				else landTwo->setOwner(player);*/
-				Engine::getInstance().acquireLand(landTwo, player);
+				acquireLand(game, landTwo, player);
 			}
 		}
 		else {
 			//landTwo->setOwner(player);
-			Engine::getInstance().acquireLand(landTwo, player);
+			acquireLand(game, landTwo, player);
 		}
 		game.setCurrentStep(state::STEP_MOVING);
 	}
