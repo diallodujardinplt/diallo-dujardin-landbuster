@@ -272,7 +272,7 @@ namespace render {
 
 	}
 
-	void Renderer::renderUI(sf::RenderWindow& window, state::Game& game) {
+	void Renderer::renderUI(sf::RenderWindow& window, state::Game& game, shared_ptr<state::Player> player) {
 
 		Client& client = Client::getInstance();
 
@@ -373,9 +373,9 @@ namespace render {
 			}
 			else {
 
-				if (land->getOwner() != client.getPlayer()) {
+				if (land->getOwner() != player) {
 
-					text.setColor(client.getPlayer()->getColor());
+					text.setColor(player->getColor());
 					text.setString("Attack");
 					window.draw(text);
 					text.move(0, 30);
@@ -402,10 +402,10 @@ namespace render {
 
 	}
 
-	void Renderer::render(sf::RenderWindow& window, state::Game& game) {
+	void Renderer::render(sf::RenderWindow& window, state::Game& game, shared_ptr<state::Player> player) {
 
 		renderGame(window, game);
-		renderUI(window, game);
+		renderUI(window, game, player);
 
 	}
 

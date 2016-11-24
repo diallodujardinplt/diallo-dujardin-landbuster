@@ -19,7 +19,7 @@ int main() {
 
 	shared_ptr<engine::Engine> engine=make_shared<engine::Engine>(game);
 
-	client.setPlayer(0);
+	client.addAttributedPlayer(0);
 	client.run(*game, engine);
 
 /*	//sf::RenderWindow window(sf::VideoMode(GRID_WIDTH * CELL_WIDTH + 200, GRID_HEIGHT * CELL_HEIGHT, 32), "Land Buster");
