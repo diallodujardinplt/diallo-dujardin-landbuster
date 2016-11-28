@@ -6,14 +6,20 @@ namespace ai {
 
 	MinMaxAI::MinMaxAI(unsigned int playerId) : AI(playerId) {}
 
-	void MinMaxAI::run(shared_ptr<state::Game> game, shared_ptr<engine::Engine> engine) {
+	shared_ptr<engine::Command> MinMaxAI::run(shared_ptr<state::Game> game) {
 
-		unsigned int depth = 8;
+		unsigned int depth = 1;
 
 		unsigned int maxVal = 0;
 		shared_ptr<engine::Command> bestShot = nullptr;
 
 		for(auto possibility : getPossibilities(game, playerId)) {
+			/*string s;
+			cin >> s;
+			if(s == "exit") exit(EXIT_SUCCESS);
+
+			cout << "possibility : " << possibility->toString() << endl;*/
+
 			shared_ptr<state::Game> possibleGame = make_shared<state::Game>(game);
 			shared_ptr<engine::Engine> possibleEngine = make_shared<engine::Engine>(possibleGame);
 			possibleEngine->pushCommand(possibility);
@@ -25,12 +31,15 @@ namespace ai {
 			}
 		}
 
-		engine->pushCommand(bestShot);
-		engine->flushCommands();
+		return bestShot;
 
 	}
 
 	unsigned int MinMaxAI::min(shared_ptr<state::Game> game, shared_ptr<engine::Engine> engine, unsigned int depth) {
+
+		/*string s;
+		cin >> s;
+		if(s == "exit") exit(EXIT_SUCCESS);*/
 
 		if (depth == 0 || game->isFinished()) {
 			return eval(game, depth);
@@ -54,6 +63,10 @@ namespace ai {
 	}
 
 	unsigned int MinMaxAI::max(shared_ptr<state::Game> game, shared_ptr<engine::Engine> engine, unsigned int depth) {
+
+		/*string s;
+		cin >> s;
+		if(s == "exit") exit(EXIT_SUCCESS);*/
 
 		if (depth == 0 || game->isFinished()) {
 			return eval(game, depth);

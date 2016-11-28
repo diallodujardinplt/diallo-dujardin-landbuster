@@ -54,7 +54,7 @@ namespace ai {
 
 					for (auto land : ownLands) {
 						for (auto neighbor : land->getNeighborLands()) {
-							if (neighbor->getOwner()->getId() != playerId && game->getAttack(land, neighbor) > game->getDefense(neighbor)) {
+							if ((!neighbor->getOwner() || neighbor->getOwner()->getId() != playerId) && game->getAttack(land, neighbor) > game->getDefense(neighbor)) {
 								vector<engine::Interaction> interactions;
 								interactions.push_back(engine::Interaction(land->getId(), neighbor->getId()));
 								possibilities.push_back(make_shared<engine::AttackCommand>(playerId, interactions));
