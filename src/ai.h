@@ -5,4 +5,5 @@
 #include "ai/AI.h"
 #include "ai/DumbAI.h"
 #include "ai/MinMaxAI.h"
+#include "ai/HeuristicAI.h"
 #endif

@@ -30,7 +30,7 @@ int main() {
 	//engine->registerAIPlayer(1, make_shared<ai::MinMaxAI>(1));
 	
 	client->addAttributedPlayer(0);
-	client->addAttributedPlayer(1);
+	engine->registerAIPlayer(1, make_shared<ai::HeuristicAI>(1));
 
 	thread threadEngine(engineThreadFunction, engine);
 	thread threadClient(clientThreadFunction, client);
