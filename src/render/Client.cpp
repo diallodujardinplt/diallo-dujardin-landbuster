@@ -185,6 +185,8 @@ namespace render {
 
 				framerateClock.restart();
 			}
+
+			this_thread::sleep_for(chrono::milliseconds(15));
 			
 		}
 

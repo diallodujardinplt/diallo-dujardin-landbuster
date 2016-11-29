@@ -21,19 +21,21 @@ namespace engine {
 	}
 
 	void Engine::flushCommands() {
-		mutex.lock();
-		game->mutex.lock();
 		while(!commandQueue.empty()) {
 			shared_ptr<Command> cmd = commandQueue.front();
+			mutex.lock();
+			game->mutex.lock();
 			commandQueue.pop();
 			if(isAllowed(cmd))
 				execute(cmd);
+			game->mutex.unlock();
+			mutex.unlock();
 		}
 		if(aiPlayers.count(this->game->getCurrentPlayer())) {
+			game->mutex.lock();
 			execute(aiPlayers[this->game->getCurrentPlayer()]->run(this->game));
+			game->mutex.unlock();
 		}
-		game->mutex.unlock();
-		mutex.unlock();
 	}
 
 	bool Engine::isAllowed(shared_ptr<Command> command) {
@@ -86,6 +88,7 @@ namespace engine {
 		while (true) {
 			if (commandQuit) break;
 			flushCommands();
+			this_thread::sleep_for(chrono::milliseconds(300));
 		}
 	}
 
