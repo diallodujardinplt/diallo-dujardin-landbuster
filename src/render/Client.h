@@ -7,15 +7,15 @@
 
 namespace state {
   class Land;
-};
-namespace render {
-  class Client;
-};
-namespace state {
   class Game;
 };
 namespace engine {
   class Engine;
+};
+namespace render {
+  class Client;
+};
+namespace engine {
   class Command;
 };
 namespace state {
@@ -26,17 +26,16 @@ namespace render {
 }
 
 #include "state/Land.h"
+#include "state/Game.h"
 #include "engine/Engine.h"
 #include "engine/Command.h"
 #include "state/Player.h"
-#include "state/Game.h"
 #include "Renderer.h"
 
 namespace render {
 
   /// class Client - 
   class Client {
-    // Associations
     // Attributes
   private:
     std::vector<unsigned int> attributedPlayers;
@@ -44,11 +43,13 @@ namespace render {
     std::shared_ptr<state::Land> selectedInfoLand;
     std::shared_ptr<state::Land> selectedLand;
     bool debugMode;
+    std::shared_ptr<state::Game> game;
+    std::shared_ptr<engine::Engine> engine;
     // Operations
   public:
+    Client (std::shared_ptr<state::Game> game, std::shared_ptr<engine::Engine> engine);
+    Client (Client& client);
     ~Client ();
-    static Client& getInstance ();
-    void run (state::Game& game, std::shared_ptr<engine::Engine> engine);
     std::vector<unsigned int> getAttributedPlayers () const;
     void addAttributedPlayer (unsigned int playerId);
     unsigned int getCurrentPlayerId () const;
@@ -57,9 +58,9 @@ namespace render {
     std::shared_ptr<state::Land> getSelectedLand () const;
     void setSelectedLand (std::shared_ptr<state::Land> land);
     bool getDebugMode () const;
+    void operator() ();
   private:
-    Client ();
-    void sendCommand (std::shared_ptr<engine::Engine> engine, std::shared_ptr<engine::Command> command);
+    void sendCommand (std::shared_ptr<engine::Command> command);
   };
 
 };
