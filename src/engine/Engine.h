@@ -2,6 +2,7 @@
 #ifndef ENGINE__ENGINE__H
 #define ENGINE__ENGINE__H
 
+#include <mutex>
 #include <queue>
 #include <memory>
 #include <map>
@@ -10,6 +11,7 @@ namespace state {
   class Game;
 };
 namespace engine {
+  class Engine;
   class Command;
 };
 namespace ai {
@@ -36,6 +38,9 @@ namespace engine {
   class Engine {
     // Associations
     // Attributes
+  public:
+    bool commandQuit;
+    std::mutex mutex;
   private:
     std::queue< std::shared_ptr<Command> > commandQueue;
     std::shared_ptr<state::Game> game;
@@ -43,10 +48,12 @@ namespace engine {
     // Operations
   public:
     Engine (std::shared_ptr<state::Game> game);
+    Engine (Engine& engine);
     void pushCommand (std::shared_ptr<Command> command);
     void flushCommands ();
     bool isAllowed (std::shared_ptr<Command> command);
     void registerAIPlayer (unsigned int playerId, std::shared_ptr<ai::AI> ai);
+    void operator() ();
   private:
     void execute (std::shared_ptr<Command> command);
   };

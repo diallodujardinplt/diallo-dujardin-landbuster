@@ -4,7 +4,8 @@ using namespace std;
 
 namespace render {
 
-	Renderer::Renderer() {
+	Renderer::Renderer(Client* client) {
+		this->client = client;
 		waterRect.setSize(sf::Vector2f(CELL_WIDTH, CELL_HEIGHT));
 		waterRect.setFillColor(sf::Color(0, 0, 128));
 		portRect.setSize(sf::Vector2f(CELL_WIDTH, CELL_HEIGHT));
@@ -12,11 +13,6 @@ namespace render {
 	}
 
 	Renderer::~Renderer() {
-	}
-
-	Renderer& Renderer::getInstance() {
-		static Renderer renderer;
-		return renderer;
 	}
 
 	void Renderer::init() {
@@ -176,14 +172,14 @@ namespace render {
 
 	void Renderer::renderSoldiersNumber(sf::RenderWindow& window, state::Game& game, shared_ptr<state::Land> land, const vector<sf::Vector2u>& geometry) {
 
-		if(!Client::getInstance().getDebugMode() && land->getSoldiersNumber() == 0) return;
+		if(!client->getDebugMode() && land->getSoldiersNumber() == 0) return;
 		sf::Vector2u mean = getMeanPos(game, land, geometry, 0);
 		sf::Vector2f pos(CELL_WIDTH * mean.x, CELL_HEIGHT * mean.y);
 		sf::Text text;
 		text.setPosition(pos);
 		text.setFont(font);
 		ostringstream oss;
-		if (!Client::getInstance().getDebugMode()) oss << land->getSoldiersNumber();
+		if (!client->getDebugMode()) oss << land->getSoldiersNumber();
 		else oss << land->getId();
 		text.setString(oss.str().c_str());
 		text.setCharacterSize(20);
@@ -274,12 +270,10 @@ namespace render {
 
 	void Renderer::renderUI(sf::RenderWindow& window, state::Game& game, shared_ptr<state::Player> player) {
 
-		Client& client = Client::getInstance();
-
 		sf::Text text;
 		text.setFont(font);
 
-		if(Client::getInstance().getDebugMode()) {
+		if(client->getDebugMode()) {
 			text.setPosition(sf::Vector2f(10, 10));
 			text.setCharacterSize(30);
 			text.setColor(sf::Color(255, 0, 0));
@@ -344,9 +338,9 @@ namespace render {
 
 		}
 
-		if (client.getSelectedInfoLand()) {
+		if (client->getSelectedInfoLand()) {
 
-			shared_ptr<state::Land> land = client.getSelectedInfoLand();
+			shared_ptr<state::Land> land = client->getSelectedInfoLand();
 
 			sf::RectangleShape ldBg(sf::Vector2f(150, 30));
 			ldBg.setPosition(sf::Vector2f(CELL_WIDTH * GRID_WIDTH + 32, 250));
@@ -380,7 +374,7 @@ namespace render {
 					window.draw(text);
 					text.move(0, 30);
 					ostringstream oss5;
-					oss5 << game.getAttack(client.getSelectedLand(), land);
+					oss5 << game.getAttack(client->getSelectedLand(), land);
 					text.setString(oss5.str().c_str());
 					window.draw(text);
 					text.move(0, 50);

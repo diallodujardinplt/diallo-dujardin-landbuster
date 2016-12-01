@@ -17,6 +17,7 @@
 #include <unordered_set>
 #include <stack>
 #include <thread>
+#include <chrono>
 
 #define GRID_WIDTH 128
 #define GRID_HEIGHT 128

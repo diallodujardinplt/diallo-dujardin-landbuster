@@ -2,6 +2,7 @@
 #ifndef STATE__GAME__H
 #define STATE__GAME__H
 
+#include <mutex>
 #include <vector>
 #include <memory>
 
@@ -25,6 +26,8 @@ namespace state {
   class Game {
     // Associations
     // Attributes
+  public:
+    std::mutex mutex;
   private:
     Step currentStep;
     unsigned int currentPlayer;

@@ -8,16 +8,13 @@
 #include <vector>
 
 namespace render {
-  class Renderer;
+  class Client;
 };
 namespace state {
   class Game;
   class Player;
   class Land;
   class Cell;
-};
-namespace render {
-  class Client;
 }
 
 #include "state/Player.h"
@@ -29,7 +26,6 @@ namespace render {
 
   /// class Renderer - 
   class Renderer {
-    // Associations
     // Attributes
   private:
     std::map<state::LandType, sf::Texture> landTextures;
@@ -39,15 +35,15 @@ namespace render {
     sf::Texture headquartersMaskTexture;
     sf::Texture heroTexture;
     sf::Texture fortTexture;
+    Client* client;
     // Operations
   public:
+    Renderer (Client* client);
     ~Renderer ();
-    static Renderer& getInstance ();
     void render (sf::RenderWindow& window, state::Game& game, std::shared_ptr<state::Player> player);
     void init ();
     void renderFort (sf::RenderWindow& window, state::Game& game, std::shared_ptr<state::Land> land, const std::vector<sf::Vector2u>& geometry);
   private:
-    Renderer ();
     void loadTextures ();
     void renderCell (sf::RenderWindow& window, state::Game& game, std::shared_ptr<state::Land> land, const std::vector<sf::Vector2u>& geometry, state::Cell& cell);
     void renderLandBorders (sf::RenderWindow& window, state::Game& game, state::Cell& cell, unsigned int x, unsigned int y, sf::Vector2f pos, bool borderTop, bool borderBottom, bool borderLeft, bool borderRight);

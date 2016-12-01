@@ -6,6 +6,14 @@ namespace engine {
 	
 	Engine::Engine(shared_ptr<state::Game> game) {
 		this->game = game;
+		commandQuit = false;
+	}
+
+	Engine::Engine(Engine& engine) {
+		commandQueue = engine.commandQueue;
+		game = engine.game;
+		aiPlayers = engine.aiPlayers;
+		commandQuit = engine.commandQuit;
 	}
 
 	void Engine::pushCommand(shared_ptr<Command> command) {
@@ -15,12 +23,18 @@ namespace engine {
 	void Engine::flushCommands() {
 		while(!commandQueue.empty()) {
 			shared_ptr<Command> cmd = commandQueue.front();
+			mutex.lock();
+			game->mutex.lock();
 			commandQueue.pop();
 			if(isAllowed(cmd))
 				execute(cmd);
+			game->mutex.unlock();
+			mutex.unlock();
 		}
 		if(aiPlayers.count(this->game->getCurrentPlayer())) {
+			game->mutex.lock();
 			execute(aiPlayers[this->game->getCurrentPlayer()]->run(this->game));
+			game->mutex.unlock();
 		}
 	}
 
@@ -68,6 +82,14 @@ namespace engine {
 
 	void Engine::registerAIPlayer(unsigned int playerId, shared_ptr<ai::AI> ai) {
 		aiPlayers[playerId] = ai;
+	}
+
+	void Engine::operator()() {
+		while (true) {
+			if (commandQuit) break;
+			flushCommands();
+			this_thread::sleep_for(chrono::milliseconds(300));
+		}
 	}
 
 }

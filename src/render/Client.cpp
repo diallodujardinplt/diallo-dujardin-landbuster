@@ -4,16 +4,23 @@ using namespace std;
 
 namespace render {
 
-	Client::Client() {
+	Client::Client(shared_ptr<state::Game> game, shared_ptr<engine::Engine> engine) {
+		this->game = game;
+		this->engine = engine;
 		debugMode = false;
 	}
 
-	Client::~Client() {}
-
-	Client& Client::getInstance() {
-		static Client client;
-		return client;
+	Client::Client(Client& client) {
+		attributedPlayers = client.attributedPlayers;
+		currentPlayerId = client.currentPlayerId;
+		selectedInfoLand = client.selectedInfoLand;
+		selectedLand = client.selectedLand;
+		debugMode = client.debugMode;
+		game = client.game;
+		engine = client.engine;
 	}
+
+	Client::~Client() {}
 
 	bool Client::getDebugMode() const {
 		return debugMode;
@@ -55,45 +62,53 @@ namespace render {
 		selectedLand = land;
 	}
 
-	void Client::run(state::Game& game, shared_ptr<engine::Engine> engine) {
+	void Client::operator()() {
 
 		sf::RenderWindow window(sf::VideoMode(GRID_WIDTH * CELL_WIDTH + 200, GRID_HEIGHT * CELL_HEIGHT, 32), "Land Buster");
 
-		render::Renderer& renderer = render::Renderer::getInstance();
+		render::Renderer renderer(this);
 		renderer.init();
 
 		sf::Clock framerateClock, clickClock;
 
 		while (window.isOpen()) {
-			shared_ptr<state::Player> player = game.getPlayers()[game.getCurrentPlayer()];
-			currentPlayerId = game.getCurrentPlayer();
+			game->mutex.lock();
+
+			shared_ptr<state::Player> player = game->getPlayers()[game->getCurrentPlayer()];
+			currentPlayerId = game->getCurrentPlayer();
 
 			sf::Event event;
 			while (window.pollEvent(event)) {
-				if (event.type == sf::Event::Closed)
+				if (event.type == sf::Event::Closed) {
+					game->mutex.unlock();
+					engine->mutex.lock();
+					engine->commandQuit = true;
+					engine->mutex.unlock();
+					game->mutex.lock();
 					window.close();
+				}
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && clickClock.getElapsedTime().asMilliseconds() >= 500) {
 					debugMode = !debugMode;
 					clickClock.restart();
 				}
 			}
 
-			if(find(attributedPlayers.begin(), attributedPlayers.end(), game.getCurrentPlayer()) != attributedPlayers.end()) {
+			if(find(attributedPlayers.begin(), attributedPlayers.end(), game->getCurrentPlayer()) != attributedPlayers.end()) {
 				sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 				if(mousePos.x > CELL_WIDTH/2 && mousePos.x < GRID_WIDTH * CELL_WIDTH && mousePos.y > CELL_HEIGHT/2 && mousePos.y < GRID_HEIGHT * CELL_HEIGHT) {
-					shared_ptr<state::Land> target = game.getCell(mousePos.x / CELL_WIDTH, mousePos.y / CELL_HEIGHT).land;
+					shared_ptr<state::Land> target = game->getCell(mousePos.x / CELL_WIDTH, mousePos.y / CELL_HEIGHT).land;
 
 					if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && clickClock.getElapsedTime().asMilliseconds() >= 500) {
 
 						cout << "click on land " << target->getId() << endl;
 
 						if (!player->getHeadquarters()) {
-							sendCommand(engine, make_shared<engine::ChoiceCommand>(engine::COMMAND_CHOOSE_HEADQUARTERS, player->getId(), target->getId()));
+							sendCommand(make_shared<engine::ChoiceCommand>(engine::COMMAND_CHOOSE_HEADQUARTERS, player->getId(), target->getId()));
 						}
-						else if (game.getCurrentStep()==state::STEP_REINFORCEMENT) {
-							sendCommand(engine, make_shared<engine::ChoiceCommand>(engine::COMMAND_CHOOSE_REINFORCEMENT, player->getId(), target->getId()));
+						else if (game->getCurrentStep()==state::STEP_REINFORCEMENT) {
+							sendCommand(make_shared<engine::ChoiceCommand>(engine::COMMAND_CHOOSE_REINFORCEMENT, player->getId(), target->getId()));
 						}
-						else if (game.getCurrentStep()==state::STEP_ACTION) {
+						else if (game->getCurrentStep()==state::STEP_ACTION) {
 							if(!selectedLand) {
 								setSelectedLand(target);
 							}
@@ -101,7 +116,7 @@ namespace render {
 								if(selectedLand == target) {
 									shared_ptr<engine::ChoiceCommand> cmd = make_shared<engine::ChoiceCommand>(engine::COMMAND_BUILD_PORT, player->getId(), target->getId());
 									if(engine->isAllowed(cmd)) {
-										sendCommand(engine, cmd);
+										sendCommand(cmd);
 										setSelectedLand(nullptr);
 									}
 								}
@@ -110,20 +125,20 @@ namespace render {
 									attacks.push_back(engine::Interaction(selectedLand->getId(), target->getId()));
 									shared_ptr<engine::AttackCommand> cmd = make_shared<engine::AttackCommand>(player->getId(), attacks);
 									if(engine->isAllowed(cmd)) {
-										sendCommand(engine, cmd);
+										sendCommand(cmd);
 										setSelectedLand(nullptr);
 									}
 								}
 							}
 						}
-						else if (game.getCurrentStep()==state::STEP_MOVING) {
+						else if (game->getCurrentStep()==state::STEP_MOVING) {
 							if(!selectedLand) {
 								setSelectedLand(target);
 							}
 							else {
 								shared_ptr<engine::MoveCommand> cmd = make_shared<engine::MoveCommand>(player->getId(), engine::Interaction(selectedLand->getId(), target->getId()), 0.5, false);
 								if(engine->isAllowed(cmd)) {
-									sendCommand(engine, cmd);
+									sendCommand(cmd);
 									setSelectedLand(nullptr);
 								}
 							}
@@ -143,38 +158,45 @@ namespace render {
 				}
 				else if(mousePos.x >= CELL_WIDTH * GRID_WIDTH + 30 && mousePos.x < CELL_WIDTH * GRID_WIDTH + 30 + 150 && mousePos.y >= CELL_HEIGHT * GRID_HEIGHT - 60 && mousePos.y < CELL_HEIGHT * GRID_HEIGHT - 60 + 30) {
 					if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && clickClock.getElapsedTime().asMilliseconds() >= 500) {
-						sendCommand(engine, make_shared<engine::ActionCommand>(engine::COMMAND_SKIP_ROUND, player->getId()));
+						sendCommand(make_shared<engine::ActionCommand>(engine::COMMAND_SKIP_ROUND, player->getId()));
 						clickClock.restart();
 					}
 				}
 				else if(mousePos.x >= CELL_WIDTH * GRID_WIDTH + 30 && mousePos.x < CELL_WIDTH * GRID_WIDTH + 30 + 150 && mousePos.y >= CELL_HEIGHT * GRID_HEIGHT - 30 && mousePos.y < CELL_HEIGHT * GRID_HEIGHT - 30 + 30) {
 					if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && clickClock.getElapsedTime().asMilliseconds() >= 500) {
-						sendCommand(engine, make_shared<engine::ActionCommand>(engine::COMMAND_ABANDON, player->getId()));
+						sendCommand(make_shared<engine::ActionCommand>(engine::COMMAND_ABANDON, player->getId()));
 						clickClock.restart();
 					}
 				}
 			}
 
+			game->mutex.unlock();
+
 			sf::Time framerateElapsed = framerateClock.getElapsedTime();
 			if (framerateElapsed.asMilliseconds() > 30) {
-				engine->flushCommands();
 
 				window.clear();
 
-				renderer.render(window, game, game.getPlayers()[currentPlayerId]);
+				game->mutex.lock();
+				renderer.render(window, *game, game->getPlayers()[currentPlayerId]);
+				game->mutex.unlock();
 
 				window.display();
 
 				framerateClock.restart();
 			}
+
+			this_thread::sleep_for(chrono::milliseconds(15));
 			
 		}
 
 	}
 
-	void Client::sendCommand(shared_ptr<engine::Engine> engine, shared_ptr<engine::Command> command) {
+	void Client::sendCommand(shared_ptr<engine::Command> command) {
 		cout << command->toString() << endl;
+		engine->mutex.lock();
 		engine->pushCommand(command);
+		engine->mutex.unlock();
 	}
 
 }
