@@ -2564,8 +2564,6 @@
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-<<<<<<< HEAD
-=======
             <dia:string>#isFinished#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
@@ -2596,18 +2594,13 @@
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
->>>>>>> master
             <dia:string>#getPlayerLands#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-<<<<<<< HEAD
-            <dia:string>#std::shared_ptr&lt;Land&gt;#</dia:string>
-=======
             <dia:string>#std::vector&lt;std::shared_ptr&lt;Land&gt;&gt;#</dia:string>
->>>>>>> master
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2630,17 +2623,10 @@
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-<<<<<<< HEAD
-                <dia:string>#player#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="type">
-                <dia:string>#std::shared_ptr&lt;Player&gt;#</dia:string>
-=======
                 <dia:string>#playerId#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#unsigned int#</dia:string>
->>>>>>> master
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -4387,7 +4373,6 @@
         <dia:point val="59.1425,-3.8705"/>
         <dia:point val="59.1425,37.7049"/>
         <dia:point val="61.7252,37.7049"/>
->>>>>>> master
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -4406,7 +4391,6 @@
       <dia:connections>
         <dia:connection handle="0" to="O2" connection="72"/>
         <dia:connection handle="1" to="O3" connection="52"/>
->>>>>>> master
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
@@ -4773,33 +4757,19 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-<<<<<<< HEAD
-        <dia:point val="22.3647,-4.6705"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="7.18085,-5.4705;23.1147,12.674"/>
-=======
         <dia:point val="61.7252,37.7049"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
         <dia:rectangle val="-5.76675,11.074;62.4752,38.5049"/>
->>>>>>> master
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-<<<<<<< HEAD
-        <dia:point val="22.3647,-4.6705"/>
-        <dia:point val="11.5677,-4.6705"/>
-        <dia:point val="11.5677,11.874"/>
-        <dia:point val="7.23085,11.874"/>
-=======
         <dia:point val="61.7252,37.7049"/>
         <dia:point val="-5.71675,37.7049"/>
         <dia:point val="-5.71675,11.874"/>
         <dia:point val="-3.44127,11.874"/>
->>>>>>> master
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -4816,11 +4786,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-<<<<<<< HEAD
-        <dia:connection handle="0" to="O2" connection="68"/>
-=======
         <dia:connection handle="0" to="O3" connection="52"/>
->>>>>>> master
         <dia:connection handle="1" to="O4" connection="26"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
@@ -6724,7 +6690,6 @@
       </dia:attribute>
       <dia:attribute name="obj_bb">
         <dia:rectangle val="37.6499,8.75;52.1218,22.3837"/>
->>>>>>> master
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7584,10 +7549,6 @@
         <dia:boolean val="true"/>
       </dia:attribute>
       <dia:connections>
-<<<<<<< HEAD
-        <dia:connection handle="0" to="O16" connection="54"/>
-        <dia:connection handle="1" to="O2" connection="68"/>
-=======
         <dia:connection handle="0" to="O15" connection="54"/>
         <dia:connection handle="1" to="O2" connection="72"/>
       </dia:connections>
@@ -13232,36 +13193,7 @@
         <dia:point val="141.007,23.6492"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-        <dia:rectangle val="53.9854,-8.1837;101.531,-4.6205"/>
-=======
-        <dia:rectangle val="53.9854,-8.9837;101.531,-4.2205"/>
->>>>>>> Stashed changes
-      </dia:attribute>
-      <dia:attribute name="meta">
-        <dia:composite type="dict"/>
-      </dia:attribute>
-      <dia:attribute name="orth_points">
-<<<<<<< Updated upstream
-        <dia:point val="101.481,-8.1337"/>
-        <dia:point val="78.1581,-8.1337"/>
-        <dia:point val="78.1581,-5.0705"/>
-        <dia:point val="54.4354,-5.0705"/>
-=======
-        <dia:point val="101.481,-8.9337"/>
-        <dia:point val="78.1581,-8.9337"/>
-        <dia:point val="78.1581,-4.6705"/>
-        <dia:point val="54.4354,-4.6705"/>
->>>>>>> Stashed changes
-      </dia:attribute>
-      <dia:attribute name="orth_orient">
-        <dia:enum val="0"/>
-        <dia:enum val="1"/>
-        <dia:enum val="0"/>
-=======
         <dia:rectangle val="140.982,23.6242;175.027,30.2742"/>
->>>>>>> master
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="141.007,23.6492"/>
@@ -13284,24 +13216,8 @@
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
       </dia:attribute>
-<<<<<<< HEAD
-      <dia:connections>
-<<<<<<< Updated upstream
-        <dia:connection handle="0" to="O31" connection="26"/>
-        <dia:connection handle="1" to="O2" connection="66"/>
-=======
-        <dia:connection handle="0" to="O31" connection="22"/>
-        <dia:connection handle="1" to="O2" connection="68"/>
->>>>>>> Stashed changes
-      </dia:connections>
-    </dia:object>
-    <dia:object type="UML - Dependency" version="1" id="O53">
-      <dia:attribute name="obj_pos">
-        <dia:point val="39.8197,-20.1695"/>
-=======
       <dia:attribute name="suppress_attributes">
         <dia:boolean val="false"/>
->>>>>>> master
       </dia:attribute>
       <dia:attribute name="suppress_operations">
         <dia:boolean val="false"/>
@@ -13746,31 +13662,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O63">
       <dia:attribute name="obj_pos">
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-        <dia:point val="133.056,34.1535"/>
-=======
         <dia:point val="136.088,43.7963"/>
->>>>>>> master
       </dia:attribute>
       <dia:attribute name="obj_bb">
         <dia:rectangle val="136.038,43.7463;166.668,52.2463"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-<<<<<<< HEAD
-        <dia:point val="133.056,34.1535"/>
-=======
-        <dia:point val="141.038,38.4281"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="141.013,38.4031;161.968,42.0531"/>
-      </dia:attribute>
-      <dia:attribute name="elem_corner">
-        <dia:point val="141.038,38.4281"/>
->>>>>>> Stashed changes
-=======
         <dia:point val="136.088,43.7963"/>
->>>>>>> master
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="30.530000000000001"/>
@@ -13961,147 +13859,9 @@
                 <dia:enum val="0"/>
               </dia:attribute>
             </dia:composite>
-<<<<<<< HEAD
-          </dia:attribute>
-        </dia:composite>
-      </dia:attribute>
-      <dia:attribute name="template">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="templates"/>
-      <dia:childnode parent="O60"/>
-    </dia:object>
-    <dia:object type="UML - Class" version="0" id="O62">
-      <dia:attribute name="obj_pos">
-        <dia:point val="141.266,24.6193"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-<<<<<<< Updated upstream
-        <dia:rectangle val="140.982,23.6242;157.702,28.6742"/>
-=======
-        <dia:rectangle val="141.241,24.5943;161.811,31.2443"/>
->>>>>>> Stashed changes
-      </dia:attribute>
-      <dia:attribute name="elem_corner">
-        <dia:point val="141.266,24.6193"/>
-      </dia:attribute>
-      <dia:attribute name="elem_width">
-        <dia:real val="16.669999999999998"/>
-      </dia:attribute>
-      <dia:attribute name="elem_height">
-        <dia:real val="5"/>
-      </dia:attribute>
-      <dia:attribute name="name">
-        <dia:string>#AI#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="stereotype">
-        <dia:string>#abstract#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="comment">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="abstract">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="suppress_attributes">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="suppress_operations">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="visible_attributes">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="visible_operations">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="visible_comments">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="wrap_operations">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="wrap_after_char">
-        <dia:int val="40"/>
-      </dia:attribute>
-      <dia:attribute name="comment_line_length">
-        <dia:int val="17"/>
-      </dia:attribute>
-      <dia:attribute name="comment_tagging">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="line_width">
-        <dia:real val="0.050000000000000003"/>
-      </dia:attribute>
-      <dia:attribute name="line_color">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:attribute name="fill_color">
-        <dia:color val="#ffffff"/>
-      </dia:attribute>
-      <dia:attribute name="text_color">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:attribute name="normal_font">
-        <dia:font family="monospace" style="0" name="Courier"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_font">
-        <dia:font family="monospace" style="0" name="Courier"/>
-      </dia:attribute>
-      <dia:attribute name="polymorphic_font">
-        <dia:font family="monospace" style="0" name="Courier"/>
-      </dia:attribute>
-      <dia:attribute name="classname_font">
-        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_classname_font">
-        <dia:font family="sans" style="0" name="Helvetica"/>
-      </dia:attribute>
-      <dia:attribute name="comment_font">
-        <dia:font family="sans" style="0" name="Helvetica"/>
-      </dia:attribute>
-      <dia:attribute name="normal_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="polymorphic_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="classname_font_height">
-        <dia:real val="1"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_classname_font_height">
-        <dia:real val="1"/>
-      </dia:attribute>
-      <dia:attribute name="comment_font_height">
-        <dia:real val="0.69999999999999996"/>
-      </dia:attribute>
-      <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-=======
-            <dia:composite type="umlparameter">
-              <dia:attribute name="name">
-                <dia:string>#engine#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="type">
-                <dia:string>#std::shared_ptr&lt;engine::Engine&gt;#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="value">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="comment">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="kind">
-                <dia:enum val="0"/>
-              </dia:attribute>
-            </dia:composite>
           </dia:attribute>
         </dia:composite>
         <dia:composite type="umloperation">
->>>>>>> master
           <dia:attribute name="name">
             <dia:string>#min#</dia:string>
           </dia:attribute>
@@ -14339,53 +14099,24 @@
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O64">
       <dia:attribute name="obj_pos">
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-        <dia:point val="140.982,26.1492"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="84.1052,26.0992;141.032,37.7549"/>
-=======
-        <dia:point val="141.24,27.9193"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="84.1052,27.8693;141.29,37.7549"/>
->>>>>>> Stashed changes
-=======
         <dia:point val="158.005,30.2746"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="152.458,30.2246;158.855,43.796"/>
->>>>>>> master
+        <dia:rectangle val="151.303,30.2246;158.855,43.796"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-        <dia:point val="140.982,26.1492"/>
-        <dia:point val="112.968,26.1492"/>
-        <dia:point val="112.968,37.3049"/>
-=======
-        <dia:point val="141.24,27.9193"/>
-        <dia:point val="113.098,27.9193"/>
-        <dia:point val="113.098,37.3049"/>
->>>>>>> Stashed changes
-        <dia:point val="84.5552,37.3049"/>
-=======
         <dia:point val="158.005,30.2746"/>
         <dia:point val="158.005,37.4103"/>
-        <dia:point val="152.508,37.4103"/>
-        <dia:point val="152.508,43.746"/>
->>>>>>> master
         <dia:point val="151.353,37.4103"/>
         <dia:point val="151.353,43.746"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
         <dia:enum val="0"/>
-<<<<<<< HEAD
+        <dia:enum val="1"/>
       </dia:attribute>
       <dia:attribute name="orth_autoroute">
         <dia:boolean val="true"/>
@@ -14402,192 +14133,6 @@
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
-      <dia:attribute name="draw_arrow">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:connections>
-        <dia:connection handle="0" to="O62" connection="14"/>
-        <dia:connection handle="1" to="O3" connection="50"/>
-      </dia:connections>
-    </dia:object>
-<<<<<<< Updated upstream
-    <dia:object type="UML - Dependency" version="1" id="O66">
-      <dia:attribute name="obj_pos">
-        <dia:point val="152.35,-19.1373"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="152.3,-19.1873;165.768,11.9904"/>
-=======
-    <dia:object type="UML - Class" version="0" id="O66">
-      <dia:attribute name="obj_pos">
-        <dia:point val="148.744,46.6874"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="148.744,46.6874;153.779,48.8874"/>
-      </dia:attribute>
-      <dia:attribute name="elem_corner">
-        <dia:point val="148.744,46.6874"/>
-      </dia:attribute>
-      <dia:attribute name="elem_width">
-        <dia:real val="5.0350000000000001"/>
-      </dia:attribute>
-      <dia:attribute name="elem_height">
-        <dia:real val="2.1999999999999997"/>
-      </dia:attribute>
-      <dia:attribute name="name">
-        <dia:string>#HeuristicAI#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="stereotype">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="comment">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="abstract">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="suppress_attributes">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="suppress_operations">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="visible_attributes">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="visible_operations">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="visible_comments">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="wrap_operations">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="wrap_after_char">
-        <dia:int val="40"/>
-      </dia:attribute>
-      <dia:attribute name="comment_line_length">
-        <dia:int val="17"/>
-      </dia:attribute>
-      <dia:attribute name="comment_tagging">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="line_width">
-        <dia:real val="0"/>
-      </dia:attribute>
-      <dia:attribute name="line_color">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:attribute name="fill_color">
-        <dia:color val="#ffffff"/>
-      </dia:attribute>
-      <dia:attribute name="text_color">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:attribute name="normal_font">
-        <dia:font family="monospace" style="0" name="Courier"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_font">
-        <dia:font family="monospace" style="0" name="Courier"/>
-      </dia:attribute>
-      <dia:attribute name="polymorphic_font">
-        <dia:font family="monospace" style="0" name="Courier"/>
-      </dia:attribute>
-      <dia:attribute name="classname_font">
-        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_classname_font">
-        <dia:font family="sans" style="0" name="Helvetica"/>
-      </dia:attribute>
-      <dia:attribute name="comment_font">
-        <dia:font family="sans" style="0" name="Helvetica"/>
-      </dia:attribute>
-      <dia:attribute name="normal_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="polymorphic_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="classname_font_height">
-        <dia:real val="1"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_classname_font_height">
-        <dia:real val="1"/>
-      </dia:attribute>
-      <dia:attribute name="comment_font_height">
-        <dia:real val="0.69999999999999996"/>
-      </dia:attribute>
-      <dia:attribute name="attributes"/>
-      <dia:attribute name="operations"/>
-      <dia:attribute name="template">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="templates"/>
-      <dia:childnode parent="O60"/>
-    </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O67">
-      <dia:attribute name="obj_pos">
-        <dia:point val="151.491,42.0281"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="150.641,41.9781;152.341,46.7371"/>
->>>>>>> Stashed changes
-      </dia:attribute>
-      <dia:attribute name="meta">
-        <dia:composite type="dict"/>
-      </dia:attribute>
-      <dia:attribute name="orth_points">
-<<<<<<< Updated upstream
-        <dia:point val="152.35,-19.1373"/>
-        <dia:point val="158.634,-19.1373"/>
-        <dia:point val="158.634,11.5404"/>
-        <dia:point val="165.318,11.5404"/>
-      </dia:attribute>
-      <dia:attribute name="orth_orient">
-        <dia:enum val="0"/>
-        <dia:enum val="1"/>
-        <dia:enum val="0"/>
-=======
-        <dia:point val="151.491,42.0281"/>
-        <dia:point val="151.491,44.7576"/>
-        <dia:point val="151.262,44.7576"/>
-        <dia:point val="151.262,46.6871"/>
-      </dia:attribute>
-      <dia:attribute name="orth_orient">
-        <dia:enum val="1"/>
-        <dia:enum val="0"/>
-        <dia:enum val="1"/>
->>>>>>> Stashed changes
-=======
-        <dia:enum val="1"/>
->>>>>>> master
-      </dia:attribute>
-      <dia:attribute name="orth_autoroute">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="text_colour">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:attribute name="line_colour">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:attribute name="name">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="stereotype">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-      <dia:attribute name="draw_arrow">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-=======
->>>>>>> master
       <dia:connections>
         <dia:connection handle="0" to="O58" connection="16"/>
         <dia:connection handle="1" to="O63" connection="18"/>

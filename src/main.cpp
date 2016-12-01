@@ -37,8 +37,7 @@ int main() {
 
 	threadClient.join();
 	threadEngine.join();
-	
-	
+
 /*	//sf::RenderWindow window(sf::VideoMode(GRID_WIDTH * CELL_WIDTH + 200, GRID_HEIGHT * CELL_HEIGHT, 32), "Land Buster");
 *	sf::Clock framerateClock, clickClock;
 *	while (window.isOpen()) {
