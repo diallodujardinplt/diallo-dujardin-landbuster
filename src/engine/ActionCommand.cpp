@@ -65,4 +65,8 @@ namespace engine {
 		
 	}
 
+	string ActionCommand::toJSON() const {
+		
+	}
+
 }

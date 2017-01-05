@@ -73,4 +73,8 @@ namespace engine {
 		return hero;
 	}
 
+	string MoveCommand::toJSON() const {
+		
+	}
+
 }

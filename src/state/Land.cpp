@@ -106,6 +106,24 @@ namespace state {
         this->itemLifetime=timeLeft;
     }
 
+    Json::Value Land::toJSON() const {
+        Json::Value jland;
+        jland["id"] = id;
+        Json::Value jneighbors;
+        for (unsigned int i = 0; i < neighborLands.size(); i++) {
+            jneighbors[i] = neighborLands[i]->getId();
+        }
+        jland["neighborLands"] = jneighbors;
+        jland["soldiersNumber"] = soldiersNumber;
+        if (owner) jland["owner"] = owner->getId();
+        jland["fort"] = fort;
+        jland["ports"] = ports;
+        jland["type"] = (int) type;
+        jland["item"] = (int) item;
+        jland["itemLifeTime"] = itemLifetime;
+        return jland;
+    }
+
 
     
 }

@@ -628,6 +628,38 @@ namespace state {
     	}
     	return results;
     }
+
+    Json::Value Game::toJSON() const {
+    	Json::Value jgame;
+    	jgame["currentStep"] = (int) currentStep;
+    	jgame["currentPlayer"] = (int) currentPlayer;
+    	jgame["activatedItem"] = (int) activatedItem;
+    	Json::Value jplayers;
+    	for (unsigned int i = 0; i < players.size(); i++) {
+    		jplayers[i] = players[i]->toJSON();
+    	}
+    	jgame["players"] = jplayers;
+    	Json::Value jlands;
+    	for (unsigned int i = 0; i < lands.size(); i++) {
+    		jlands[i] = lands[i]->toJSON();
+    	}
+    	jgame["lands"] = jlands;
+    	Json::Value jcells;
+    	int index = 0;
+    	for (unsigned int i = 0; i < cells.size(); i++) {
+    		for (unsigned int j = 0; j < cells[i].size(); j++) {
+    			jcells[index] = cells[i][j].toJSON();
+    			index++;
+    		}
+    	}
+    	jgame["cells"] = jcells;
+    	return jgame;
+    }
+
+    /*void Game::fromJSON(Json::Value jgame) {
+    	Json::Value jGame;
+    	jGame["currentStep"] = 
+    }*/
              
 
 }

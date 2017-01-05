@@ -58,6 +58,7 @@ namespace state {
     void setItem (ItemType item);
     unsigned int getItemLifetime () const;
     void setItemLifetime (unsigned int timeLeft);
+    Json::Value toJSON () const;
   };
 
 };

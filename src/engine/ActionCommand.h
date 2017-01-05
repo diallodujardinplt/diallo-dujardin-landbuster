@@ -27,6 +27,7 @@ namespace engine {
     bool isAllowed (state::Game& game) const;
     void execute (state::Game& game);
     void rollback (state::Game& game);
+    std::string toJSON () const;
   };
 
 };

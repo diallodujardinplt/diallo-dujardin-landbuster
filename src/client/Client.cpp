@@ -10,6 +10,7 @@ namespace client {
 		game = make_shared<state::Game>();
 		game->init(2);
 		game->generateMap();
+		cout << game->toJSON() << endl;
 
 		engine = make_shared<engine::Engine>(game);
 		gui = make_shared<render::Client>(game, engine);

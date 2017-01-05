@@ -45,6 +45,7 @@ namespace state {
     ItemType getStoredItem () const;
     void setStoredItem (ItemType storedItem);
     sf::Color getColor () const;
+    Json::Value toJSON () const;
   };
 
 };

@@ -108,4 +108,8 @@ namespace engine {
 		return landId;
 	}
 
+	string ChoiceCommand::toJSON() const {
+		
+	}
+
 }

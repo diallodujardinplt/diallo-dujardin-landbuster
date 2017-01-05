@@ -22,6 +22,7 @@ namespace state {
     // Operations
   public:
     Cell ();
+    Json::Value toJSON () const;
   };
 
 };

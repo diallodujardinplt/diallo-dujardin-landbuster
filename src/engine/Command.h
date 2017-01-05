@@ -41,6 +41,7 @@ namespace engine {
     virtual void rollback (state::Game& game) = 0;
     CommandType getType () const;
     unsigned int getPlayerId () const;
+    virtual std::string toJSON () const = 0;
   protected:
     void defeat (state::Game& game, std::shared_ptr<state::Player> player, std::shared_ptr<state::Player> killer);
     void rollbackDefeat (state::Game& game, std::shared_ptr<state::Player> player, std::shared_ptr<state::Player> killer);

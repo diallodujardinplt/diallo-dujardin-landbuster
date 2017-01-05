@@ -19,6 +19,8 @@
 #include <thread>
 #include <mutex>
 #include <chrono>
+#include <json/json.h>
+#include <microhttpd.h>
 
 #define GRID_WIDTH 128
 #define GRID_HEIGHT 128

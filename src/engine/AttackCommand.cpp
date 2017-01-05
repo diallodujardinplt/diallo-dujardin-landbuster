@@ -71,4 +71,8 @@ namespace engine {
 		return interactions;
 	}
 
+	string AttackCommand::toJSON() const {
+		
+	}
+
 }

@@ -83,5 +83,21 @@ void Player::setStoredItem (ItemType storedItem){
     this->storedItem=storedItem;
 }
 
+Json::Value Player::toJSON() const {
+    Json::Value jplayer;
+    jplayer["id"] = id;
+    if (headquarters) jplayer["headquarters"] = headquarters->getId();
+    if (heroPosition) jplayer["heroPosition"] = heroPosition->getId();
+    jplayer["deadHero"] = deadHero;
+    jplayer["alive"] = alive;
+    jplayer["storedItem"] = (int) storedItem;
+    Json::Value jcolor;
+    jcolor["r"] = color.r;
+    jcolor["g"] = color.g;
+    jcolor["b"] = color.b;
+    jplayer["color"] = jcolor;
+    return jplayer;
+}
+
 
 }

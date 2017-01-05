@@ -1,7 +1,5 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <json/json.h>
-#include <microhttpd.h>
 
 #include "common.hpp"
 #include "state.h"
