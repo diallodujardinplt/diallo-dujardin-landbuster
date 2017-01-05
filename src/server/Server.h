@@ -15,6 +15,7 @@ namespace engine {
 
 #include "state/Game.h"
 #include "engine/Engine.h"
+#include "ServerState.h"
 #include "engine/Command.h"
 
 namespace server {
@@ -27,6 +28,8 @@ namespace server {
     std::vector< std::shared_ptr<engine::Command> > history;
     std::shared_ptr<state::Game> game;
     std::shared_ptr<engine::Engine> engine;
+    ServerState state;
+    unsigned int joinedPlayers;
     // Operations
   public:
     Server ();
@@ -34,6 +37,7 @@ namespace server {
   private:
     void pushCommand (std::shared_ptr<engine::Command> command);
     std::vector< std::shared_ptr<engine::Command> > getCommands (unsigned int from) const;
+    void createGame (unsigned int numPlayers);
   };
 
 };

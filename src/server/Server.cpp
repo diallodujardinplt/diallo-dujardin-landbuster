@@ -5,7 +5,8 @@ using namespace std;
 namespace server {
 
 	Server::Server() {
-
+		state = STATE_IDLE;
+		joinedPlayers = 0;
 	}
 
 	void Server::run() {
@@ -22,6 +23,14 @@ namespace server {
     		for (unsigned int i = from; i < history.size(); i++)
     			result.push_back(history[i]);
     	return result;
+    }
+
+    void Server::createGame(unsigned int numPlayers) {
+    	game = make_shared<state::Game>();
+		game->init(numPlayers);
+		state = STATE_INIT;
+		joinedPlayers = 1;
+		game->generateMap();
     }
 
 }

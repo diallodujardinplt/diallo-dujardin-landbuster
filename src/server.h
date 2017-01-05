@@ -2,5 +2,6 @@
 #ifndef __SERVER__H
 #define __SERVER__H
 
+#include "server/ServerState.h"
 #include "server/Server.h"
 #endif
