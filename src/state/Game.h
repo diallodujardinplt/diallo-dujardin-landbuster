@@ -59,6 +59,7 @@ namespace state {
     bool isFinished () const;
     std::vector<std::shared_ptr<Land>> getPlayerLands (unsigned int playerId) const;
     Json::Value toJSON () const;
+    void fromJSON (Json::Value jgame);
   private:
     std::vector<unsigned int> generateAreas (std::vector< std::vector<int> >& ncells);
     unsigned int util_total (std::vector<unsigned int>& v);

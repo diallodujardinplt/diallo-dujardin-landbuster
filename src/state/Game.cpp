@@ -656,10 +656,68 @@ namespace state {
     	return jgame;
     }
 
-    /*void Game::fromJSON(Json::Value jgame) {
-    	Json::Value jGame;
-    	jGame["currentStep"] = 
-    }*/
+    void Game::fromJSON(Json::Value jgame) {
+    	currentStep = (Step) jgame["currentStep"].asInt();
+    	currentPlayer = jgame["currentPlayer"].asInt();
+    	activatedItem = (ItemType) jgame["activatedItem"].asInt();
+    	players.clear();
+    	players.resize(0);
+    	for (int i = 0; i < jgame["players"].size(); i++) {
+    		Json::Value jplayer = jgame["players"][i];
+    		unsigned int id = jplayer["id"].asInt();
+    		sf::Color color;
+    		color.r = jplayer["color"]["r"].asInt();
+    		color.g = jplayer["color"]["g"].asInt();
+    		color.b = jplayer["color"]["b"].asInt();
+    		shared_ptr<Player> player = make_shared<Player>(id, color);
+    		/*if (value.isMember("machin")) {
+
+    		}*/
+    		player->setDeadHero(jplayer["deadHero"].asBool());
+    		player->setAlive(jplayer["alive"].asBool());
+    		player->setStoredItem((ItemType) jplayer["storedItem"].asInt());
+    		players.push_back(player);
+    	}
+    	lands.clear();
+    	lands.resize(0);
+    	for (int i = 0; i < jgame["lands"].size(); i++) {
+    		Json::Value jland = jgame["lands"][i];
+    		shared_ptr<Land> land = make_shared<Land>(jland["id"].asInt());
+    		land->setSoldiersNumber(jland["soldiersNumber"].asInt());
+    		if (jland.isMember("owner")) land->setOwner(players[jland["owner"].asInt()]);
+    		land->setFort(jland["fort"].asBool());
+    		land->setPorts(jland["ports"].asBool());
+    		land->setType((LandType) jland["type"].asInt());
+    		land->setItem((ItemType) jland["item"].asInt());
+    		land->setItemLifetime(jland["itemLifetime"].asInt());
+    		lands.push_back(land);
+    	}
+    	for (int i = 0; i < jgame["players"].size(); i++) {
+    		Json::Value jplayer = jgame["players"][i];
+    		if (jplayer.isMember("headquarters")) {
+    			players[i]->setHeadquarters(lands[jplayer["headquarters"].asInt()]);
+    		}
+    		if (jplayer.isMember("heroPosition")) {
+    			players[i]->setHeroPosition(lands[jplayer["heroPosition"].asInt()]);
+    		}
+    	}
+    	for (int i = 0; i < jgame["cells"].size(); i++) {
+    		Json::Value jcell = jgame["cells"][i];
+    		int x = jcell["x"].asInt();
+    		int y = jcell["y"].asInt();
+    		cells[x][y].position = sf::Vector2u(x, y);
+    		cells[x][y].land = lands[jcell["land"].asInt()];
+    		auto geometry = lands[jcell["land"].asInt()]->getGeometry();
+    		geometry.push_back(sf::Vector2u(x, y));
+    		lands[jcell["land"].asInt()]->setGeometry(geometry);
+    	}
+    	for (int i = 0; i < jgame["lands"].size(); i++) {
+    		Json::Value jneighbors = jgame["lands"][i]["neighborLands"];
+    		for (int j = 0; j < jneighbors.size(); j++) {
+    			lands[i]->addNeighborLand(lands[jneighbors[j].asInt()]);
+    		}
+    	}
+    }
              
 
 }
