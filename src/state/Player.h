@@ -3,6 +3,7 @@
 #define STATE__PLAYER__H
 
 #include <memory>
+#include <SFML/Graphics.hpp>
 
 namespace state {
   class Land;

@@ -3,6 +3,7 @@
 #define STATE__LAND__H
 
 #include <vector>
+#include <SFML/Graphics.hpp>
 #include <memory>
 
 namespace state {

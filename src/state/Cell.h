@@ -2,6 +2,7 @@
 #ifndef STATE__CELL__H
 #define STATE__CELL__H
 
+#include <SFML/Graphics.hpp>
 #include <memory>
 
 namespace state {

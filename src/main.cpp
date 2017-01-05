@@ -1,5 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <json/json.h>
+#include <microhttpd.h>
 
 #include "common.hpp"
 #include "state.h"
@@ -18,6 +20,9 @@ void clientThreadFunction(shared_ptr<render::Client> client) {
 }
 
 int main() {
+
+	struct MHD_Daemon *d;
+	Json::Value jsonObject;
 	
 	shared_ptr<state::Game> game=make_shared<state::Game>();
 

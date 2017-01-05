@@ -25,9 +25,13 @@ exec_program(${DIA2CODE} ARGS -d ../src -t cpp ../src/landbuster.dia)
 # Sources
 file(GLOB_RECURSE main_sources src/*.cpp)
 
+# jsoncpp
+include_directories ("${PROJECT_SOURCE_DIR}/extern/jsoncpp-0.10.5/dist")
+file(GLOB jsoncpp_sources "${PROJECT_SOURCE_DIR}/extern/jsoncpp-0.10.5/dist/jsoncpp.cpp")
+
 
 # Executables
-add_executable(run ${main_sources})
+add_executable(run ${main_sources} ${jsoncpp_sources})
 
 # SFML
 if(WIN32)
@@ -41,4 +45,10 @@ if(SFML_FOUND)
   include_directories(${SFML_INCLUDE_DIR})
   target_link_libraries(run ${SFML_LIBRARIES})
 endif()
+
+
+# libmicrohttpd
+include_directories ("${PROJECT_SOURCE_DIR}/extern/libmicrohttpd/include")
+target_link_libraries(run "${PROJECT_SOURCE_DIR}/extern/libmicrohttpd/lib/libmicrohttpd.so")
+
 
