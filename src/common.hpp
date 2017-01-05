@@ -19,8 +19,10 @@
 #include <thread>
 #include <mutex>
 #include <chrono>
-#include <json/json.h>
-#include <microhttpd.h>
+#include "../extern/jsoncpp-0.10.5/include/json/json.h"
+//#include <json/json.h>
+#include "../extern/libmicrohttpd/include/microhttpd.h"
+//#include <microhttpd.h>
 #include <SFML/Network.hpp>
 #include <cstring>
 
