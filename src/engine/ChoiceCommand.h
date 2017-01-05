@@ -31,7 +31,7 @@ namespace engine {
     void execute (state::Game& game);
     unsigned int getLandId () const;
     void rollback (state::Game& game);
-    std::string toJSON () const;
+    Json::Value toJSON () const;
   };
 
 };

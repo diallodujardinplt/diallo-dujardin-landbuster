@@ -36,7 +36,7 @@ namespace engine {
     void execute (state::Game& game);
     std::vector<Interaction> getInteractions () const;
     void rollback (state::Game& game);
-    std::string toJSON () const;
+    Json::Value toJSON () const;
   };
 
 };

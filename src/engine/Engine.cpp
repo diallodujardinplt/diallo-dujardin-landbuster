@@ -96,4 +96,30 @@ namespace engine {
 		(*engine)();
 	}
 
+	shared_ptr<Command> commandFromJSON(Json::Value jcmd) {
+		CommandType type = (CommandType) jcmd["type"].asInt();
+		shared_ptr<Command> cmd;
+		if (type == COMMAND_SKIP_ROUND || type == COMMAND_ABANDON || type == COMMAND_USE_ITEM) {
+			shared_ptr<ActionCommand> scmd = make_shared<ActionCommand>((CommandType) jcmd["type"].asInt(), jcmd["playerId"].asInt());
+			cmd = scmd;
+		}
+		else if (type == COMMAND_CHOOSE_HEADQUARTERS || type == COMMAND_CHOOSE_REINFORCEMENT || type == COMMAND_BUILD_PORT) {
+			shared_ptr<ChoiceCommand> scmd = make_shared<ChoiceCommand>((CommandType) jcmd["type"].asInt(), jcmd["playerId"].asInt(), jcmd["landId"].asInt());
+			cmd = scmd;
+		}
+		else if (type == COMMAND_ATTACK) {
+			std::vector<Interaction> interactions;
+			for (int i = 0; i < jcmd["interactions"].size(); i++) {
+				interactions.push_back(Interaction(jcmd["interactions"][i]["landOne"].asInt(), jcmd["interactions"][i]["landTwo"].asInt()));
+			}
+			shared_ptr<AttackCommand> scmd = make_shared<AttackCommand>(jcmd["playerId"].asInt(), interactions);
+			cmd = scmd;
+		}
+		else {
+			shared_ptr<MoveCommand> scmd = make_shared<MoveCommand>(jcmd["playerId"].asInt(), Interaction(jcmd["interaction"]["landOne"].asInt(), jcmd["interaction"]["landTwo"].asInt()), jcmd["ratio"].asFloat(), jcmd["hero"].asBool());
+			cmd = scmd;
+		}
+		return cmd;
+	}
+
 }

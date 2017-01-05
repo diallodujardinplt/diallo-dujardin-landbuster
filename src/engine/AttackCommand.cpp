@@ -71,8 +71,19 @@ namespace engine {
 		return interactions;
 	}
 
-	string AttackCommand::toJSON() const {
-		
+	Json::Value AttackCommand::toJSON() const {
+		Json::Value jcmd;
+		jcmd["type"] = type;
+		jcmd["playerId"] = playerId;
+		Json::Value jis;
+		for (int i = 0; i < interactions.size(); i++) {
+			Json::Value ji;
+			ji["landOne"] = interactions[i].landOneId;
+			ji["landTwo"] = interactions[i].landTwoId;
+			jis[i] = ji;
+		}
+		jcmd["interactions"] = jis;
+		return jcmd;
 	}
 
 }

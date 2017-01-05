@@ -73,8 +73,17 @@ namespace engine {
 		return hero;
 	}
 
-	string MoveCommand::toJSON() const {
-		
+	Json::Value MoveCommand::toJSON() const {
+		Json::Value jcmd;
+		jcmd["type"] = type;
+		jcmd["playerId"] = playerId;
+		Json::Value ji;
+		ji["landOne"] = interaction.landOneId;
+		ji["landTwo"] = interaction.landTwoId;
+		jcmd["interaction"] = ji;
+		jcmd["ratio"] = ratio;
+		jcmd["hero"] = hero;		
+		return jcmd;
 	}
 
 }

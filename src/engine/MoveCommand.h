@@ -38,7 +38,7 @@ namespace engine {
     float getRatio () const;
     bool getHero () const;
     void rollback (state::Game& game);
-    std::string toJSON () const;
+    Json::Value toJSON () const;
   };
 
 };

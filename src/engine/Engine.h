@@ -54,6 +54,7 @@ namespace engine {
     bool isAllowed (std::shared_ptr<Command> command);
     void registerAIPlayer (unsigned int playerId, std::shared_ptr<ai::AI> ai);
     void operator() ();
+    std::shared_ptr<Command> commandFromJSON (Json::Value jcmd);
   private:
     void execute (std::shared_ptr<Command> command);
   };

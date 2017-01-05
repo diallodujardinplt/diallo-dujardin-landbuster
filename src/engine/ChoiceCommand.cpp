@@ -108,8 +108,12 @@ namespace engine {
 		return landId;
 	}
 
-	string ChoiceCommand::toJSON() const {
-		
+	Json::Value ChoiceCommand::toJSON() const {
+		Json::Value jcmd;
+		jcmd["type"] = type;
+		jcmd["playerId"] = playerId;
+		jcmd["landId"] = landId;
+		return jcmd;
 	}
 
 }

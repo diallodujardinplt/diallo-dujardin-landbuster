@@ -65,8 +65,11 @@ namespace engine {
 		
 	}
 
-	string ActionCommand::toJSON() const {
-		
+	Json::Value ActionCommand::toJSON() const {
+		Json::Value jcmd;
+		jcmd["type"] = type;
+		jcmd["playerId"] = playerId;
+		return jcmd;
 	}
 
 }
