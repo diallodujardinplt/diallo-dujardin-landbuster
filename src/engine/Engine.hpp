@@ -5,4 +5,8 @@
 #include "state.h"
 #include "Engine.h"
 
+namespace engine {
+	void engineThreadFunction(std::shared_ptr<Engine> engine);
+}
+
 #endif

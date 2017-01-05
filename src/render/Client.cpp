@@ -199,4 +199,8 @@ namespace render {
 		engine->mutex.unlock();
 	}
 
+	void clientThreadFunction(shared_ptr<Client> client) {
+		(*client)();
+	}
+
 }

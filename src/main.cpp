@@ -13,14 +13,6 @@
 
 using namespace std;
 
-void engineThreadFunction(shared_ptr<engine::Engine> engine) {
-	(*engine)();
-}
-
-void clientThreadFunction(shared_ptr<render::Client> client) {
-	(*client)();
-}
-
 int main(int argc, char* argv[]) {
 
 	if (argc > 1) {

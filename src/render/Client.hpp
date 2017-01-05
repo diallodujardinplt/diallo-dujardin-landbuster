@@ -4,4 +4,8 @@
 #include "../common.hpp"
 #include "Client.h"
 
+namespace render {
+	void clientThreadFunction(std::shared_ptr<Client> client);
+}
+
 #endif

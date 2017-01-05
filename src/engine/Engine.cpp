@@ -92,4 +92,8 @@ namespace engine {
 		}
 	}
 
+	void engineThreadFunction(shared_ptr<engine::Engine> engine) {
+		(*engine)();
+	}
+
 }
