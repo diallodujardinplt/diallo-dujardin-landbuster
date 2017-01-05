@@ -47,10 +47,72 @@ namespace server {
 		state = STATE_INIT;
 		joinedPlayers = 1;
 		game->generateMap();
+		state = STATE_GAME;
     }
 
     int Server::queryService(string& out, const string& in, const string& url, const string& method) {
-    	return 200;
+    	Json::Value jdata;
+    	istringstream iss(in);
+    	iss >> jdata;
+    	if (url == "/status/" && method == "GET") {
+    		// Service : get_status
+    		if (state == STATE_IDLE) return 503;
+    		else if (state == STATE_INIT) {
+    			if (joinedPlayers < game->getPlayers().size()) return 204;
+    			else return 403;
+    		}
+    		else {
+    			Json::Value jret;
+    			jret["playerId"] = joinedPlayers;
+    			jret["state"] = game->toJSON();
+    			ostringstream oss;
+    			oss << jret;
+    			out = oss.str();
+    			return 200;
+    		}
+    	}
+    	else if (url == "/status" && method == "PUT") {
+    		// Service : create_game
+    		if (state == STATE_IDLE) {
+	    		createGame(jdata["numPlayers"].asInt());
+	    		return 200;
+	    	}
+	    	else {
+	    		return 403;
+	    	}
+    	}
+    	else if ((url == "/commands/action/" || url == "/commands/choice" || url == "/commands/attack/" || url == "/commands/move/") && method == "PUT") {
+    		// Service : push_command (action)
+    		if (state != STATE_GAME) return 503;
+    		shared_ptr<engine::Command> cmd = engine->commandFromJSON(jdata);
+    		if (engine->isAllowed(cmd)) {
+    			engine->pushCommand(cmd);
+    			engine->flushCommands();
+    			Json::Value jret = (int) history.size();
+    			history.push_back(cmd);
+    			ostringstream oss;
+    			oss << jret;
+    			out = oss.str();
+    			return 200;
+    		}
+    		else {
+    			return 403;
+    		}
+    	}
+    	else if (url == "/commands/" && method == "GET") {
+    		unsigned int index = jdata.asInt();
+    		if (state != STATE_GAME) return 503;
+    		if (index >= history.size()) return 400;
+    		Json::Value cmds;
+    		for (int i = index; i < history.size(); i++) {
+    			cmds[i-index] = history[i]->toJSON();
+    		}
+    		ostringstream oss;
+    		oss << cmds;
+    		out = oss.str();
+    		return 200;
+    	}
+    	else return 400;
     }
 
     // Fonction pour gérer les données imporantes en upload (non implanté ici)

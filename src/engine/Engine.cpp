@@ -96,7 +96,7 @@ namespace engine {
 		(*engine)();
 	}
 
-	shared_ptr<Command> commandFromJSON(Json::Value jcmd) {
+	shared_ptr<Command> Engine::commandFromJSON(Json::Value jcmd) {
 		CommandType type = (CommandType) jcmd["type"].asInt();
 		shared_ptr<Command> cmd;
 		if (type == COMMAND_SKIP_ROUND || type == COMMAND_ABANDON || type == COMMAND_USE_ITEM) {
