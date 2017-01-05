@@ -21,6 +21,7 @@
 #include <chrono>
 #include <json/json.h>
 #include <microhttpd.h>
+#include <SFML/Network.hpp>
 
 #define GRID_WIDTH 128
 #define GRID_HEIGHT 128

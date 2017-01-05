@@ -7,6 +7,8 @@ using namespace std;
 namespace client {
 
 	Client::Client() {
+		nextCommandIndex = 0;
+
 		game = make_shared<state::Game>();
 		game->init(2);
 		game->generateMap();
@@ -24,6 +26,22 @@ namespace client {
 
 		threadClient.join();
 		threadEngine.join();
+	}
+
+	int Client::requestGetStatus() {
+		
+	}
+
+	int Client::requestCreateGame(unsigned int numPlayers) {
+
+	}
+
+	int Client::requestPushCommand(shared_ptr<engine::Command> command) {
+
+	}
+
+	int Client::requestGetCommands() {
+
 	}
 
 }

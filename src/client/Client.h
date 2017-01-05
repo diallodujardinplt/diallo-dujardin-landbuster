@@ -12,11 +12,13 @@ namespace render {
 };
 namespace engine {
   class Engine;
+  class Command;
 }
 
 #include "state/Game.h"
 #include "render/Client.h"
 #include "engine/Engine.h"
+#include "engine/Command.h"
 
 namespace client {
 
@@ -28,10 +30,15 @@ namespace client {
     std::shared_ptr<state::Game> game;
     std::shared_ptr<render::Client> gui;
     std::shared_ptr<engine::Engine> engine;
+    int nextCommandIndex;
     // Operations
   public:
     Client ();
     void run ();
+    int requestGetStatus ();
+    int requestCreateGame (unsigned int numPlayers);
+    int requestPushCommand (std::shared_ptr<engine::Command> command);
+    int requestGetCommands ();
   };
 
 };
