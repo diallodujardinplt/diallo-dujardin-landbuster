@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <memory>
+#include <string>
 
 namespace state {
   class Game;
@@ -11,12 +12,16 @@ namespace state {
 namespace engine {
   class Engine;
   class Command;
+};
+namespace server {
+  class ServiceException;
 }
 
 #include "state/Game.h"
 #include "engine/Engine.h"
 #include "ServerState.h"
 #include "engine/Command.h"
+#include "ServiceException.h"
 
 namespace server {
 
@@ -34,6 +39,7 @@ namespace server {
   public:
     Server ();
     void run ();
+    int queryService (std::string& out, const std::string& in, const std::string& url, const std::string& method);
   private:
     void pushCommand (std::shared_ptr<engine::Command> command);
     std::vector< std::shared_ptr<engine::Command> > getCommands (unsigned int from) const;

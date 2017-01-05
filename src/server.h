@@ -3,5 +3,6 @@
 #define __SERVER__H
 
 #include "server/ServerState.h"
+#include "server/ServiceException.h"
 #include "server/Server.h"
 #endif
