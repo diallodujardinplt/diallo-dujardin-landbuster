@@ -8,6 +8,8 @@
 #include "engine.h"
 #include "render.h"
 #include "ai.h"
+#include "server.h"
+#include "client.h"
 
 using namespace std;
 
@@ -19,12 +21,19 @@ void clientThreadFunction(shared_ptr<render::Client> client) {
 	(*client)();
 }
 
-int main() {
+int main(int argc, char* argv[]) {
 
-	struct MHD_Daemon *d;
-	Json::Value jsonObject;
-	
-	shared_ptr<state::Game> game=make_shared<state::Game>();
+	if (argc > 1) {
+		// Server mode
+		server::Server server;
+		server.run();
+	}
+	else {
+		client::Client client;
+		client.run();
+	}
+
+	/*shared_ptr<state::Game> game=make_shared<state::Game>();
 
 	game->init(2);
 	game->generateMap();
@@ -42,7 +51,7 @@ int main() {
 	thread threadClient(clientThreadFunction, client);
 
 	threadClient.join();
-	threadEngine.join();
+	threadEngine.join();*/
 
 /*	//sf::RenderWindow window(sf::VideoMode(GRID_WIDTH * CELL_WIDTH + 200, GRID_HEIGHT * CELL_HEIGHT, 32), "Land Buster");
 *	sf::Clock framerateClock, clickClock;

@@ -5,10 +5,16 @@
 #include <vector>
 #include <memory>
 
+namespace state {
+  class Game;
+};
 namespace engine {
+  class Engine;
   class Command;
 }
 
+#include "state/Game.h"
+#include "engine/Engine.h"
 #include "engine/Command.h"
 
 namespace server {
@@ -18,11 +24,16 @@ namespace server {
     // Associations
     // Attributes
   private:
-    std::vector< std::shared_ptr<Command> > history;
+    std::vector< std::shared_ptr<engine::Command> > history;
+    std::shared_ptr<state::Game> game;
+    std::shared_ptr<engine::Engine> engine;
     // Operations
+  public:
+    Server ();
+    void run ();
   private:
-    void pushCommand (std::shared_ptr<Command> command);
-    std::vector< std::shared_ptr<Command> > getCommands (unsigned int from) const;
+    void pushCommand (std::shared_ptr<engine::Command> command);
+    std::vector< std::shared_ptr<engine::Command> > getCommands (unsigned int from) const;
   };
 
 };
